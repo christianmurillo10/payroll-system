@@ -1,9 +1,11 @@
 const auth = require('./AuthController');
-const users = require('./UsersController');
+const payFrequencies = require('./PayFrequenciesController');
 const roles = require('./RolesController');
+const users = require('./UsersController');
 
 module.exports = {
     auth,
-    users,
-    roles
+    payFrequencies,
+    roles,
+    users
 }

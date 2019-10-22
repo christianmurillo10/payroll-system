@@ -6,7 +6,7 @@ module.exports = {
    * @param req
    * @param res
    * @returns {Promise<void>}
-   * @routes POST /role/create
+   * @routes POST /payFrequency/create
    */
   create: async (req, res) => {
     const params = req.body;
@@ -27,20 +27,20 @@ module.exports = {
 
       // Pre-setting variables
       criteria = { where: { name: params.name } };
-      initialValues = _.pick(params, ['name', 'description', 'created_at']);
+      initialValues = _.pick(params, ['name', 'created_at']);
       // Execute findAll query
-      data = await Model.Roles.findAll(criteria);
+      data = await Model.PayFrequencies.findAll(criteria);
       if (_.isEmpty(data[0])) {
-        let role = await Model.Roles.create(initialValues);
+        let payFrequency = await Model.PayFrequencies.create(initialValues);
         res.json({
           status: 200,
-          message: "Successfully created role.",
-          result: _.omit(role.get({ plain: true }), ['is_deleted'])
+          message: "Successfully created data.",
+          result: _.omit(payFrequency.get({ plain: true }), ['is_deleted'])
         });
       } else {
         res.json({
           status: 200,
-          message: "Role already exist.",
+          message: "Data already exist.",
           result: false
         });
       }
@@ -48,14 +48,14 @@ module.exports = {
       res.json({
         status: 401,
         err: err,
-        message: "Failed creating role."
+        message: "Failed creating data."
       });
     }
   },
 
   /**
    * Update
-   * @route PUT /role/update/:id
+   * @route PUT /payFrequency/update/:id
    * @param req
    * @param res
    * @returns {never}
@@ -71,20 +71,20 @@ module.exports = {
 
     try {
       // Pre-setting variables
-      initialValues = _.pick(params, ['name', 'description']);
+      initialValues = _.pick(params, ['name']);
       // Execute findByPk query
-      data = await Model.Roles.findByPk(req.params.id);
+      data = await Model.PayFrequencies.findByPk(req.params.id);
       if (!_.isEmpty(data)) {
-        let role = await data.update(initialValues);
+        let payFrequency = await data.update(initialValues);
         res.json({
           status: 200,
-          message: "Successfully updated role.",
-          result: role
+          message: "Successfully updated data.",
+          result: payFrequency
         });
       } else {
         res.json({
           status: 200,
-          message: "Role doesn't exist.",
+          message: "Data doesn't exist.",
           result: false
         });
       }
@@ -92,14 +92,14 @@ module.exports = {
       res.json({
         status: 401,
         err: err,
-        message: "Failed updating role."
+        message: "Failed updating data."
       });
     }
   },
 
   /**
    * Delete
-   * @route PUT /role/delete/:id
+   * @route PUT /payFrequency/delete/:id
    * @param req
    * @param res
    * @returns {never}
@@ -109,18 +109,18 @@ module.exports = {
 
     try {
       // Execute findByPk query
-      data = await Model.Roles.findByPk(req.params.id);
+      data = await Model.PayFrequencies.findByPk(req.params.id);
       if (!_.isEmpty(data)) {
-        let role = await data.update({ is_deleted: 1 });
+        let payFrequency = await data.update({ is_deleted: 1 });
         res.json({
           status: 200,
-          message: "Successfully deleted role.",
-          result: role
+          message: "Successfully deleted data.",
+          result: payFrequency
         });
       } else {
         res.json({
           status: 200,
-          message: "Role doesn't exist.",
+          message: "Data doesn't exist.",
           result: false
         });
       }
@@ -128,14 +128,14 @@ module.exports = {
       res.json({
         status: 401,
         err: err,
-        message: "Failed deleting role."
+        message: "Failed deleting data."
       });
     }
   },
 
   /**
    * Search
-   * @route POST /role/search/
+   * @route POST /payFrequency/search/
    * @param req
    * @param res
    * @returns {never}
@@ -151,7 +151,7 @@ module.exports = {
 
     try {
       // Pre-setting variables
-      query = `SELECT id, name, description, created_at, updated_at FROM roles WHERE CONCAT(name, description) LIKE ? AND is_deleted = 0;`;
+      query = `SELECT id, name, created_at, updated_at FROM pay_frequencies WHERE name LIKE ? AND is_deleted = 0;`;
       // Execute native query
       data = await Model.sequelize.query(query, {
         replacements: [`%${params.value}%`],
@@ -181,7 +181,7 @@ module.exports = {
 
   /**
    * Find all
-   * @route GET /role
+   * @route GET /payFrequency
    * @param req
    * @param res
    * @returns {never}
@@ -193,7 +193,7 @@ module.exports = {
       // Pre-setting variables
       criteria = { where: { is_deleted: 0 } };
       // Execute findAll query
-      data = await Model.Roles.findAll(criteria);
+      data = await Model.PayFrequencies.findAll(criteria);
       if (!_.isEmpty(data[0])) {
         res.json({
           status: 200,
@@ -218,7 +218,7 @@ module.exports = {
 
   /**
    * Find by id
-   * @route GET /role/:id
+   * @route GET /payFrequency/:id
    * @param req
    * @param res
    * @returns {never}
@@ -228,7 +228,7 @@ module.exports = {
 
     try {
       // Execute findAll query
-      data = await Model.Roles.findByPk(req.params.id);
+      data = await Model.PayFrequencies.findByPk(req.params.id);
       if (!_.isEmpty(data)) {
         res.json({
           status: 200,
