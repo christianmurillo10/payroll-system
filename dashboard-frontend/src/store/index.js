@@ -8,6 +8,8 @@ import toolbar from './modules/toolbar'
 import userAuthentication from './modules/userAuthentication'
 import users from './modules/users'
 import roles from './modules/roles'
+import payFrequencies from './modules/payFrequencies'
+import sssContributionTables from './modules/sssContributionTables'
 
 Vue.use(Vuex);
 
@@ -22,6 +24,8 @@ export default new Vuex.Store({
     toolbar,
     userAuthentication,
     users,
-    roles
+    roles,
+    payFrequencies,
+    sssContributionTables
   }
 });

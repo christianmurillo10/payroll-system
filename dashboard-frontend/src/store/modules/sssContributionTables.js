@@ -1,18 +1,24 @@
 import axios from "axios";
 
 const state = {
-  userList: []
+  sssContributionTableList: []
 };
 
 const getters = {
-  getUserById: (state) => (id) => {
-    return state.userList.find(user => user.id === id);
+  getSssContributionTableById: (state) => (id) => {
+    return state.sssContributionTableList.find(sssContributionTable => sssContributionTable.id === id);
   },
+  getSssContributionTableNameById: (state) => (id) => {
+    return state.sssContributionTableList.find(sssContributionTable => sssContributionTable.id === id).name;
+  },
+  getSssContributionTableList: (state) => {
+    return state.sssContributionTableList;
+  }
 };
 
 const actions = {
   getData({ dispatch, commit, state, rootState, getters, rootGetters }) {
-    let url = `${process.env.VUE_APP_API_BACKEND}/user/`;
+    let url = `${process.env.VUE_APP_API_BACKEND}/sssContributionTable/`;
     let header = { headers: { Token: localStorage.getItem("token") } };
     return new Promise((resolve, reject) => {
       try {
@@ -26,7 +32,7 @@ const actions = {
     });
   },
   getDataById({ dispatch, commit, state, rootState, getters, rootGetters }, payload) {
-    let url = `${process.env.VUE_APP_API_BACKEND}/user/${payload}`;
+    let url = `${process.env.VUE_APP_API_BACKEND}/sssContributionTable/${payload}`;
     let header = { headers: { Token: localStorage.getItem("token") } };
     return new Promise((resolve, reject) => {
       try {
@@ -41,15 +47,17 @@ const actions = {
     });
   },
   saveData({ dispatch, commit, state, rootState, getters, rootGetters }, payload) {
-    let url = `${process.env.VUE_APP_API_BACKEND}/user/create`;
+    let url = `${process.env.VUE_APP_API_BACKEND}/sssContributionTable/create`;
     let header = { headers: { Token: localStorage.getItem("token") } };
     return new Promise((resolve, reject) => {
       try {
         let obj = {
-          email: payload.email,
-          username: payload.username,
-          password: payload.password,
-          role_id: payload.role_id
+          compensation_range_from: payload.compensation_range_from,
+          compensation_range_to: payload.compensation_range_to,
+          monthly_salary_credit: payload.monthly_salary_credit,
+          employer_contribution: payload.employer_contribution,
+          employee_contribution: payload.employee_contribution,
+          total: payload.total,
         };
 
         axios
@@ -64,14 +72,17 @@ const actions = {
     });
   },
   updateData({ dispatch, commit, state, rootState, getters, rootGetters }, payload) {
-    let url = `${process.env.VUE_APP_API_BACKEND}/user/update/${payload.id}`;
+    let url = `${process.env.VUE_APP_API_BACKEND}/sssContributionTable/update/${payload.id}`;
     let header = { headers: { Token: localStorage.getItem("token") } };
     return new Promise((resolve, reject) => {
       try {
         let obj = {
-          username: payload.username,
-          email: payload.email,
-          role_id: payload.role_id
+          compensation_range_from: payload.compensation_range_from,
+          compensation_range_to: payload.compensation_range_to,
+          monthly_salary_credit: payload.monthly_salary_credit,
+          employer_contribution: payload.employer_contribution,
+          employee_contribution: payload.employee_contribution,
+          total: payload.total,
         };
 
         axios
@@ -86,7 +97,7 @@ const actions = {
     });
   },
   deleteData({ dispatch, commit, state, rootState, getters, rootGetters }, payload) {
-    let url = `${process.env.VUE_APP_API_BACKEND}/user/delete/${payload}`;
+    let url = `${process.env.VUE_APP_API_BACKEND}/sssContributionTable/delete/${payload}`;
     let header = { headers: { Token: localStorage.getItem("token") } };
     return new Promise((resolve, reject) => {
       try {
@@ -106,25 +117,28 @@ const actions = {
 const mutations = {
   SET_DATA(state, payload) {
     if (payload) {
-      state.userList = payload;
+      state.sssContributionTableList = payload;
     } else {
-      state.userList = [];
+      state.sssContributionTableList = [];
     }
   },
   ADD_DATA(state, payload) {
-    state.userList.push(payload);
+    state.sssContributionTableList.push(payload);
   },
   UPDATE_DATA(state, payload) {
-    let index = state.userList.map(user => user.id).indexOf(payload.id);
-    Object.assign(state.userList[index], {
-      username: payload.username,
-      email: payload.email,
-      role_id: payload.role_id
+    let index = state.sssContributionTableList.map(sssContributionTable => sssContributionTable.id).indexOf(payload.id);
+    Object.assign(state.sssContributionTableList[index], {
+      compensation_range_from: payload.compensation_range_from,
+      compensation_range_to: payload.compensation_range_to,
+      monthly_salary_credit: payload.monthly_salary_credit,
+      employer_contribution: payload.employer_contribution,
+      employee_contribution: payload.employee_contribution,
+      total: payload.total
     });
   },
   DELETE_DATA(state, payload) {
-    let index = state.userList.map(user => user.id).indexOf(payload);
-    state.userList.splice(index, 1);
+    let index = state.sssContributionTableList.map(sssContributionTable => sssContributionTable.id).indexOf(payload);
+    state.sssContributionTableList.splice(index, 1);
   }
 };
 

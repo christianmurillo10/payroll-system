@@ -228,11 +228,13 @@ module.exports = {
    * @returns {never}
    */
   findById: async (req, res) => {
-    let data;
+    let data, criteria;
 
     try {
+      // Pre-setting variables
+      criteria = { include: [{ model: Model.PayFrequencies, as: 'payFrequencies' }] };
       // Execute findAll query
-      data = await Model.WithholdingTaxTables.findByPk(req.params.id);
+      data = await Model.WithholdingTaxTables.findByPk(req.params.id, criteria);
       if (!_.isEmpty(data)) {
         res.json({
           status: 200,

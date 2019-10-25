@@ -75,7 +75,17 @@ export default {
       {
         to: '/roles',
         icon: 'person_pin',
-        text: 'Role'
+        text: 'Roles'
+      },
+      {
+        to: '/payFrequencies',
+        icon: 'person_pin',
+        text: 'PayFrequencies'
+      },
+      {
+        to: '/sssContributionTables',
+        icon: 'person_pin',
+        text: 'SssContributionTables'
       }
     ],
     responsive: true

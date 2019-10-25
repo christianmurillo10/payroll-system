@@ -5,6 +5,8 @@ import Login from "../views/Login";
 import Dashboard from "../views/Dashboard";
 import Users from "../views/users/Index";
 import Roles from "../views/roles/Index";
+import PayFrequencies from "../views/payFrequencies/Index";
+import SssContributionTables from "../views/sssContributionTables/Index";
 
 Vue.use(Router);
 
@@ -36,6 +38,16 @@ let router = new Router({
       path: "/roles",
       name: "roles",
       component: Roles
+    },
+    {
+      path: "/payFrequencies",
+      name: "payFrequencies",
+      component: PayFrequencies
+    },
+    {
+      path: "/sssContributionTables",
+      name: "sssContributionTables",
+      component: SssContributionTables
     }
   ]
 })
