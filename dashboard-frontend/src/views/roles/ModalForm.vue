@@ -15,7 +15,7 @@
               <v-text-field
                 v-model="formData.name"
                 :rules="validateItem.nameRules"
-                label="Role"
+                label="Name"
                 required
               ></v-text-field>
             </v-flex>

@@ -7,6 +7,7 @@ import Users from "../views/users/Index";
 import Roles from "../views/roles/Index";
 import PayFrequencies from "../views/payFrequencies/Index";
 import SssContributionTables from "../views/sssContributionTables/Index";
+import WithholdingTaxTables from "../views/withholdingTaxTables/Index";
 
 Vue.use(Router);
 
@@ -48,6 +49,11 @@ let router = new Router({
       path: "/sssContributionTables",
       name: "sssContributionTables",
       component: SssContributionTables
+    },
+    {
+      path: "/withholdingTaxTables",
+      name: "withholdingTaxTables",
+      component: WithholdingTaxTables
     }
   ]
 })

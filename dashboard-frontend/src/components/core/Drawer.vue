@@ -86,6 +86,11 @@ export default {
         to: '/sssContributionTables',
         icon: 'person_pin',
         text: 'SssContributionTables'
+      },
+      {
+        to: '/withholdingTaxTables',
+        icon: 'person_pin',
+        text: 'WithholdingTaxTables'
       }
     ],
     responsive: true

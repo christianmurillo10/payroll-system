@@ -1,24 +1,24 @@
 import axios from "axios";
 
 const state = {
-  sssContributionTableList: []
+  withholdingTaxTableList: []
 };
 
 const getters = {
-  getSssContributionTableById: (state) => (id) => {
-    return state.sssContributionTableList.find(sssContributionTable => sssContributionTable.id === id);
+  getWithholdingTaxTableById: (state) => (id) => {
+    return state.withholdingTaxTableList.find(withholdingTaxTable => withholdingTaxTable.id === id);
   },
-  getSssContributionTableNameById: (state) => (id) => {
-    return state.sssContributionTableList.find(sssContributionTable => sssContributionTable.id === id).name;
+  getWithholdingTaxTableById: (state) => (id) => {
+    return state.withholdingTaxTableList.find(withholdingTaxTable => withholdingTaxTable.id === id).name;
   },
-  getSssContributionTableList: (state) => {
-    return state.sssContributionTableList;
+  getWithholdingTaxTableList: (state) => {
+    return state.withholdingTaxTableList;
   }
 };
 
 const actions = {
   getData({ dispatch, commit, state, rootState, getters, rootGetters }) {
-    let url = `${process.env.VUE_APP_API_BACKEND}/sssContributionTable/`;
+    let url = `${process.env.VUE_APP_API_BACKEND}/withholdingTaxTable/`;
     let header = { headers: { Token: localStorage.getItem("token") } };
     return new Promise((resolve, reject) => {
       try {
@@ -32,7 +32,7 @@ const actions = {
     });
   },
   getDataById({ dispatch, commit, state, rootState, getters, rootGetters }, payload) {
-    let url = `${process.env.VUE_APP_API_BACKEND}/sssContributionTable/${payload}`;
+    let url = `${process.env.VUE_APP_API_BACKEND}/withholdingTaxTable/${payload}`;
     let header = { headers: { Token: localStorage.getItem("token") } };
     return new Promise((resolve, reject) => {
       try {
@@ -47,17 +47,16 @@ const actions = {
     });
   },
   saveData({ dispatch, commit, state, rootState, getters, rootGetters }, payload) {
-    let url = `${process.env.VUE_APP_API_BACKEND}/sssContributionTable/create`;
+    let url = `${process.env.VUE_APP_API_BACKEND}/withholdingTaxTable/create`;
     let header = { headers: { Token: localStorage.getItem("token") } };
     return new Promise((resolve, reject) => {
       try {
         let obj = {
           compensation_range_from: payload.compensation_range_from,
           compensation_range_to: payload.compensation_range_to,
-          monthly_salary_credit: payload.monthly_salary_credit,
-          employer_contribution: payload.employer_contribution,
-          employee_contribution: payload.employee_contribution,
-          total: payload.total
+          tax_amount: payload.tax_amount,
+          tax_percentage: payload.tax_percentage,
+          pay_frequency_id: payload.pay_frequency_id
         };
 
         axios
@@ -72,17 +71,16 @@ const actions = {
     });
   },
   updateData({ dispatch, commit, state, rootState, getters, rootGetters }, payload) {
-    let url = `${process.env.VUE_APP_API_BACKEND}/sssContributionTable/update/${payload.id}`;
+    let url = `${process.env.VUE_APP_API_BACKEND}/withholdingTaxTable/update/${payload.id}`;
     let header = { headers: { Token: localStorage.getItem("token") } };
     return new Promise((resolve, reject) => {
       try {
         let obj = {
           compensation_range_from: payload.compensation_range_from,
           compensation_range_to: payload.compensation_range_to,
-          monthly_salary_credit: payload.monthly_salary_credit,
-          employer_contribution: payload.employer_contribution,
-          employee_contribution: payload.employee_contribution,
-          total: payload.total
+          tax_amount: payload.tax_amount,
+          tax_percentage: payload.tax_percentage,
+          pay_frequency_id: payload.pay_frequency_id
         };
 
         axios
@@ -97,7 +95,7 @@ const actions = {
     });
   },
   deleteData({ dispatch, commit, state, rootState, getters, rootGetters }, payload) {
-    let url = `${process.env.VUE_APP_API_BACKEND}/sssContributionTable/delete/${payload}`;
+    let url = `${process.env.VUE_APP_API_BACKEND}/withholdingTaxTable/delete/${payload}`;
     let header = { headers: { Token: localStorage.getItem("token") } };
     return new Promise((resolve, reject) => {
       try {
@@ -117,28 +115,27 @@ const actions = {
 const mutations = {
   SET_DATA(state, payload) {
     if (payload) {
-      state.sssContributionTableList = payload;
+      state.withholdingTaxTableList = payload;
     } else {
-      state.sssContributionTableList = [];
+      state.withholdingTaxTableList = [];
     }
   },
   ADD_DATA(state, payload) {
-    state.sssContributionTableList.push(payload);
+    state.withholdingTaxTableList.push(payload);
   },
   UPDATE_DATA(state, payload) {
-    let index = state.sssContributionTableList.map(sssContributionTable => sssContributionTable.id).indexOf(payload.id);
-    Object.assign(state.sssContributionTableList[index], {
+    let index = state.withholdingTaxTableList.map(withholdingTaxTable => withholdingTaxTable.id).indexOf(payload.id);
+    Object.assign(state.withholdingTaxTableList[index], {
       compensation_range_from: payload.compensation_range_from,
       compensation_range_to: payload.compensation_range_to,
-      monthly_salary_credit: payload.monthly_salary_credit,
-      employer_contribution: payload.employer_contribution,
-      employee_contribution: payload.employee_contribution,
-      total: payload.total
+      tax_amount: payload.tax_amount,
+      tax_percentage: payload.tax_percentage,
+      pay_frequency_id: payload.pay_frequency_id
     });
   },
   DELETE_DATA(state, payload) {
-    let index = state.sssContributionTableList.map(sssContributionTable => sssContributionTable.id).indexOf(payload);
-    state.sssContributionTableList.splice(index, 1);
+    let index = state.withholdingTaxTableList.map(withholdingTaxTable => withholdingTaxTable.id).indexOf(payload);
+    state.withholdingTaxTableList.splice(index, 1);
   }
 };
 

@@ -20,7 +20,7 @@
       <template v-slot:items="props">
         <td class="text-xs-left">{{ props.item.username }}</td>
         <td class="text-xs-left">{{ props.item.email }}</td>
-        <td class="text-xs-left">{{ getRoleNameById(props.item.role_id) }}</td>
+        <td class="text-xs-left">{{ props.item.roles.name }}</td>
         <td class="justify-center layout px-0">
           <v-icon small class="mr-2" @click="editItem(props.item.id)">edit</v-icon>
           <v-icon small @click="deleteItem(props.item.id)">delete</v-icon>
@@ -56,7 +56,6 @@ export default {
 
   computed: {
     ...mapState("users", ["userList"]),
-    ...mapGetters("roles", ["getRoleNameById"]),
   },
 
   watch: {
