@@ -148,7 +148,5 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  PayrollOvertimes.associate = (models) => { };
-
   return PayrollOvertimes;
 };

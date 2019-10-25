@@ -84,7 +84,5 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  PayrollWithTaxCompensations.associate = (models) => { };
-
   return PayrollWithTaxCompensations;
 };

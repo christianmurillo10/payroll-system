@@ -76,7 +76,5 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  EmployeeSalariesAndAllowances.associate = (models) => {};
-
   return EmployeeSalariesAndAllowances;
 };

@@ -114,7 +114,5 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  PayrollDeductions.associate = (models) => { };
-
   return PayrollDeductions;
 };

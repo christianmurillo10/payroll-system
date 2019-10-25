@@ -78,7 +78,5 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  PayrollPersonalCashAdvances.associate = (models) => { };
-
   return PayrollPersonalCashAdvances;
 };

@@ -84,7 +84,5 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  PayrollOtherSalariesAndWages.associate = (models) => { };
-
   return PayrollOtherSalariesAndWages;
 };

@@ -135,7 +135,5 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  PayrollTardiness.associate = (models) => { };
-
   return PayrollTardiness;
 };

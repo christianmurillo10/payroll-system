@@ -195,7 +195,7 @@ module.exports = {
 
     try {
       // Pre-setting variables
-      criteria = { where: { is_deleted: 0 } };
+      criteria = { where: { is_deleted: 0 }, include: [{ model: Model.PayFrequencies, as: 'payFrequencies' }] };
       // Execute findAll query
       data = await Model.WithholdingTaxTables.findAll(criteria);
       if (!_.isEmpty(data[0])) {

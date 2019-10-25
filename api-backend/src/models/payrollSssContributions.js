@@ -90,7 +90,5 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  PayrollSssContributions.associate = (models) => { };
-
   return PayrollSssContributions;
 };

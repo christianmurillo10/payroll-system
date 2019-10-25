@@ -148,7 +148,5 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  PayrollNightDifferentials.associate = (models) => { };
-
   return PayrollNightDifferentials;
 };

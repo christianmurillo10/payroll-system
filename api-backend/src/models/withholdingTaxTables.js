@@ -62,7 +62,5 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  WithholdingTaxTables.associate = (models) => {};
-
   return WithholdingTaxTables;
 };

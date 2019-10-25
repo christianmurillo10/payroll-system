@@ -148,7 +148,5 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  PayrollWorkingDays.associate = (models) => { };
-
   return PayrollWorkingDays;
 };

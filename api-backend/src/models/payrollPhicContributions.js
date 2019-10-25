@@ -90,7 +90,5 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  PayrollPhicContributions.associate = (models) => { };
-
   return PayrollPhicContributions;
 };
