@@ -36,11 +36,11 @@ module.exports = {
       // Execute findAll query
       data = await Model.SssContributionTables.findAll(criteria);
       if (_.isEmpty(data[0])) {
-        let payFrequency = await Model.SssContributionTables.create(initialValues);
+        let finalData = await Model.SssContributionTables.create(initialValues);
         res.json({
           status: 200,
           message: "Successfully created data.",
-          result: _.omit(payFrequency.get({ plain: true }), ['is_deleted'])
+          result: _.omit(finalData.get({ plain: true }), ['is_deleted'])
         });
       } else {
         res.json({
@@ -80,11 +80,11 @@ module.exports = {
       // Execute findByPk query
       data = await Model.SssContributionTables.findByPk(req.params.id);
       if (!_.isEmpty(data)) {
-        let payFrequency = await data.update(initialValues);
+        let finalData = await data.update(initialValues);
         res.json({
           status: 200,
           message: "Successfully updated data.",
-          result: payFrequency
+          result: finalData
         });
       } else {
         res.json({
@@ -116,11 +116,11 @@ module.exports = {
       // Execute findByPk query
       data = await Model.SssContributionTables.findByPk(req.params.id);
       if (!_.isEmpty(data)) {
-        let payFrequency = await data.update({ is_deleted: 1 });
+        let finalData = await data.update({ is_deleted: 1 });
         res.json({
           status: 200,
           message: "Successfully deleted data.",
-          result: payFrequency
+          result: finalData
         });
       } else {
         res.json({

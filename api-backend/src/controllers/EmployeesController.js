@@ -6,7 +6,7 @@ module.exports = {
    * @param req
    * @param res
    * @returns {Promise<void>}
-   * @routes POST /payFrequency/create
+   * @routes POST /employee/create
    */
   create: async (req, res) => {
     const params = req.body;
@@ -23,15 +23,44 @@ module.exports = {
 
     try {
       // Validators
-      if (_.isEmpty(params.name)) return res.json({ status: 200, message: "Name is required.", result: false });
+      if (_.isEmpty(params.employee_no)) return res.json({ status: 200, message: "Employee No. is required.", result: false });
+      if (_.isEmpty(params.firstname)) return res.json({ status: 200, message: "Firstname is required.", result: false });
+      if (_.isEmpty(params.middlename)) return res.json({ status: 200, message: "Middlename is required.", result: false });
+      if (_.isEmpty(params.lastname)) return res.json({ status: 200, message: "Lastname is required.", result: false });
+      if (_.isEmpty(params.primary_address)) return res.json({ status: 200, message: "Primary Address is required.", result: false });
+      if (_.isEmpty(params.email)) return res.json({ status: 200, message: "Email is required.", result: false });
+      if (_.isEmpty(params.pay_frequency_id)) return res.json({ status: 200, message: "Pay Frequency is required.", result: false });
+      if (_.isEmpty(params.user_id)) return res.json({ status: 200, message: "Created By is required.", result: false });
+      if (_.isEmpty(params.birthdate)) return res.json({ status: 200, message: "Birthdate is required.", result: false });
+      if (_.isEmpty(params.date_start)) return res.json({ status: 200, message: "Date Start is required.", result: false });
 
       // Pre-setting variables
-      criteria = { where: { name: params.name } };
-      initialValues = _.pick(params, ['name', 'created_at']);
+      criteria = { where: { employee_no: params.employee_no } };
+      initialValues = _.pick(params, [
+        'employee_no', 
+        'firstname', 
+        'middlename', 
+        'lastname', 
+        'primary_address', 
+        'secondary_address', 
+        'email', 
+        'mobile', 
+        'landline', 
+        'tin_no', 
+        'sss_no', 
+        'philhealth_no', 
+        'pagibig_no', 
+        'pay_frequency_id', 
+        'user_id', 
+        'birthdate', 
+        'date_start', 
+        'date_endo'
+      ]);
+
       // Execute findAll query
-      data = await Model.PayFrequencies.findAll(criteria);
+      data = await Model.Employees.findAll(criteria);
       if (_.isEmpty(data[0])) {
-        let finalData = await Model.PayFrequencies.create(initialValues);
+        let finalData = await Model.Employees.create(initialValues);
         res.json({
           status: 200,
           message: "Successfully created data.",
@@ -55,7 +84,7 @@ module.exports = {
 
   /**
    * Update
-   * @route PUT /payFrequency/update/:id
+   * @route PUT /employee/update/:id
    * @param req
    * @param res
    * @returns {never}
@@ -71,9 +100,29 @@ module.exports = {
 
     try {
       // Pre-setting variables
-      initialValues = _.pick(params, ['name']);
+      initialValues = _.pick(params, [
+        'employee_no', 
+        'firstname', 
+        'middlename', 
+        'lastname', 
+        'primary_address', 
+        'secondary_address', 
+        'email', 
+        'mobile', 
+        'landline', 
+        'tin_no', 
+        'sss_no', 
+        'philhealth_no', 
+        'pagibig_no', 
+        'pay_frequency_id', 
+        'user_id', 
+        'birthdate', 
+        'date_start', 
+        'date_endo',
+        'is_active'
+      ]);
       // Execute findByPk query
-      data = await Model.PayFrequencies.findByPk(req.params.id);
+      data = await Model.Employees.findByPk(req.params.id);
       if (!_.isEmpty(data)) {
         let finalData = await data.update(initialValues);
         res.json({
@@ -99,7 +148,7 @@ module.exports = {
 
   /**
    * Delete
-   * @route PUT /payFrequency/delete/:id
+   * @route PUT /employee/delete/:id
    * @param req
    * @param res
    * @returns {never}
@@ -109,7 +158,7 @@ module.exports = {
 
     try {
       // Execute findByPk query
-      data = await Model.PayFrequencies.findByPk(req.params.id);
+      data = await Model.Employees.findByPk(req.params.id);
       if (!_.isEmpty(data)) {
         let finalData = await data.update({ is_deleted: 1 });
         res.json({
@@ -135,7 +184,7 @@ module.exports = {
 
   /**
    * Search
-   * @route POST /payFrequency/search/
+   * @route POST /employee/search/
    * @param req
    * @param res
    * @returns {never}
@@ -151,7 +200,7 @@ module.exports = {
 
     try {
       // Pre-setting variables
-      query = `SELECT id, name, created_at, updated_at FROM pay_frequencies WHERE name LIKE ? AND is_deleted = 0;`;
+      query = `SELECT id, employee_no, firstname, middlename, lastname, primary_address, secondary_address, created_at, updated_at FROM employees WHERE (CONCAT(employee_no, firstname, middlename, lastname) LIKE ?) AND is_deleted = 0;`;
       // Execute native query
       data = await Model.sequelize.query(query, {
         replacements: [`%${params.value}%`],
@@ -181,7 +230,7 @@ module.exports = {
 
   /**
    * Find all
-   * @route GET /payFrequency
+   * @route GET /employee
    * @param req
    * @param res
    * @returns {never}
@@ -191,9 +240,9 @@ module.exports = {
 
     try {
       // Pre-setting variables
-      criteria = { where: { is_deleted: 0 } };
+      criteria = { where: { is_deleted: 0 }, include: [{ model: Model.PayFrequencies, as: 'payFrequencies' }, { model: Model.Users, as: 'users' }] };
       // Execute findAll query
-      data = await Model.PayFrequencies.findAll(criteria);
+      data = await Model.Employees.findAll(criteria);
       if (!_.isEmpty(data[0])) {
         res.json({
           status: 200,
@@ -218,17 +267,19 @@ module.exports = {
 
   /**
    * Find by id
-   * @route GET /payFrequency/:id
+   * @route GET /employee/:id
    * @param req
    * @param res
    * @returns {never}
    */
   findById: async (req, res) => {
-    let data;
+    let data, criteria;
 
     try {
+      // Pre-setting variables
+      criteria = { include: [{ model: Model.PayFrequencies, as: 'payFrequencies' }, { model: Model.Users, as: 'users' }] };
       // Execute findAll query
-      data = await Model.PayFrequencies.findByPk(req.params.id);
+      data = await Model.Employees.findByPk(req.params.id, criteria);
       if (!_.isEmpty(data)) {
         res.json({
           status: 200,

@@ -89,7 +89,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     'date_endo': {
       type: DataTypes.DATEONLY,
-      allowNull: false
+      allowNull: true
     },
     'created_at': {
       type: 'TIMESTAMP',
@@ -127,10 +127,6 @@ module.exports = (sequelize, DataTypes) => {
       as: 'users'
     });
   };
-
-  Employees.beforeCreate(async (value, options) => {
-    value.password = await bcrypt.hashPassword(value.password);
-  })
 
   return Employees;
 };

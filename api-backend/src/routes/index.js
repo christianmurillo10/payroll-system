@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 router.use('/payFrequency', require('./payFrequencies'));
+router.use('/employee', require('./employees'));
 router.use('/role', require('./roles'));
 router.use('/sssContributionTable', require('./sssContributionTables'));
 router.use('/user', require('./users'));

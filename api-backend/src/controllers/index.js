@@ -1,4 +1,5 @@
 const auth = require('./AuthController');
+const employees = require('./EmployeesController');
 const payFrequencies = require('./PayFrequenciesController');
 const roles = require('./RolesController');
 const sssContributionTables = require('./SssContributionTablesController');
@@ -7,6 +8,7 @@ const withholdingTaxTables = require('./WithholdingTaxTablesController');
 
 module.exports = {
     auth,
+    employees,
     payFrequencies,
     roles,
     sssContributionTables,

@@ -35,11 +35,11 @@ module.exports = {
       // Execute findAll query
       data = await Model.WithholdingTaxTables.findAll(criteria);
       if (_.isEmpty(data[0])) {
-        let withholdingTax = await Model.WithholdingTaxTables.create(initialValues);
+        let finalData = await Model.WithholdingTaxTables.create(initialValues);
         res.json({
           status: 200,
           message: "Successfully created data.",
-          result: _.omit(withholdingTax.get({ plain: true }), ['is_deleted'])
+          result: _.omit(finalData.get({ plain: true }), ['is_deleted'])
         });
       } else {
         res.json({
@@ -79,11 +79,11 @@ module.exports = {
       // Execute findByPk query
       data = await Model.WithholdingTaxTables.findByPk(req.params.id);
       if (!_.isEmpty(data)) {
-        let withholdingTax = await data.update(initialValues);
+        let finalData = await data.update(initialValues);
         res.json({
           status: 200,
           message: "Successfully updated data.",
-          result: withholdingTax
+          result: finalData
         });
       } else {
         res.json({
@@ -115,11 +115,11 @@ module.exports = {
       // Execute findByPk query
       data = await Model.WithholdingTaxTables.findByPk(req.params.id);
       if (!_.isEmpty(data)) {
-        let withholdingTax = await data.update({ is_deleted: 1 });
+        let finalData = await data.update({ is_deleted: 1 });
         res.json({
           status: 200,
           message: "Successfully deleted data.",
-          result: withholdingTax
+          result: finalData
         });
       } else {
         res.json({
@@ -155,10 +155,10 @@ module.exports = {
 
     try {
       // Pre-setting variables
-      query = `SELECT id, compensation_range_from, compensation_range_to, tax_amount, tax_percentage, pay_frequency_id, created_at, updated_at FROM withholding_tax_tables WHERE compensation_range_from LIKE ? AND compensation_range_to LIKE ? AND is_deleted = 0;`;
+      query = `SELECT id, compensation_range_from, compensation_range_to, tax_amount, tax_percentage, pay_frequency_id, created_at, updated_at FROM withholding_tax_tables WHERE (CONCAT(compensation_range_from, compensation_range_to, tax_amount, tax_percentage) LIKE ?) AND is_deleted = 0;`;
       // Execute native query
       data = await Model.sequelize.query(query, {
-        replacements: [`%${params.value}%`, `%${params.value}%`],
+        replacements: [`%${params.value}%`],
         type: Model.sequelize.QueryTypes.SELECT
       });
       if (!_.isEmpty(data)) {
