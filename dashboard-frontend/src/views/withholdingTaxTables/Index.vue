@@ -22,7 +22,7 @@
         <td class="text-xs-left">{{ props.item.compensation_range_to }}</td>
         <td class="text-xs-left">{{ props.item.tax_amount }}</td>
         <td class="text-xs-left">{{ props.item.tax_percentage }}</td>
-        <td class="text-xs-left">{{ props.item.payFrequencies.name }}</td>
+        <td class="text-xs-left">{{ getPayFrequencyNameById(props.item.pay_frequency_id) }}</td>
         <td class="justify-center layout px-0">
           <v-icon small class="mr-2" @click="editItem(props.item.id)">edit</v-icon>
           <v-icon small @click="deleteItem(props.item.id)">delete</v-icon>
@@ -38,7 +38,7 @@
 <script>
 import Alerts from "../../components/utilities/Alerts";
 import ModalForm from "./ModalForm";
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -60,6 +60,7 @@ export default {
 
   computed: {
     ...mapState("withholdingTaxTables", ["withholdingTaxTableList"]),
+    ...mapGetters("payFrequencies", ["getPayFrequencyNameById"]),
   },
 
   watch: {

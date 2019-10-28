@@ -67,8 +67,7 @@ export default {
         v => (v && v.length <= 50) || "Name must be less than 50 characters"
       ],
       descriptionRules: [
-        v =>
-          (v && v.length <= 500) || "Password must be less than 500 characters"
+        v => (v && v.length <= 500) || "Password must be less than 500 characters"
       ]
     }
   }),

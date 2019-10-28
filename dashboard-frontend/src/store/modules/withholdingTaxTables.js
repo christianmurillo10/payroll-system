@@ -8,9 +8,6 @@ const getters = {
   getWithholdingTaxTableById: (state) => (id) => {
     return state.withholdingTaxTableList.find(withholdingTaxTable => withholdingTaxTable.id === id);
   },
-  getWithholdingTaxTableById: (state) => (id) => {
-    return state.withholdingTaxTableList.find(withholdingTaxTable => withholdingTaxTable.id === id).name;
-  },
   getWithholdingTaxTableList: (state) => {
     return state.withholdingTaxTableList;
   }

@@ -121,8 +121,13 @@ export default {
     this.getUserData();
   },
 
+  created() {
+    this.getRoleData();
+  },
+
   methods: {
     ...mapActions("alerts", ["setAlert"]),
+    ...mapActions("roles", {getRoleData: "getData"}),
     ...mapActions("users", {
       getUserData: "getData",
       saveUserData: "saveData",

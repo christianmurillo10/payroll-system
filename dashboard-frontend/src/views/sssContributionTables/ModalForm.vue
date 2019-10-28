@@ -18,30 +18,40 @@
                 label="Compensation Range From"
                 required
               ></v-text-field>
+            </v-flex>
+            <v-flex xs12 sm12 md12>
               <v-text-field
                 v-model="formData.compensation_range_to"
                 :rules="validateItem.compensationRangeToRules"
                 label="Compensation Range To"
                 required
               ></v-text-field>
+            </v-flex>
+            <v-flex xs12 sm12 md12>
               <v-text-field
                 v-model="formData.monthly_salary_credit"
                 :rules="validateItem.monthlySalaryCreditRules"
                 label="Monthly Salary Credit"
                 required
               ></v-text-field>
+            </v-flex>
+            <v-flex xs12 sm12 md12>
               <v-text-field
                 v-model="formData.employer_contribution"
                 :rules="validateItem.employerContributionRules"
                 label="Employer Contribution"
                 required
               ></v-text-field>
+            </v-flex>
+            <v-flex xs12 sm12 md12>
               <v-text-field
                 v-model="formData.employee_contribution"
                 :rules="validateItem.employeeContributionRules"
                 label="Employee Contribution"
                 required
               ></v-text-field>
+            </v-flex>
+            <v-flex xs12 sm12 md12>
               <v-text-field
                 v-model="formData.total"
                 :rules="validateItem.totalRules"

@@ -18,30 +18,41 @@
                 label="Compensation Range From"
                 required
               ></v-text-field>
+            </v-flex>
+            <v-flex xs12 sm12 md12>
               <v-text-field
                 v-model="formData.compensation_range_to"
                 :rules="validateItem.compensationRangeToRules"
                 label="Compensation Range To"
                 required
               ></v-text-field>
+            </v-flex>
+            <v-flex xs12 sm12 md12>
               <v-text-field
                 v-model="formData.tax_amount"
                 :rules="validateItem.taxAmountRules"
                 label="Tax Amount"
                 required
               ></v-text-field>
+            </v-flex>
+            <v-flex xs12 sm12 md12>
               <v-text-field
                 v-model="formData.tax_percentage"
                 :rules="validateItem.taxPercentageRules"
                 label="Tax Percentage"
                 required
               ></v-text-field>
-              <v-text-field
+            </v-flex>
+            <v-flex xs12 sm12 md12>
+              <v-select
+                :items="getPayFrequencyList"
+                item-text="name"
+                item-value="id"
                 v-model="formData.pay_frequency_id"
                 :rules="validateItem.payFrequencyRules"
                 label="Pay Frequency"
                 required
-              ></v-text-field>
+              ></v-select>
             </v-flex>
           </v-layout>
         </v-container>
@@ -86,30 +97,26 @@ export default {
     valid: true,
     validateItem: {
       compensationRangeFromRules: [
-        v => !!v || "Compensation Range From is required",
-        v => (v && v.length <= 50) || "Compensation Range From must be less than 50 characters"
+        v => !!v || "Compensation Range From is required"
       ],
       compensationRangeToRules: [
-        v => !!v || "Compensation Range To is required",
-        v => (v && v.length <= 50) || "Compensation Range To must be less than 50 characters"
+        v => !!v || "Compensation Range To is required"
       ],
       taxAmountRules: [
-        v => !!v || "Tax Amount is required",
-        v => (v && v.length <= 50) || "Tax Amount must be less than 50 characters"
+        v => !!v || "Tax Amount is required"
       ],
       taxPercentageRules: [
-        v => !!v || "Tax Percentage is required",
-        v => (v && v.length <= 50) || "Tax Percentage must be less than 50 characters"
+        v => !!v || "Tax Percentage is required"
       ],
       payFrequencyRules: [
-        v => !!v || "Pay Frequency is required",
-        v => (v && v.length <= 50) || "Pay Frequency must be less than 50 characters"
+        v => !!v || "Pay Frequency is required"
       ]
     }
   }),
 
   computed: {
     ...mapGetters("withholdingTaxTables", ["getWithholdingTaxTableById"]),
+    ...mapGetters("payFrequencies", ["getPayFrequencyList"]),
     formTitle() {
       return this.formType === "new" ? "New Withholding Tax" : "Edit Withholding Tax";
     },
@@ -122,8 +129,13 @@ export default {
     this.getWithholdingTaxTableData();
   },
 
+  created() {
+    this.getPayFrequenciesData();
+  },
+
   methods: {
     ...mapActions("alerts", ["setAlert"]),
+    ...mapActions("payFrequencies", {getPayFrequenciesData: "getData"}),
     ...mapActions("withholdingTaxTables", {
       getWithholdingTaxTableData: "getData",
       saveWithholdingTaxTableData: "saveData",
