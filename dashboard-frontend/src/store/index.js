@@ -11,6 +11,7 @@ import roles from './modules/roles'
 import payFrequencies from './modules/payFrequencies'
 import sssContributionTables from './modules/sssContributionTables'
 import withholdingTaxTables from './modules/withholdingTaxTables'
+import employees from './modules/employees'
 
 Vue.use(Vuex);
 
@@ -28,6 +29,7 @@ export default new Vuex.Store({
     roles,
     payFrequencies,
     sssContributionTables,
-    withholdingTaxTables
+    withholdingTaxTables,
+    employees
   }
 });

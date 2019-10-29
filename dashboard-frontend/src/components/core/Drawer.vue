@@ -91,6 +91,11 @@ export default {
         to: '/withholdingTaxTables',
         icon: 'person_pin',
         text: 'WithholdingTaxTables'
+      },
+      {
+        to: '/employees',
+        icon: 'person_pin',
+        text: 'Employees'
       }
     ],
     responsive: true
