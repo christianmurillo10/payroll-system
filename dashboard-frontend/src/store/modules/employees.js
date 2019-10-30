@@ -63,7 +63,6 @@ const actions = {
           philhealth_no: payload.philhealth_no,
           pagibig_no: payload.pagibig_no,
           pay_frequency_id: payload.pay_frequency_id.toLocaleString(),
-          user_id: "2",
           birthdate: payload.birthdate,
           date_start: payload.date_start
         };
@@ -99,7 +98,6 @@ const actions = {
           philhealth_no: payload.philhealth_no,
           pagibig_no: payload.pagibig_no,
           pay_frequency_id: payload.pay_frequency_id,
-          user_id: 2,
           birthdate: payload.birthdate,
           date_start: payload.date_start
         };
@@ -161,7 +159,7 @@ const mutations = {
       philhealth_no: payload.philhealth_no,
       pagibig_no: payload.pagibig_no,
       pay_frequency_id: payload.pay_frequency_id,
-      user_id: 2,
+      user_id: payload.user_id,
       birthdate: payload.birthdate,
       date_start: payload.date_start
     });
