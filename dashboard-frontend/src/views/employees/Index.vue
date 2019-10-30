@@ -7,7 +7,7 @@
           <v-icon class="black--text">view_list</v-icon>Employees
         </v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="999px">
+        <v-dialog v-model="dialog" persistent max-width="999px">
           <template v-slot:activator="{ on }">
             <v-btn icon v-on="on">
               <v-icon>add_box</v-icon>

@@ -11,15 +11,45 @@
       <v-card-text>
         <v-container grid-list-md>
           <v-layout wrap>
-            <v-flex xs12 sm12 md12>
-              <v-text-field
-                v-model="formData.employee_no"
-                :rules="validateItem.employeeNoRules"
-                label="Employee No"
-                required
-              ></v-text-field>
+              <v-flex xs12 sm12 md4>
+                <v-text-field
+                  v-model="formData.employee_no"
+                  :rules="validateItem.employeeNoRules"
+                  label="Employee No"
+                  required
+                ></v-text-field>
+              </v-flex>
+            <v-flex xs12 sm12 md4></v-flex>
+            <v-flex xs12 sm12 md4>
+              <v-menu
+                ref="date_start"
+                v-model="date_start"
+                :close-on-content-click="false"
+                :nudge-right="40"
+                :return-value.sync="formData.date_start"
+                lazy
+                transition="scale-transition"
+                offset-y
+                full-width
+                min-width="290px"
+              >
+                <template v-slot:activator="{ on }">
+                  <v-text-field
+                    v-model="formData.date_start"
+                    label="Date Start"
+                    prepend-icon="event"
+                    readonly
+                    v-on="on"
+                  ></v-text-field>
+                </template>
+                <v-date-picker v-model="formData.date_start" no-title scrollable>
+                  <v-spacer></v-spacer>
+                  <v-btn flat color="primary" @click="date_start = false">Cancel</v-btn>
+                  <v-btn flat color="primary" @click="$refs.date_start.save(formData.date_start)">OK</v-btn>
+                </v-date-picker>
+              </v-menu>
             </v-flex>
-            <v-flex xs12 sm12 md12>
+            <v-flex xs12 sm12 md4>
               <v-text-field
                 v-model="formData.firstname"
                 :rules="validateItem.firstnameRules"
@@ -27,15 +57,14 @@
                 required
               ></v-text-field>
             </v-flex>
-            <v-flex xs12 sm12 md12>
+            <v-flex xs12 sm12 md4>
               <v-text-field
                 v-model="formData.middlename"
-                :rules="validateItem.middlenameRules"
                 label="Middlename"
                 required
               ></v-text-field>
             </v-flex>
-            <v-flex xs12 sm12 md12>
+            <v-flex xs12 sm12 md4>
               <v-text-field
                 v-model="formData.lastname"
                 :rules="validateItem.lastnameRules"
@@ -54,12 +83,11 @@
             <v-flex xs12 sm12 md12>
               <v-text-field
                 v-model="formData.secondary_address"
-                :rules="validateItem.secondaryAddressRules"
                 label="Secondary Address"
                 required
               ></v-text-field>
             </v-flex>
-            <v-flex xs12 sm12 md12>
+            <v-flex xs12 sm12 md8>
               <v-text-field
                 v-model="formData.email"
                 :rules="validateItem.emailRules"
@@ -67,18 +95,45 @@
                 required
               ></v-text-field>
             </v-flex>
-            <v-flex xs12 sm12 md12>
+            <v-flex xs12 sm12 md4>
+              <v-menu
+                ref="birthdate"
+                v-model="birthdate"
+                :close-on-content-click="false"
+                :nudge-right="40"
+                :return-value.sync="formData.birthdate"
+                lazy
+                transition="scale-transition"
+                offset-y
+                full-width
+                min-width="290px"
+              >
+                <template v-slot:activator="{ on }">
+                  <v-text-field
+                    v-model="formData.birthdate"
+                    label="Birthdate"
+                    prepend-icon="event"
+                    readonly
+                    v-on="on"
+                  ></v-text-field>
+                </template>
+                <v-date-picker v-model="formData.birthdate" no-title scrollable>
+                  <v-spacer></v-spacer>
+                  <v-btn flat color="primary" @click="birthdate = false">Cancel</v-btn>
+                  <v-btn flat color="primary" @click="$refs.birthdate.save(formData.birthdate)">OK</v-btn>
+                </v-date-picker>
+              </v-menu>
+            </v-flex>
+            <v-flex xs12 sm12 md6>
               <v-text-field
                 v-model="formData.mobile"
-                :rules="validateItem.mobileRules"
                 label="Mobile"
                 required
               ></v-text-field>
             </v-flex>
-            <v-flex xs12 sm12 md12>
+            <v-flex xs12 sm12 md6>
               <v-text-field
                 v-model="formData.landline"
-                :rules="validateItem.landlineRules"
                 label="Landline"
                 required
               ></v-text-field>
@@ -86,7 +141,6 @@
             <v-flex xs12 sm12 md12>
               <v-text-field
                 v-model="formData.tin_no"
-                :rules="validateItem.tinNoRules"
                 label="TIN No"
                 required
               ></v-text-field>
@@ -94,7 +148,6 @@
             <v-flex xs12 sm12 md12>
               <v-text-field
                 v-model="formData.sss_no"
-                :rules="validateItem.sssNoRules"
                 label="SSS No"
                 required
               ></v-text-field>
@@ -102,7 +155,6 @@
             <v-flex xs12 sm12 md12>
               <v-text-field
                 v-model="formData.philhealth_no"
-                :rules="validateItem.philhealthNoRules"
                 label="Philhealth No"
                 required
               ></v-text-field>
@@ -110,7 +162,6 @@
             <v-flex xs12 sm12 md12>
               <v-text-field
                 v-model="formData.pagibig_no"
-                :rules="validateItem.pagibigNoRules"
                 label="Pagibig No"
                 required
               ></v-text-field>
@@ -125,65 +176,6 @@
                 label="Pay Frequency"
                 required
               ></v-select>
-            </v-flex>
-
-            <v-flex xs12 sm12 md12>
-              <v-menu
-                ref="menu"
-                v-model="formData.birthdate"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                :return-value.sync="date"
-                lazy
-                transition="scale-transition"
-                offset-y
-                full-width
-                min-width="290px"
-              >
-                <template v-slot:activator="{ on }">
-                  <v-text-field
-                    v-model="date"
-                    label="Birthdate"
-                    prepend-icon="event"
-                    readonly
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-date-picker v-model="date" no-title scrollable>
-                  <v-spacer></v-spacer>
-                  <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
-                  <v-btn flat color="primary" @click="$refs.menu.save(date)">OK</v-btn>
-                </v-date-picker>
-              </v-menu>
-            </v-flex>
-            <v-flex xs12 sm12 md12>
-              <v-menu
-                ref="menu"
-                v-model="formData.date_start"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                :return-value.sync="date"
-                lazy
-                transition="scale-transition"
-                offset-y
-                full-width
-                min-width="290px"
-              >
-                <template v-slot:activator="{ on }">
-                  <v-text-field
-                    v-model="date"
-                    label="Date Start"
-                    prepend-icon="event"
-                    readonly
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-date-picker v-model="date" no-title scrollable>
-                  <v-spacer></v-spacer>
-                  <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
-                  <v-btn flat color="primary" @click="$refs.menu.save(date)">OK</v-btn>
-                </v-date-picker>
-              </v-menu>
             </v-flex>
           </v-layout>
         </v-container>
@@ -210,43 +202,44 @@ export default {
   },
 
   data: () => ({
-    date: new Date().toISOString().substr(0, 10),
+    birthdate: false,
+    date_start: false,
     defaultFormData: {
-      employee_no: "",
-      firstname: "",
-      middlename: "",
-      lastname: "",
-      primary_address: "",
-      secondary_address: "",
-      email: "",
-      mobile: "",
-      landline: "",
-      tin_no: "",
-      sss_no: "",
-      philhealth_no: "",
-      pagibig_no: "",
-      pay_frequency_id: "",
-      birthdate: "",
-      date_start: ""
+      employee_no: null,
+      firstname: null,
+      middlename: null,
+      lastname: null,
+      primary_address: null,
+      secondary_address: null,
+      email: null,
+      mobile: null,
+      landline: null,
+      tin_no: null,
+      sss_no: null,
+      philhealth_no: null,
+      pagibig_no: null,
+      pay_frequency_id: null,
+      birthdate: new Date().toISOString().substr(0, 10),
+      date_start: new Date().toISOString().substr(0, 10)
     },
     formType: "new",
     formData: {
-      employee_no: "",
-      firstname: "",
-      middlename: "",
-      lastname: "",
-      primary_address: "",
-      secondary_address: "",
-      email: "",
-      mobile: "",
-      landline: "",
-      tin_no: "",
-      sss_no: "",
-      philhealth_no: "",
-      pagibig_no: "",
-      pay_frequency_id: "",
-      birthdate: "",
-      date_start: ""
+      employee_no: null,
+      firstname: null,
+      middlename: null,
+      lastname: null,
+      primary_address: null,
+      secondary_address: null,
+      email: null,
+      mobile: null,
+      landline: null,
+      tin_no: null,
+      sss_no: null,
+      philhealth_no: null,
+      pagibig_no: null,
+      pay_frequency_id: null,
+      birthdate: new Date().toISOString().substr(0, 10),
+      date_start: new Date().toISOString().substr(0, 10)
     },
     valid: true,
     validateItem: {
@@ -256,38 +249,14 @@ export default {
       firstnameRules: [
         v => !!v || "Firstname is required"
       ],
-      middlenameRules: [
-        v => !!v || "Middlename is required"
-      ],
       lastnameRules: [
         v => !!v || "Lastname is required"
       ],
       primaryAddressRules: [
         v => !!v || "Primary Address is required"
       ],
-      secondaryAddressRules: [
-        v => !!v || "Secondary Address is required"
-      ],
       emailRules: [
         v => !!v || "Email is required"
-      ],
-      mobileRules: [
-        v => !!v || "Mobile is required"
-      ],
-      landlineRules: [
-        v => !!v || "Landline is required"
-      ],
-      tinNoRules: [
-        v => !!v || "TIN No is required"
-      ],
-      sssNoRules: [
-        v => !!v || "SSS No is required"
-      ],
-      philhealthNoRules: [
-        v => !!v || "Philhealth No is required"
-      ],
-      pagibigNoRules: [
-        v => !!v || "Pagibig No is required"
       ],
       payFrequencyRules: [
         v => !!v || "Pay Frequency is required"
@@ -313,7 +282,7 @@ export default {
   },
 
   mounted() {
-    this.getEmployeeById();
+    this.getEmployeeData();
   },
 
   created() {
@@ -360,6 +329,8 @@ export default {
             type: "success",
             message: response.data.message
           };
+          
+          if (!response.data.result) obj.type = "error"
           this.setAlert(obj);
         })
         .catch(err => console.log(err));
@@ -383,6 +354,8 @@ export default {
                 type: "success",
                 message: response.data.message
               };
+
+              if (!response.data.result) obj.type = "error"
               this.setAlert(obj);
             })
             .catch(err => console.log(err));
@@ -394,6 +367,8 @@ export default {
                 type: "success",
                 message: response.data.message
               };
+
+              if (!response.data.result) obj.type = "error"
               this.setAlert(obj);
             })
             .catch(err => console.log(err));

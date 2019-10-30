@@ -25,7 +25,6 @@ module.exports = {
       // Validators
       if (_.isEmpty(params.employee_no)) return res.json({ status: 200, message: "Employee No. is required.", result: false });
       if (_.isEmpty(params.firstname)) return res.json({ status: 200, message: "Firstname is required.", result: false });
-      if (_.isEmpty(params.middlename)) return res.json({ status: 200, message: "Middlename is required.", result: false });
       if (_.isEmpty(params.lastname)) return res.json({ status: 200, message: "Lastname is required.", result: false });
       if (_.isEmpty(params.primary_address)) return res.json({ status: 200, message: "Primary Address is required.", result: false });
       if (_.isEmpty(params.email)) return res.json({ status: 200, message: "Email is required.", result: false });

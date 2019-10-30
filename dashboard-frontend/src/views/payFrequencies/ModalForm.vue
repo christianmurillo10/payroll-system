@@ -45,12 +45,12 @@ export default {
 
   data: () => ({
     defaultFormData: {
-      name: "",
+      name: null,
       description: ""
     },
     formType: "new",
     formData: {
-      name: "",
+      name: null,
       description: ""
     },
     valid: true,
@@ -100,6 +100,8 @@ export default {
             type: "success",
             message: response.data.message
           };
+
+          if (!response.data.result) obj.type = "error"
           this.setAlert(obj);
         })
         .catch(err => console.log(err));
@@ -123,6 +125,8 @@ export default {
                 type: "success",
                 message: response.data.message
               };
+
+              if (!response.data.result) obj.type = "error"
               this.setAlert(obj);
             })
             .catch(err => console.log(err));
@@ -134,6 +138,8 @@ export default {
                 type: "success",
                 message: response.data.message
               };
+              
+              if (!response.data.result) obj.type = "error"
               this.setAlert(obj);
             })
             .catch(err => console.log(err));

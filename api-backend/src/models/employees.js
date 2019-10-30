@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     'middlename': {
       type: DataTypes.STRING(50), 
-      allowNull: false
+      allowNull: true
     },
     'lastname': {
       type: DataTypes.STRING(50), 

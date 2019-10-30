@@ -85,21 +85,21 @@ export default {
 
   data: () => ({
     defaultFormData: {
-      compensation_range_from: "",
-      compensation_range_to: "",
-      monthly_salary_credit: "",
-      employer_contribution: "",
-      descremployee_contributioniption: "",
-      total: ""
+      compensation_range_from: null,
+      compensation_range_to: null,
+      monthly_salary_credit: null,
+      employer_contribution: null,
+      descremployee_contributioniption: null,
+      total: null
     },
     formType: "new",
     formData: {
-      compensation_range_from: "",
-      compensation_range_to: "",
-      monthly_salary_credit: "",
-      employer_contribution: "",
-      descremployee_contributioniption: "",
-      total: ""
+      compensation_range_from: null,
+      compensation_range_to: null,
+      monthly_salary_credit: null,
+      employer_contribution: null,
+      descremployee_contributioniption: null,
+      total: null
     },
     valid: true,
     validateItem: {
@@ -173,6 +173,8 @@ export default {
             type: "success",
             message: response.data.message
           };
+          
+          if (!response.data.result) obj.type = "error"
           this.setAlert(obj);
         })
         .catch(err => console.log(err));
@@ -196,6 +198,8 @@ export default {
                 type: "success",
                 message: response.data.message
               };
+              
+              if (!response.data.result) obj.type = "error"
               this.setAlert(obj);
             })
             .catch(err => console.log(err));
@@ -207,6 +211,8 @@ export default {
                 type: "success",
                 message: response.data.message
               };
+              
+              if (!response.data.result) obj.type = "error"
               this.setAlert(obj);
             })
             .catch(err => console.log(err));

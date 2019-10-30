@@ -80,19 +80,19 @@ export default {
 
   data: () => ({
     defaultFormData: {
-      compensation_range_from: "",
-      compensation_range_to: "",
-      tax_amount: "",
-      tax_percentage: "",
-      pay_frequency_id: ""
+      compensation_range_from: null,
+      compensation_range_to: null,
+      tax_amount: null,
+      tax_percentage: null,
+      pay_frequency_id: null
     },
     formType: "new",
     formData: {
-      compensation_range_from: "",
-      compensation_range_to: "",
-      tax_amount: "",
-      tax_percentage: "",
-      pay_frequency_id: ""
+      compensation_range_from: null,
+      compensation_range_to: null,
+      tax_amount: null,
+      tax_percentage: null,
+      pay_frequency_id: null
     },
     valid: true,
     validateItem: {
@@ -162,6 +162,8 @@ export default {
             type: "success",
             message: response.data.message
           };
+          
+          if (!response.data.result) obj.type = "error"
           this.setAlert(obj);
         })
         .catch(err => console.log(err));
@@ -185,6 +187,8 @@ export default {
                 type: "success",
                 message: response.data.message
               };
+              
+              if (!response.data.result) obj.type = "error"
               this.setAlert(obj);
             })
             .catch(err => console.log(err));
@@ -196,6 +200,8 @@ export default {
                 type: "success",
                 message: response.data.message
               };
+              
+              if (!response.data.result) obj.type = "error"
               this.setAlert(obj);
             })
             .catch(err => console.log(err));
