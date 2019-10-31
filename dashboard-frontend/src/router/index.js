@@ -9,6 +9,7 @@ import PayFrequencies from "../views/payFrequencies/Index";
 import SssContributionTables from "../views/sssContributionTables/Index";
 import WithholdingTaxTables from "../views/withholdingTaxTables/Index";
 import Employees from "../views/employees/Index";
+import EmployeesView from "../views/employees/View";
 
 Vue.use(Router);
 
@@ -60,6 +61,11 @@ let router = new Router({
       path: "/employees",
       name: "employees",
       component: Employees
+    },
+    {
+      path: "/employees/view/:id",
+      name: "employees-view",
+      component: EmployeesView
     }
   ]
 })

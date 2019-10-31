@@ -2,23 +2,25 @@
   <div>
     <Alerts />
     <v-divider></v-divider>
-      <v-toolbar color="#EEEEEE" dense>
-        <v-toolbar-title>
-          <v-icon class="black--text">view_list</v-icon>Employees
-        </v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" persistent max-width="999px">
-          <template v-slot:activator="{ on }">
-            <v-btn icon v-on="on">
-              <v-icon>add_box</v-icon>
-            </v-btn>
-          </template>
-          <ModalForm ref="modalForm" @setDialog="setDialog" />
-        </v-dialog>
-      </v-toolbar>
+    <v-toolbar color="#EEEEEE" dense>
+      <v-toolbar-title>
+        <v-icon class="black--text">view_list</v-icon>Employees
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-dialog v-model="dialog" persistent max-width="999px">
+        <template v-slot:activator="{ on }">
+          <v-btn icon v-on="on">
+            <v-icon>add_box</v-icon>
+          </v-btn>
+        </template>
+        <ModalForm ref="modalForm" @setDialog="setDialog" />
+      </v-dialog>
+    </v-toolbar>
     <v-data-table :headers="headers" :items="employeeList" class="elevation-1">
       <template v-slot:items="props">
-        <td class="text-xs-left">{{ props.item.employee_no }}</td>
+        <td class="text-xs-left">
+          <router-link v-bind:to="'/employees/view/' + props.item.id">{{ props.item.employee_no }}</router-link>
+        </td>
         <td class="text-xs-left">{{ props.item.firstname }}</td>
         <td class="text-xs-left">{{ props.item.email }}</td>
         <td class="text-xs-left">{{ props.item.date_start }}</td>
@@ -38,7 +40,7 @@
 <script>
 import Alerts from "../../components/utilities/Alerts";
 import ModalForm from "./ModalForm";
-import { mapState, mapGetters } from 'vuex';
+import { mapState, mapGetters } from "vuex";
 
 export default {
   components: {
@@ -55,11 +57,11 @@ export default {
       { text: "Date Start", value: "date_start" },
       { text: "Date Endo", value: "date_endo" },
       { text: "Actions", align: "center", value: "name", sortable: false }
-    ],
+    ]
   }),
 
   computed: {
-    ...mapState("employees", ["employeeList"]),
+    ...mapState("employees", ["employeeList"])
     // ...mapGetters("employees", ["getPayFrequencyNameById"]),
   },
 
