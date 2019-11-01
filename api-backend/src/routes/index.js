@@ -3,6 +3,7 @@ var router = express.Router();
 
 router.use('/payFrequency', require('./payFrequencies'));
 router.use('/employee', require('./employees'));
+router.use('/employeeSalariesAndAllowances', require('./employeeSalariesAndAllowances'));
 router.use('/role', require('./roles'));
 router.use('/sssContributionTable', require('./sssContributionTables'));
 router.use('/user', require('./users'));
