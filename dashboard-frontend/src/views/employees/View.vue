@@ -11,47 +11,102 @@
     <v-card class="mx-auto my-12" :elevation="3" max-width="auto">
       <v-container grid-list-md>
         <v-layout wrap>
-          <v-flex xs12 sm12 md4>
-            <v-img height="250" src="https://cdn.vuetifyjs.com/images/cards/cooking.png"></v-img>
+          <template>
+            <v-flex xs12 sm6 md4 lg3>
+              <v-card :elevation="5">
+                <v-card-title class="subheading font-weight-bold">Employee Details</v-card-title>
 
-            <v-card-title>Cafe Badilico</v-card-title>
+                <v-divider></v-divider>
 
-            <v-card-text>
-              <v-row align="center" class="mx-0">
-                <v-rating :value="4.5" color="amber" dense half-increments readonly size="14"></v-rating>
+                <v-list dense>
+                  <v-list-tile>
+                    <v-list-tile-content>Employee No:</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ employeeDetails.employee_no }}</v-list-tile-content>
+                  </v-list-tile>
 
-                <div class="grey--text ml-4">4.5 (413)</div>
-              </v-row>
+                  <v-list-tile>
+                    <v-list-tile-content>Firstname:</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ employeeDetails.firstname }}</v-list-tile-content>
+                  </v-list-tile>
 
-              <div class="my-4 subtitle-1 black--text">$ • Italian, Cafe</div>
+                  <v-list-tile>
+                    <v-list-tile-content>Middlename:</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ employeeDetails.middlename }}</v-list-tile-content>
+                  </v-list-tile>
 
-              <div>Small plates, salads & sandwiches an inteimate setting with 12 indoor seats plus patio seating.</div>
-            </v-card-text>
+                  <v-list-tile>
+                    <v-list-tile-content>Lastname:</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ employeeDetails.lastname }}</v-list-tile-content>
+                  </v-list-tile>
 
-            <v-divider class="mx-4"></v-divider>
+                  <v-list-tile>
+                    <v-list-tile-content>Primary Address:</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ employeeDetails.primary_address }}</v-list-tile-content>
+                  </v-list-tile>
 
-            <v-card-title>Tonight's availability</v-card-title>
+                  <v-list-tile>
+                    <v-list-tile-content>Secondary Address:</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ employeeDetails.secondary_address }}</v-list-tile-content>
+                  </v-list-tile>
 
-            <v-card-text>
-              <v-chip-group
-                v-model="selection"
-                active-class="deep-purple accent-4 white--text"
-                column
-              >
-                <v-chip>5:30PM</v-chip>
+                  <v-list-tile>
+                    <v-list-tile-content>Email:</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ employeeDetails.email }}</v-list-tile-content>
+                  </v-list-tile>
 
-                <v-chip>7:30PM</v-chip>
+                  <v-list-tile>
+                    <v-list-tile-content>Mobile:</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ employeeDetails.mobile }}</v-list-tile-content>
+                  </v-list-tile>
 
-                <v-chip>8:00PM</v-chip>
+                  <v-list-tile>
+                    <v-list-tile-content>Landline:</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ employeeDetails.landline }}</v-list-tile-content>
+                  </v-list-tile>
 
-                <v-chip>9:00PM</v-chip>
-              </v-chip-group>
-            </v-card-text>
+                  <v-list-tile>
+                    <v-list-tile-content>TIN No:</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ employeeDetails.tin_no }}</v-list-tile-content>
+                  </v-list-tile>
 
-            <v-card-actions>
-              <v-btn color="deep-purple accent-4" text @click="reserve">Reserve</v-btn>
-            </v-card-actions>
-          </v-flex>
+                  <v-list-tile>
+                    <v-list-tile-content>SSS No:</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ employeeDetails.sss_no }}</v-list-tile-content>
+                  </v-list-tile>
+
+                  <v-list-tile>
+                    <v-list-tile-content>Philhealth No:</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ employeeDetails.philhealth_no }}</v-list-tile-content>
+                  </v-list-tile>
+
+                  <v-list-tile>
+                    <v-list-tile-content>Pagibig No:</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ employeeDetails.pagibig_no }}</v-list-tile-content>
+                  </v-list-tile>
+
+                  <v-list-tile>
+                    <v-list-tile-content>Birthdate:</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ employeeDetails.birthdate }}</v-list-tile-content>
+                  </v-list-tile>
+
+                  <v-list-tile>
+                    <v-list-tile-content>Date Start:</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ employeeDetails.date_start }}</v-list-tile-content>
+                  </v-list-tile>
+
+                  <v-list-tile>
+                    <v-list-tile-content>Date End:</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ employeeDetails.date_end }}</v-list-tile-content>
+                  </v-list-tile>
+
+                  <v-list-tile>
+                    <v-list-tile-content>Active?:</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ getActive(employeeDetails.is_active) }}</v-list-tile-content>
+                  </v-list-tile>
+                </v-list>
+              </v-card>
+            </v-flex>
+          </template>
         </v-layout>
       </v-container>
     </v-card>
@@ -59,7 +114,28 @@
 </template>
 
 <script>
+import Alerts from "@/components/utilities/Alerts";
+import Mixins from "@/helpers/Mixins.js";
+import { mapActions } from "vuex";
+
 export default {
-  //
+  components: {
+    Alerts
+  },
+  mixins: [Mixins],
+
+  data: () => ({
+    employeeDetails: ""
+  }),
+
+  mounted() {
+    this.getEmployeeDataById(this.$route.params.id).then(response => {
+      this.employeeDetails = response.data.result;
+    });
+  },
+
+  methods: {
+    ...mapActions("employees", { getEmployeeDataById: "getDataById" })
+  }
 };
 </script>
