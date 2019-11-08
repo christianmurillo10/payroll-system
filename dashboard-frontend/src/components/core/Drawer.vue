@@ -58,8 +58,7 @@
                   <!-- Sub-child navigation -->
                   <v-list class="pt-0" dense v-for="(subChild, i) in child.subChilds" :key="i">
                     <v-list-tile :to="subChild.to">
-                      <v-list-tile-action class="margin-left-n10"></v-list-tile-action>
-                      <v-list-tile-content class="margin-left-n10">
+                      <v-list-tile-content>
                         <v-list-tile-title>{{ subChild.text }}</v-list-tile-title>
                       </v-list-tile-content>
                     </v-list-tile>
@@ -120,17 +119,17 @@ export default {
       {
         to: "/payFrequencies",
         icon: "person_pin",
-        text: "PayFrequencies"
+        text: "Pay Frequencies"
       },
       {
         to: "/sssContributionTables",
         icon: "person_pin",
-        text: "SssContributionTables"
+        text: "Sss Contribution"
       },
       {
         to: "/withholdingTaxTables",
         icon: "person_pin",
-        text: "WithholdingTaxTables"
+        text: "Withholding Tax"
       },
       {
         to: "/employees",
@@ -156,7 +155,7 @@ export default {
               {
                 to: "/withholdingTaxTables",
                 icon: "person_pin",
-                text: "WithholdingTaxTables"
+                text: "Withholding Tax"
               }
             ]
           }
