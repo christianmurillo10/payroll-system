@@ -112,55 +112,72 @@ export default {
         text: "Users"
       },
       {
-        to: "/roles",
-        icon: "person_pin",
-        text: "Roles"
-      },
-      {
-        to: "/payFrequencies",
-        icon: "person_pin",
-        text: "Pay Frequencies"
-      },
-      {
-        to: "/sssContributionTables",
-        icon: "person_pin",
-        text: "Sss Contribution"
-      },
-      {
-        to: "/withholdingTaxTables",
-        icon: "person_pin",
-        text: "Withholding Tax"
-      },
-      {
-        to: "/employees",
-        icon: "person_pin",
-        text: "Employees"
-      },
-      {
-        icon: "person_pin",
+        icon: "people",
         text: "Employees",
         submenus: true,
         childs: [
           {
             to: "/employees",
-            icon: "person_pin",
-            text: "Employees"
+            text: "Lists"
+          }
+        ]
+      },
+      {
+        icon: "settings_applications",
+        text: "Parameters",
+        submenus: true,
+        childs: [
+          {
+            to: "/payFrequencies",
+            text: "Pay Frequencies"
           },
           {
-            to: "/employees",
-            icon: "person_pin",
-            text: "Employees",
-            submenus: true,
-            subChilds: [
-              {
-                to: "/withholdingTaxTables",
-                icon: "person_pin",
-                text: "Withholding Tax"
-              }
-            ]
+            to: "/sssContributionTables",
+            text: "Sss Contribution"
+          },
+          {
+            to: "/withholdingTaxTables",
+            text: "Withholding Tax"
+          }
+        ]
+      },
+      {
+        icon: "build",
+        text: "Role Based Access",
+        submenus: true,
+        childs: [
+          {
+            to: "/roles",
+            text: "Roles"
           }
         ]
       }
+      // Do not delete for reference
+      // {
+      //   icon: "person_pin",
+      //   text: "Employees",
+      //   submenus: true,
+      //   childs: [
+      //     {
+      //       to: "/employees",
+      //       icon: "person_pin",
+      //       text: "Employees"
+      //     },
+      //     {
+      //       to: "/employees",
+      //       icon: "person_pin",
+      //       text: "Employees",
+      //       submenus: true,
+      //       subChilds: [
+      //         {
+      //           to: "/withholdingTaxTables",
+      //           icon: "person_pin",
+      //           text: "Withholding Tax"
+      //         }
+      //       ]
+      //     }
+      //   ]
+      // }
     ],
     responsive: true
   }),
