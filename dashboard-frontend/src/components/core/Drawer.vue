@@ -119,6 +119,10 @@ export default {
           {
             to: "/employees",
             text: "Lists"
+          },
+          {
+            to: "/employeeSalariesAndAllowances",
+            text: "Salary and Allowances"
           }
         ]
       },

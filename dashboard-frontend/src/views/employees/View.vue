@@ -7,6 +7,7 @@
         <v-icon class="black--text">view_list</v-icon>Employees - View
       </v-toolbar-title>
       <v-spacer></v-spacer>
+      <router-link to="/employees" tag="button"><v-icon>arrow_back</v-icon></router-link>
     </v-toolbar>
     <v-card class="mx-auto my-12" :elevation="3" max-width="auto">
       <v-container grid-list-md>
