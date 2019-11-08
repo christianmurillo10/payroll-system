@@ -12,7 +12,7 @@
     app
     dark
     mobile-break-point="991"
-    width="260"
+    width="300"
   >
     <v-list>
       <v-toolbar flat class="transparent">
@@ -43,13 +43,13 @@
           <v-list-group :prepend-icon="link.icon">
             <template v-slot:activator>
               <v-list-tile>
-                <v-list-tile-title>{{ link.text }}</v-list-tile-title>
+                <v-list-tile-title class="margin-left-n10">{{ link.text }}</v-list-tile-title>
               </v-list-tile>
             </template>
             <!-- Child navigation -->
             <v-list class="pt-0" dense v-for="(child, i) in link.childs" :key="i">
               <template v-if="child.submenus">
-                <v-list-group no-action sub-group>
+                <v-list-group class="margin-left-n10" no-action sub-group>
                   <template v-slot:activator>
                     <v-list-tile>
                       <v-list-tile-title>{{ child.text }}</v-list-tile-title>
@@ -58,10 +58,10 @@
                   <!-- Sub-child navigation -->
                   <v-list class="pt-0" dense v-for="(subChild, i) in child.subChilds" :key="i">
                     <v-list-tile :to="subChild.to">
-                      <v-list-tile-title>{{ subChild.text }}</v-list-tile-title>
-                      <v-list-tile-action>
-                        <v-icon>{{ subChild.icon }}</v-icon>
-                      </v-list-tile-action>
+                      <v-list-tile-action class="margin-left-n10"></v-list-tile-action>
+                      <v-list-tile-content class="margin-left-n10">
+                        <v-list-tile-title>{{ subChild.text }}</v-list-tile-title>
+                      </v-list-tile-content>
                     </v-list-tile>
                   </v-list>
                   <!-- End of Sub-child navigation -->
@@ -69,10 +69,8 @@
               </template>
               <template v-else>
                 <v-list-tile :to="child.to">
-                  <v-list-tile-action>
-                    <v-icon>{{ child.icon }}</v-icon>
-                  </v-list-tile-action>
-                  <v-list-tile-content>
+                  <v-list-tile-action></v-list-tile-action>
+                  <v-list-tile-content class="margin-left-n10">
                     <v-list-tile-title>{{ child.text }}</v-list-tile-title>
                   </v-list-tile-content>
                 </v-list-tile>
@@ -86,7 +84,7 @@
             <v-list-tile-action>
               <v-icon>{{ link.icon }}</v-icon>
             </v-list-tile-action>
-            <v-list-tile-content>
+            <v-list-tile-content class="margin-left-n10">
               <v-list-tile-title>{{ link.text }}</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
@@ -172,3 +170,9 @@ export default {
   }
 };
 </script>
+
+<style>
+.margin-left-n10 {
+  margin-left: -10px !important;
+}
+</style>
