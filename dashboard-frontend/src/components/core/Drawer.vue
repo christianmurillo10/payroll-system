@@ -128,16 +128,22 @@ export default {
         submenus: true,
         childs: [
           {
-            to: "/payFrequencies",
-            text: "Pay Frequencies"
-          },
-          {
-            to: "/sssContributionTables",
-            text: "Sss Contribution"
-          },
-          {
-            to: "/withholdingTaxTables",
-            text: "Withholding Tax"
+            text: "Payroll",
+            submenus: true,
+            subChilds: [
+              {
+                to: "/payFrequencies",
+                text: "Pay Frequencies"
+              },
+              {
+                to: "/sssContributionTables",
+                text: "Sss Contribution"
+              },
+              {
+                to: "/withholdingTaxTables",
+                text: "Withholding Tax"
+              }
+            ]
           }
         ]
       },
@@ -152,32 +158,6 @@ export default {
           }
         ]
       }
-      // Do not delete for reference
-      // {
-      //   icon: "person_pin",
-      //   text: "Employees",
-      //   submenus: true,
-      //   childs: [
-      //     {
-      //       to: "/employees",
-      //       icon: "person_pin",
-      //       text: "Employees"
-      //     },
-      //     {
-      //       to: "/employees",
-      //       icon: "person_pin",
-      //       text: "Employees",
-      //       submenus: true,
-      //       subChilds: [
-      //         {
-      //           to: "/withholdingTaxTables",
-      //           icon: "person_pin",
-      //           text: "Withholding Tax"
-      //         }
-      //       ]
-      //     }
-      //   ]
-      // }
     ],
     responsive: true
   }),
