@@ -8,6 +8,7 @@ router.route('/create').post(authController.authorization, employeeSalariesAndAl
 router.route('/update/:id').put(authController.authorization, employeeSalariesAndAllowancesController.update);
 router.route('/delete/:id').put(authController.authorization, employeeSalariesAndAllowancesController.delete);
 router.route('/search').post(authController.authorization, employeeSalariesAndAllowancesController.search);
+router.route('/findAllbyEmployeeId/:employeeId').get(authController.authorization, employeeSalariesAndAllowancesController.findAllbyEmployeeId);
 router.route('/:id').get(authController.authorization, employeeSalariesAndAllowancesController.findById);
 
 module.exports = router;

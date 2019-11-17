@@ -222,6 +222,43 @@ module.exports = {
   },
 
   /**
+   * Find all by employee id
+   * @route GET /employeeSalariesAndAllowances/findByEmployeeId/:employeeId
+   * @param req
+   * @param res
+   * @returns {never}
+   */
+  findAllbyEmployeeId: async (req, res) => {
+    let data, criteria;
+
+    try {
+      // Pre-setting variables
+      criteria = { where: { employee_id: req.params.employeeId, is_deleted: 0 }, include: [{ model: Model.Employees, as: 'employees' }, { model: Model.Users, as: 'users' }] };
+      // Execute findAll query
+      data = await Model.EmployeeSalariesAndAllowances.findAll(criteria);
+      if (!_.isEmpty(data[0])) {
+        res.json({
+          status: 200,
+          message: "Successfully find all data.",
+          result: data
+        });
+      } else {
+        res.json({
+          status: 200,
+          message: "No Data Found.",
+          result: false
+        });
+      }
+    } catch (err) {
+      res.json({
+        status: 401,
+        err: err,
+        message: "Failed to find all data."
+      });
+    }
+  },
+
+  /**
    * Find by id
    * @route GET /employeeSalariesAndAllowances/:id
    * @param req
