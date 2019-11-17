@@ -28,39 +28,6 @@
                   prepend-icon="list"
                 ></v-autocomplete>
               </v-flex>
-              <v-flex xs12 sm12 md12>
-                <v-menu
-                  ref="date_issued"
-                  v-model="date_issued"
-                  :close-on-content-click="false"
-                  :nudge-right="40"
-                  :return-value.sync="formData.date_issued"
-                  lazy
-                  transition="scale-transition"
-                  offset-y
-                  full-width
-                  min-width="290px"
-                >
-                  <template v-slot:activator="{ on }">
-                    <v-text-field
-                      v-model="formData.date_issued"
-                      label="Date Issued"
-                      prepend-icon="event"
-                      readonly
-                      v-on="on"
-                    ></v-text-field>
-                  </template>
-                  <v-date-picker v-model="formData.date_issued" no-title scrollable>
-                    <v-spacer></v-spacer>
-                    <v-btn flat color="primary" @click="date_issued = false">Cancel</v-btn>
-                    <v-btn
-                      flat
-                      color="primary"
-                      @click="$refs.date_issued.save(formData.date_issued)"
-                    >OK</v-btn>
-                  </v-date-picker>
-                </v-menu>
-              </v-flex>
             </v-layout>
           </v-container>
 
@@ -78,29 +45,24 @@
 
 <script>
 import Alerts from "@/components/utilities/Alerts";
-import Mixins from "@/helpers/Mixins.js";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
     Alerts
   },
-  mixins: [Mixins],
 
   data: () => ({
     date_issued: false,
     defaultFormData: {
-      employee_id: null,
-      date_issued: new Date().toISOString().substr(0, 10)
+      employee_id: null
     },
     formData: {
-      employee_id: null,
-      date_issued: new Date().toISOString().substr(0, 10)
+      employee_id: null
     },
     valid: true,
     validateItem: {
-      employeeRules: [v => !!v || "Employee is required"],
-      dateIssuedRules: [v => !!v || "Date Issued is required"]
+      employeeRules: [v => !!v || "Employee is required"]
     }
   }),
 
