@@ -8,9 +8,6 @@ const getters = {
   getSssContributionTableById: (state) => (id) => {
     return state.sssContributionTableList.find(sssContributionTable => sssContributionTable.id === id);
   },
-  getSssContributionTableNameById: (state) => (id) => {
-    return state.sssContributionTableList.find(sssContributionTable => sssContributionTable.id === id).name;
-  },
   getSssContributionTableList: (state) => {
     return state.sssContributionTableList;
   }
