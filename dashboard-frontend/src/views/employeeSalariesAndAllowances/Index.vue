@@ -77,21 +77,22 @@ export default {
   methods: {
     ...mapActions("alerts", ["setAlert"]),
     ...mapActions("employees", { getEmployeesData: "getData" }),
+    ...mapActions("employeeSalariesAndAllowances", {getEmployeeSalariesAndAllowancesDataByEmployeeId: "getDataByEmployeeId"}),
 
     submit() {
       if (this.$refs.form.validate()) {
-          // this.saveEmployeeData(this.formData)
-          //   .then(response => {
-          //     let obj = {
-          //       alert: true,
-          //       type: "success",
-          //       message: response.data.message
-          //     };
+        this.getEmployeeSalariesAndAllowancesDataByEmployeeId(this.formData.employee_id)
+          .then(response => {
+            let obj = {
+              alert: true,
+              type: "success",
+              message: response.data.message
+            };
 
-          //     if (!response.data.result) obj.type = "error"
-          //     this.setAlert(obj);
-          //   })
-          //   .catch(err => console.log(err));
+            if (!response.data.result) obj.type = "error";
+            this.setAlert(obj);
+          })
+          .catch(err => console.log(err));
         console.log("Submitted");
       }
     }
