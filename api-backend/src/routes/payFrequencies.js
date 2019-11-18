@@ -7,7 +7,7 @@ router.route('/').get(authController.authorization, PayFrequenciesController.fin
 router.route('/create').post(authController.authorization, PayFrequenciesController.create);
 router.route('/update/:id').put(authController.authorization, PayFrequenciesController.update);
 router.route('/delete/:id').put(authController.authorization, PayFrequenciesController.delete);
-router.route('/search').post(authController.authorization, PayFrequenciesController.search);
+router.route('/search/:value').get(authController.authorization, PayFrequenciesController.search);
 router.route('/:id').get(authController.authorization, PayFrequenciesController.findById);
 
 module.exports = router;

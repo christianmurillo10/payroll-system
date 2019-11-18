@@ -7,7 +7,7 @@ router.route('/').get(authController.authorization, SssContributionTablesControl
 router.route('/create').post(authController.authorization, SssContributionTablesController.create);
 router.route('/update/:id').put(authController.authorization, SssContributionTablesController.update);
 router.route('/delete/:id').put(authController.authorization, SssContributionTablesController.delete);
-router.route('/search').post(authController.authorization, SssContributionTablesController.search);
+router.route('/search/:value').get(authController.authorization, SssContributionTablesController.search);
 router.route('/:id').get(authController.authorization, SssContributionTablesController.findById);
 
 module.exports = router;

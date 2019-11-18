@@ -135,13 +135,13 @@ module.exports = {
 
   /**
    * Search
-   * @route POST /role/search/
+   * @route POST /role/search/:value
    * @param req
    * @param res
    * @returns {never}
    */
   search: async (req, res) => {
-    const params = req.body;
+    const params = req.params;
     let query, data;
 
     if (_.isUndefined(params))

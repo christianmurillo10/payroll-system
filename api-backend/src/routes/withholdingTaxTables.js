@@ -7,7 +7,7 @@ router.route('/').get(authController.authorization, WithholdingTaxTablesControll
 router.route('/create').post(authController.authorization, WithholdingTaxTablesController.create);
 router.route('/update/:id').put(authController.authorization, WithholdingTaxTablesController.update);
 router.route('/delete/:id').put(authController.authorization, WithholdingTaxTablesController.delete);
-router.route('/search').post(authController.authorization, WithholdingTaxTablesController.search);
+router.route('/search/:value').get(authController.authorization, WithholdingTaxTablesController.search);
 router.route('/:id').get(authController.authorization, WithholdingTaxTablesController.findById);
 
 module.exports = router;

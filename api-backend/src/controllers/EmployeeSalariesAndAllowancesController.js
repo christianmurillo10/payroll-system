@@ -140,13 +140,13 @@ module.exports = {
 
   /**
    * Search
-   * @route POST /employeeSalariesAndAllowances/search/
+   * @route GET /employeeSalariesAndAllowances/search/:value
    * @param req
    * @param res
    * @returns {never}
    */
   search: async (req, res) => {
-    const params = req.body;
+    const params = req.params;
     let query, data;
 
     if (_.isUndefined(params))
@@ -229,11 +229,12 @@ module.exports = {
    * @returns {never}
    */
   findAllbyEmployeeId: async (req, res) => {
+    const params = req.params;
     let data, criteria;
 
     try {
       // Pre-setting variables
-      criteria = { where: { employee_id: req.params.employeeId, is_deleted: 0 }, include: [{ model: Model.Employees, as: 'employees' }, { model: Model.Users, as: 'users' }] };
+      criteria = { where: { employee_id: params.employeeId, is_deleted: 0 }, include: [{ model: Model.Employees, as: 'employees' }, { model: Model.Users, as: 'users' }] };
       // Execute findAll query
       data = await Model.EmployeeSalariesAndAllowances.findAll(criteria);
       if (!_.isEmpty(data[0])) {
