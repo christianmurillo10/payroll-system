@@ -1,21 +1,21 @@
 <template>
-  <div>
+  <v-container fluid>
     <Alerts />
     <v-divider></v-divider>
-      <v-toolbar color="#EEEEEE" dense>
-        <v-toolbar-title>
-          <v-icon class="black--text">view_list</v-icon>SSS Contribution Tables
-        </v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="500px">
-          <template v-slot:activator="{ on }">
-            <v-btn icon v-on="on">
-              <v-icon>add_box</v-icon>
-            </v-btn>
-          </template>
-          <ModalForm ref="modalForm" @setDialog="setDialog" />
-        </v-dialog>
-      </v-toolbar>
+    <v-toolbar color="#EEEEEE" dense>
+      <v-toolbar-title>
+        <v-icon class="black--text">view_list</v-icon>SSS Contribution Tables
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-dialog v-model="dialog" max-width="500px">
+        <template v-slot:activator="{ on }">
+          <v-btn icon v-on="on">
+            <v-icon>add_box</v-icon>
+          </v-btn>
+        </template>
+        <ModalForm ref="modalForm" @setDialog="setDialog" />
+      </v-dialog>
+    </v-toolbar>
     <v-data-table :headers="headers" :items="sssContributionTableList" class="elevation-1">
       <template v-slot:items="props">
         <td class="text-xs-left">{{ props.item.compensation_range_from }}</td>
@@ -33,13 +33,13 @@
         <p class="justify-center layout px-0">No data found!</p>
       </template>
     </v-data-table>
-  </div>
+  </v-container>
 </template>
 
 <script>
 import Alerts from "../../components/utilities/Alerts";
 import ModalForm from "./ModalForm";
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions } from "vuex";
 
 export default {
   components: {
@@ -57,11 +57,11 @@ export default {
       { text: "EE", value: "employee_contribution" },
       { text: "Total", value: "total" },
       { text: "Actions", align: "center", value: "name", sortable: false }
-    ],
+    ]
   }),
 
   computed: {
-    ...mapState("sssContributionTables", ["sssContributionTableList"]),
+    ...mapState("sssContributionTables", ["sssContributionTableList"])
   },
 
   watch: {

@@ -1,21 +1,21 @@
 <template>
-  <div>
+  <v-container fluid>
     <Alerts />
     <v-divider></v-divider>
-      <v-toolbar color="#EEEEEE" dense>
-        <v-toolbar-title>
-          <v-icon class="black--text">view_list</v-icon>Withholding Tax Tables
-        </v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="500px">
-          <template v-slot:activator="{ on }">
-            <v-btn icon v-on="on">
-              <v-icon>add_box</v-icon>
-            </v-btn>
-          </template>
-          <ModalForm ref="modalForm" @setDialog="setDialog" />
-        </v-dialog>
-      </v-toolbar>
+    <v-toolbar color="#EEEEEE" dense>
+      <v-toolbar-title>
+        <v-icon class="black--text">view_list</v-icon>Withholding Tax Tables
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-dialog v-model="dialog" max-width="500px">
+        <template v-slot:activator="{ on }">
+          <v-btn icon v-on="on">
+            <v-icon>add_box</v-icon>
+          </v-btn>
+        </template>
+        <ModalForm ref="modalForm" @setDialog="setDialog" />
+      </v-dialog>
+    </v-toolbar>
     <v-data-table :headers="headers" :items="withholdingTaxTableList" class="elevation-1">
       <template v-slot:items="props">
         <td class="text-xs-left">{{ props.item.compensation_range_from }}</td>
@@ -32,13 +32,13 @@
         <p class="justify-center layout px-0">No data found!</p>
       </template>
     </v-data-table>
-  </div>
+  </v-container>
 </template>
 
 <script>
 import Alerts from "../../components/utilities/Alerts";
 import ModalForm from "./ModalForm";
-import { mapState, mapGetters } from 'vuex';
+import { mapState, mapGetters } from "vuex";
 
 export default {
   components: {
@@ -55,12 +55,12 @@ export default {
       { text: "Tax Percentage", value: "tax_percentage" },
       { text: "Pay Frequency", value: "pay_frequency_id" },
       { text: "Actions", align: "center", value: "name", sortable: false }
-    ],
+    ]
   }),
 
   computed: {
     ...mapState("withholdingTaxTables", ["withholdingTaxTableList"]),
-    ...mapGetters("payFrequencies", ["getPayFrequencyNameById"]),
+    ...mapGetters("payFrequencies", ["getPayFrequencyNameById"])
   },
 
   watch: {

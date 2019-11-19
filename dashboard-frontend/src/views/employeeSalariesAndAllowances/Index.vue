@@ -1,59 +1,61 @@
 <template>
   <div>
-    <Alerts />
-    <v-layout row wrap>
-      <v-flex xs12 sm6 md4 lg4>
-        <v-toolbar color="#EEEEEE" dense>
-          <v-toolbar-title>
-            <v-icon class="black--text">view_list</v-icon>Employees - Salary and Allowances
-          </v-toolbar-title>
-          <v-spacer></v-spacer>
-          <router-link to="/employees" tag="button">
-            <v-icon>arrow_back</v-icon>
-          </router-link>
-        </v-toolbar>
-        <v-card class="mx-auto my-12" :elevation="3" max-width="auto">
-          <v-form ref="form" @submit.prevent="submit" v-model="valid" lazy-validation>
-            <v-container grid-list-md>
-              <v-layout wrap>
-                <v-flex xs12 sm12 md12>
-                  <v-autocomplete
-                    :items="getEmployeeList"
-                    item-text="firstname"
-                    item-value="id"
-                    v-model="formData.employee_id"
-                    :rules="validateItem.employeeRules"
-                    label="Employee"
-                    required
-                    persistent-hint
-                    prepend-icon="list"
-                  ></v-autocomplete>
-                </v-flex>
-              </v-layout>
-            </v-container>
+    <v-container fluid grid-list-md>
+      <Alerts />
+      <v-layout row wrap>
+        <v-flex xs12 sm6 md4 lg4>
+          <v-toolbar color="#EEEEEE" dense>
+            <v-toolbar-title>
+              <v-icon class="black--text">view_list</v-icon>Employees - Salary and Allowances
+            </v-toolbar-title>
+            <v-spacer></v-spacer>
+            <router-link to="/employees" tag="button">
+              <v-icon>arrow_back</v-icon>
+            </router-link>
+          </v-toolbar>
+          <v-card class="mx-auto my-12" :elevation="3" max-width="auto">
+            <v-form ref="form" @submit.prevent="submit" v-model="valid" lazy-validation>
+              <v-container grid-list-md>
+                <v-layout wrap>
+                  <v-flex xs12 sm12 md12>
+                    <v-autocomplete
+                      :items="getEmployeeList"
+                      item-text="firstname"
+                      item-value="id"
+                      v-model="formData.employee_id"
+                      :rules="validateItem.employeeRules"
+                      label="Employee"
+                      required
+                      persistent-hint
+                      prepend-icon="list"
+                    ></v-autocomplete>
+                  </v-flex>
+                </v-layout>
+              </v-container>
 
-            <v-divider></v-divider>
+              <v-divider></v-divider>
 
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" type="submit" flat :disabled="!valid">Submit</v-btn>
-            </v-card-actions>
-          </v-form>
-        </v-card>
-      </v-flex>
-      <v-flex xs12 sm6 md8 lg8>
-        <v-toolbar color="#EEEEEE" dense>
-          <v-toolbar-title>
-            <v-icon class="black--text">view_list</v-icon>Employees - Salary and Allowances
-          </v-toolbar-title>
-          <v-spacer></v-spacer>
-          <router-link to="/employees" tag="button">
-            <v-icon>arrow_back</v-icon>
-          </router-link>
-        </v-toolbar>
-        <v-card class="mx-auto my-12" :elevation="3" max-width="auto"></v-card>
-      </v-flex>
-    </v-layout>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" type="submit" flat :disabled="!valid">Submit</v-btn>
+              </v-card-actions>
+            </v-form>
+          </v-card>
+        </v-flex>
+        <v-flex xs12 sm6 md8 lg8>
+          <v-toolbar color="#EEEEEE" dense>
+            <v-toolbar-title>
+              <v-icon class="black--text">view_list</v-icon>Employees - Salary and Allowances
+            </v-toolbar-title>
+            <v-spacer></v-spacer>
+            <router-link to="/employees" tag="button">
+              <v-icon>arrow_back</v-icon>
+            </router-link>
+          </v-toolbar>
+          <v-card class="mx-auto my-12" :elevation="3" max-width="auto"></v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
   </div>
 </template>
 

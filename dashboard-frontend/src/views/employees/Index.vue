@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container fluid>
     <Alerts />
     <v-divider></v-divider>
     <v-toolbar color="#EEEEEE" dense>
@@ -34,7 +34,7 @@
         <p class="justify-center layout px-0">No data found!</p>
       </template>
     </v-data-table>
-  </div>
+  </v-container>
 </template>
 
 <script>

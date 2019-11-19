@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container fluid>
     <Alerts />
     <v-divider></v-divider>
     <v-toolbar color="#EEEEEE" dense>
@@ -7,7 +7,9 @@
         <v-icon class="black--text">view_list</v-icon>Employees - View
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <router-link to="/employees" tag="button"><v-icon>arrow_back</v-icon></router-link>
+      <router-link to="/employees" tag="button">
+        <v-icon>arrow_back</v-icon>
+      </router-link>
     </v-toolbar>
     <v-card class="mx-auto my-12" :elevation="3" max-width="auto">
       <v-container grid-list-md>
@@ -179,7 +181,7 @@
         </v-layout>
       </v-container>
     </v-card>
-  </div>
+  </v-container>
 </template>
 
 <script>
