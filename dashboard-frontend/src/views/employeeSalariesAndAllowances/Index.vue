@@ -9,7 +9,10 @@
               <v-icon class="black--text" large left>view_list</v-icon>
               <span class="title">Employees - Salaries And Allowances</span>
             </v-card-title>
-            <v-form ref="form" @submit.prevent="submit" v-model="valid" lazy-validation>
+
+            <v-divider></v-divider>
+
+            <v-form ref="form" @submit.prevent="generate" v-model="valid" lazy-validation>
               <v-container grid-list-md>
                 <v-layout wrap>
                   <v-flex xs12 sm12 md12>
@@ -32,7 +35,7 @@
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" type="submit" flat :disabled="!valid">Submit</v-btn>
+                <v-btn color="blue darken-1" type="submit" flat :disabled="!valid">Generate</v-btn>
               </v-card-actions>
             </v-form>
           </v-card>
@@ -40,6 +43,14 @@
       </v-container>
       <v-container fluid>
         <v-flex xs12 sm12 md12 lg12>
+          <v-dialog v-model="dialog" persistent max-width="999px">
+            <template v-slot:activator="{ on }">
+              <v-btn color="success" v-on="on">
+                <v-icon>add_box</v-icon> Add New
+              </v-btn>
+            </template>
+            <!-- <ModalForm ref="modalForm" @setDialog="setDialog" /> -->
+          </v-dialog>
           <v-data-table
             :headers="headers"
             :items="employeeSalariesAndAllowancesByEmployeeList"
@@ -67,6 +78,7 @@
 
 <script>
 import Alerts from "@/components/utilities/Alerts";
+import ModalForm from "./ModalForm";
 import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
@@ -75,6 +87,7 @@ export default {
   },
 
   data: () => ({
+    dialog: false,
     date_issued: false,
     defaultFormData: {
       employee_id: null
@@ -102,6 +115,12 @@ export default {
     ])
   },
 
+  watch: {
+    dialog(val) {
+      val || this.close();
+    }
+  },
+
   created() {
     this.getEmployeesData();
   },
@@ -113,7 +132,7 @@ export default {
       getEmployeeSalariesAndAllowancesDataByEmployeeId: "getDataByEmployeeId"
     }),
 
-    submit() {
+    generate() {
       if (this.$refs.form.validate()) {
         this.getEmployeeSalariesAndAllowancesDataByEmployeeId(
           this.formData.employee_id
@@ -131,6 +150,24 @@ export default {
           .catch(err => console.log(err));
       }
     }
+
+    // editItem(id) {
+    //   this.setDialog(true);
+    //   this.$refs.modalForm.editItem(id);
+    // },
+
+    // deleteItem(id) {
+    //   this.$refs.modalForm.deleteItem(id);
+    // },
+
+    // close() {
+    //   this.setDialog(false);
+    //   this.$refs.modalForm.close();
+    // },
+
+    // setDialog(value) {
+    //   this.dialog = value;
+    // }
   }
 };
 </script>
