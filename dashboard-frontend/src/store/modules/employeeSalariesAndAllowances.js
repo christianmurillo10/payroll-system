@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const state = {
-  employeeSalariesAndAllowancesList: []
+  employeeSalariesAndAllowancesList: [],
+  employeeSalariesAndAllowancesByEmployeeList: []
 };
 
 const getters = {
@@ -51,6 +52,7 @@ const actions = {
         axios
           .get(url, header)
           .then(response => {
+            commit("SET_DATA_BY_EMPLOYEE", response.data.result);
             resolve(response);
           });
       } catch (err) {
@@ -131,6 +133,13 @@ const mutations = {
       state.employeeSalariesAndAllowancesList = payload;
     } else {
       state.employeeSalariesAndAllowancesList = [];
+    }
+  },
+  SET_DATA_BY_EMPLOYEE(state, payload) {
+    if (payload) {
+      state.employeeSalariesAndAllowancesByEmployeeList = payload;
+    } else {
+      state.employeeSalariesAndAllowancesByEmployeeList = [];
     }
   },
   ADD_DATA(state, payload) {

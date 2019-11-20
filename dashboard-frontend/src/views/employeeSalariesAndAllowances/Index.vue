@@ -1,19 +1,14 @@
 <template>
   <div>
-    <v-container fluid grid-list-md>
-      <Alerts />
-      <v-layout row wrap>
+    <v-layout row wrap>
+      <v-container fluid grid-list-md>
+        <Alerts />
         <v-flex xs12 sm6 md4 lg4>
-          <v-toolbar color="#EEEEEE" dense>
-            <v-toolbar-title>
-              <v-icon class="black--text">view_list</v-icon>Employees - Salary and Allowances
-            </v-toolbar-title>
-            <v-spacer></v-spacer>
-            <router-link to="/employees" tag="button">
-              <v-icon>arrow_back</v-icon>
-            </router-link>
-          </v-toolbar>
           <v-card class="mx-auto my-12" :elevation="3" max-width="auto">
+            <v-card-title>
+              <v-icon class="black--text" large left>view_list</v-icon>
+              <span class="title">Employees - Salaries And Allowances</span>
+            </v-card-title>
             <v-form ref="form" @submit.prevent="submit" v-model="valid" lazy-validation>
               <v-container grid-list-md>
                 <v-layout wrap>
@@ -42,26 +37,37 @@
             </v-form>
           </v-card>
         </v-flex>
-        <v-flex xs12 sm6 md8 lg8>
-          <v-toolbar color="#EEEEEE" dense>
-            <v-toolbar-title>
-              <v-icon class="black--text">view_list</v-icon>Employees - Salary and Allowances
-            </v-toolbar-title>
-            <v-spacer></v-spacer>
-            <router-link to="/employees" tag="button">
-              <v-icon>arrow_back</v-icon>
-            </router-link>
-          </v-toolbar>
-          <v-card class="mx-auto my-12" :elevation="3" max-width="auto"></v-card>
+      </v-container>
+      <v-container fluid>
+        <v-flex xs12 sm12 md12 lg12>
+          <v-data-table
+            :headers="headers"
+            :items="employeeSalariesAndAllowancesByEmployeeList"
+            class="elevation-1"
+          >
+            <template v-slot:items="props">
+              <td class="text-xs-left">{{ props.item.date_issued }}</td>
+              <td class="text-xs-left">{{ props.item.salary_amount }}</td>
+              <td class="text-xs-left">{{ props.item.allowance_amount }}</td>
+              <td class="text-xs-left">{{ props.item.is_current }}</td>
+              <td class="justify-center layout px-0">
+                <v-icon small class="mr-2" @click="editItem(props.item.id)">edit</v-icon>
+                <v-icon small @click="deleteItem(props.item.id)">delete</v-icon>
+              </td>
+            </template>
+            <template v-slot:no-data>
+              <p class="justify-center layout px-0">No data found!</p>
+            </template>
+          </v-data-table>
         </v-flex>
-      </v-layout>
-    </v-container>
+      </v-container>
+    </v-layout>
   </div>
 </template>
 
 <script>
 import Alerts from "@/components/utilities/Alerts";
-import { mapGetters, mapActions } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
@@ -79,11 +85,21 @@ export default {
     valid: true,
     validateItem: {
       employeeRules: [v => !!v || "Employee is required"]
-    }
+    },
+    headers: [
+      { text: "Date Issued", value: "date_issued" },
+      { text: "Salary Amount", value: "salary_amount" },
+      { text: "Allowance Amount", value: "allowance_amount" },
+      { text: "Current?", value: "is_current" },
+      { text: "Actions", align: "center", value: "name", sortable: false }
+    ]
   }),
 
   computed: {
-    ...mapGetters("employees", ["getEmployeeList"])
+    ...mapGetters("employees", ["getEmployeeList"]),
+    ...mapState("employeeSalariesAndAllowances", [
+      "employeeSalariesAndAllowancesByEmployeeList"
+    ])
   },
 
   created() {
@@ -113,7 +129,6 @@ export default {
             this.setAlert(obj);
           })
           .catch(err => console.log(err));
-        console.log("Submitted");
       }
     }
   }
