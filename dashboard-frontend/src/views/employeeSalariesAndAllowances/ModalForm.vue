@@ -11,22 +11,13 @@
       <v-card-text>
         <v-container grid-list-md>
           <v-layout wrap>
-              <v-flex xs12 sm12 md4>
-                <v-text-field
-                  v-model="formData.employee_no"
-                  :rules="validateItem.employeeNoRules"
-                  label="Employee No"
-                  required
-                ></v-text-field>
-              </v-flex>
-            <v-flex xs12 sm12 md4></v-flex>
-            <v-flex xs12 sm12 md4>
+            <v-flex xs12 sm12 md12>
               <v-menu
-                ref="date_start"
-                v-model="date_start"
+                ref="date_issued"
+                v-model="date_issued"
                 :close-on-content-click="false"
                 :nudge-right="40"
-                :return-value.sync="formData.date_start"
+                :return-value.sync="formData.date_issued"
                 lazy
                 transition="scale-transition"
                 offset-y
@@ -35,147 +26,37 @@
               >
                 <template v-slot:activator="{ on }">
                   <v-text-field
-                    v-model="formData.date_start"
-                    label="Date Start"
+                    v-model="formData.date_issued"
+                    label="Date Issued"
                     prepend-icon="event"
                     readonly
                     v-on="on"
                   ></v-text-field>
                 </template>
-                <v-date-picker v-model="formData.date_start" no-title scrollable>
+                <v-date-picker v-model="formData.date_issued" no-title scrollable>
                   <v-spacer></v-spacer>
-                  <v-btn flat color="primary" @click="date_start = false">Cancel</v-btn>
-                  <v-btn flat color="primary" @click="$refs.date_start.save(formData.date_start)">OK</v-btn>
+                  <v-btn flat color="primary" @click="date_issued = false">Cancel</v-btn>
+                  <v-btn flat color="primary" @click="$refs.date_issued.save(formData.date_issued)">OK</v-btn>
                 </v-date-picker>
               </v-menu>
             </v-flex>
-            <v-flex xs12 sm12 md4>
+            <v-flex xs12 sm12 md12>
               <v-text-field
-                v-model="formData.firstname"
-                :rules="validateItem.firstnameRules"
-                label="Firstname"
-                required
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm12 md4>
-              <v-text-field
-                v-model="formData.middlename"
-                label="Middlename"
-                required
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm12 md4>
-              <v-text-field
-                v-model="formData.lastname"
-                :rules="validateItem.lastnameRules"
-                label="Lastname"
+                v-model="formData.salary_amount"
+                :rules="validateItem.salaryAmountRules"
+                label="Salary Amount"
+                type="number"
+                prepend-icon="money"
                 required
               ></v-text-field>
             </v-flex>
             <v-flex xs12 sm12 md12>
               <v-text-field
-                v-model="formData.primary_address"
-                :rules="validateItem.primaryAddressRules"
-                label="Primary Address"
-                required
+                v-model="formData.allowance_amount"
+                label="Allowance Amount"
+                type="number"
+                prepend-icon="money"
               ></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm12 md12>
-              <v-text-field
-                v-model="formData.secondary_address"
-                label="Secondary Address"
-                required
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm12 md8>
-              <v-text-field
-                v-model="formData.email"
-                :rules="validateItem.emailRules"
-                label="Email"
-                required
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm12 md4>
-              <v-menu
-                ref="birthdate"
-                v-model="birthdate"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                :return-value.sync="formData.birthdate"
-                lazy
-                transition="scale-transition"
-                offset-y
-                full-width
-                min-width="290px"
-              >
-                <template v-slot:activator="{ on }">
-                  <v-text-field
-                    v-model="formData.birthdate"
-                    label="Birthdate"
-                    prepend-icon="event"
-                    readonly
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-date-picker v-model="formData.birthdate" no-title scrollable>
-                  <v-spacer></v-spacer>
-                  <v-btn flat color="primary" @click="birthdate = false">Cancel</v-btn>
-                  <v-btn flat color="primary" @click="$refs.birthdate.save(formData.birthdate)">OK</v-btn>
-                </v-date-picker>
-              </v-menu>
-            </v-flex>
-            <v-flex xs12 sm12 md6>
-              <v-text-field
-                v-model="formData.mobile"
-                label="Mobile"
-                required
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm12 md6>
-              <v-text-field
-                v-model="formData.landline"
-                label="Landline"
-                required
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm12 md12>
-              <v-text-field
-                v-model="formData.tin_no"
-                label="TIN No"
-                required
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm12 md12>
-              <v-text-field
-                v-model="formData.sss_no"
-                label="SSS No"
-                required
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm12 md12>
-              <v-text-field
-                v-model="formData.philhealth_no"
-                label="Philhealth No"
-                required
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm12 md12>
-              <v-text-field
-                v-model="formData.pagibig_no"
-                label="Pagibig No"
-                required
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm12 md12>
-              <v-select
-                :items="getPayFrequencyList"
-                item-text="name"
-                item-value="id"
-                v-model="formData.pay_frequency_id"
-                :rules="validateItem.payFrequencyRules"
-                label="Pay Frequency"
-                required
-              ></v-select>
             </v-flex>
           </v-layout>
         </v-container>
@@ -202,79 +83,32 @@ export default {
   },
 
   data: () => ({
-    birthdate: false,
-    date_start: false,
+    date_issued: false,
     defaultFormData: {
-      employee_no: null,
-      firstname: null,
-      middlename: null,
-      lastname: null,
-      primary_address: null,
-      secondary_address: null,
-      email: null,
-      mobile: null,
-      landline: null,
-      tin_no: null,
-      sss_no: null,
-      philhealth_no: null,
-      pagibig_no: null,
-      pay_frequency_id: null,
-      birthdate: new Date().toISOString().substr(0, 10),
-      date_start: new Date().toISOString().substr(0, 10)
+      salary_amount: null,
+      allowance_amount: null,
+      date_issued: new Date().toISOString().substr(0, 10)
     },
     formType: "new",
     formData: {
-      employee_no: null,
-      firstname: null,
-      middlename: null,
-      lastname: null,
-      primary_address: null,
-      secondary_address: null,
-      email: null,
-      mobile: null,
-      landline: null,
-      tin_no: null,
-      sss_no: null,
-      philhealth_no: null,
-      pagibig_no: null,
-      pay_frequency_id: null,
-      birthdate: new Date().toISOString().substr(0, 10),
-      date_start: new Date().toISOString().substr(0, 10)
+      salary_amount: null,
+      allowance_amount: null,
+      date_issued: new Date().toISOString().substr(0, 10)
     },
     valid: true,
     validateItem: {
-      employeeNoRules: [
-        v => !!v || "Employee No is required"
-      ],
-      firstnameRules: [
-        v => !!v || "Firstname is required"
-      ],
-      lastnameRules: [
-        v => !!v || "Lastname is required"
-      ],
-      primaryAddressRules: [
-        v => !!v || "Primary Address is required"
-      ],
-      emailRules: [
-        v => !!v || "Email is required"
-      ],
-      payFrequencyRules: [
-        v => !!v || "Pay Frequency is required"
-      ],
-      birthdateRules: [
-        v => !!v || "Birthdate is required"
-      ],
-      dateStartRules: [
-        v => !!v || "Date Start is required"
-      ]
+      salaryAmountRules: [v => !!v || "Salary Amount is required"],
+      allowanceAmountRules: [v => !!v || "Allowance Amount is required"],
+      dateIssuedRules: [v => !!v || "Date Issued is required"]
     }
   }),
 
   computed: {
-    ...mapGetters("employees", ["getEmployeeById"]),
-    ...mapGetters("payFrequencies", ["getPayFrequencyList"]),
+    ...mapGetters("employeeSalariesAndAllowances", [
+      "getEmployeeSalariesAndAllowancesById"
+    ]),
     formTitle() {
-      return this.formType === "new" ? "New Employee" : "Edit Employee";
+      return this.formType === "new" ? "New" : "Edit";
     },
     formIcon() {
       return this.formType === "new" ? "add_box" : "edit";
@@ -282,55 +116,36 @@ export default {
   },
 
   mounted() {
-    this.getEmployeeData();
-  },
-
-  created() {
-    this.getPayFrequenciesData();
+    this.getEmployeeSalariesAndAllowancesData();
   },
 
   methods: {
     ...mapActions("alerts", ["setAlert"]),
-    ...mapActions("payFrequencies", {getPayFrequenciesData: "getData"}),
-    ...mapActions("employees", {
-      getEmployeeData: "getData",
-      saveEmployeeData: "saveData",
-      updateEmployeeData: "updateData",
-      deleteEmployeeData: "deleteData"
+    ...mapActions("employeeSalariesAndAllowances", {
+      getEmployeeSalariesAndAllowancesData: "getData",
+      saveEmployeeSalariesAndAllowancesData: "saveData",
+      updateEmployeeSalariesAndAllowancesData: "updateData",
+      deleteEmployeeSalariesAndAllowancesData: "deleteData"
     }),
 
     editItem(id) {
-      let data = this.getEmployeeById(id);
+      let data = this.getEmployeeSalariesAndAllowancesById(id);
       this.formData.id = data.id;
-      this.formData.employee_no = data.employee_no;
-      this.formData.firstname = data.firstname;
-      this.formData.middlename = data.middlename;
-      this.formData.lastname = data.lastname;
-      this.formData.primary_address = data.primary_address;
-      this.formData.secondary_address = data.secondary_address;
-      this.formData.email = data.email;
-      this.formData.mobile = data.mobile;
-      this.formData.landline = data.landline;
-      this.formData.tin_no = data.tin_no;
-      this.formData.sss_no = data.sss_no;
-      this.formData.philhealth_no = data.philhealth_no;
-      this.formData.pagibig_no = data.pagibig_no;
-      this.formData.pay_frequency_id = data.pay_frequency_id;
-      this.formData.birthdate = data.birthdate;
-      this.formData.date_start = data.date_start;
+      this.formData.name = data.name;
+      this.formData.description = data.description;
       this.formType = "update";
     },
 
     deleteItem(id) {
-      this.deleteEmployeeData(id)
+      this.deleteEmployeeSalariesAndAllowancesData(id)
         .then(response => {
           let obj = {
             alert: true,
             type: "success",
             message: response.data.message
           };
-          
-          if (!response.data.result) obj.type = "error"
+
+          if (!response.data.result) obj.type = "error";
           this.setAlert(obj);
         })
         .catch(err => console.log(err));
@@ -347,7 +162,7 @@ export default {
     save() {
       if (this.$refs.form.validate()) {
         if (this.formType === "new") {
-          this.saveEmployeeData(this.formData)
+          this.saveEmployeeSalariesAndAllowancesData(this.formData)
             .then(response => {
               let obj = {
                 alert: true,
@@ -355,12 +170,12 @@ export default {
                 message: response.data.message
               };
 
-              if (!response.data.result) obj.type = "error"
+              if (!response.data.result) obj.type = "error";
               this.setAlert(obj);
             })
             .catch(err => console.log(err));
         } else if (this.formType === "update") {
-          this.updateEmployeeData(this.formData)
+          this.updateEmployeeSalariesAndAllowancesData(this.formData)
             .then(response => {
               let obj = {
                 alert: true,
@@ -368,7 +183,7 @@ export default {
                 message: response.data.message
               };
 
-              if (!response.data.result) obj.type = "error"
+              if (!response.data.result) obj.type = "error";
               this.setAlert(obj);
             })
             .catch(err => console.log(err));

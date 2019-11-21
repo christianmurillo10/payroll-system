@@ -43,13 +43,13 @@
       </v-container>
       <v-container fluid>
         <v-flex xs12 sm12 md12 lg12>
-          <v-dialog v-model="dialog" persistent max-width="999px">
+          <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on }">
               <v-btn color="success" v-on="on">
-                <v-icon>add_box</v-icon> Add New
+                <v-icon>add_box</v-icon>&nbsp; Add New
               </v-btn>
             </template>
-            <!-- <ModalForm ref="modalForm" @setDialog="setDialog" /> -->
+            <ModalForm ref="modalForm" @setDialog="setDialog" />
           </v-dialog>
           <v-data-table
             :headers="headers"
@@ -83,7 +83,8 @@ import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
-    Alerts
+    Alerts,
+    ModalForm
   },
 
   data: () => ({
@@ -149,25 +150,25 @@ export default {
           })
           .catch(err => console.log(err));
       }
+    },
+
+    editItem(id) {
+      this.setDialog(true);
+      this.$refs.modalForm.editItem(id);
+    },
+
+    deleteItem(id) {
+      this.$refs.modalForm.deleteItem(id);
+    },
+
+    close() {
+      this.setDialog(false);
+      this.$refs.modalForm.close();
+    },
+
+    setDialog(value) {
+      this.dialog = value;
     }
-
-    // editItem(id) {
-    //   this.setDialog(true);
-    //   this.$refs.modalForm.editItem(id);
-    // },
-
-    // deleteItem(id) {
-    //   this.$refs.modalForm.deleteItem(id);
-    // },
-
-    // close() {
-    //   this.setDialog(false);
-    //   this.$refs.modalForm.close();
-    // },
-
-    // setDialog(value) {
-    //   this.dialog = value;
-    // }
   }
 };
 </script>

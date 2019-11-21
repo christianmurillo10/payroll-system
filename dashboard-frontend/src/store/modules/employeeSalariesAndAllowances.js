@@ -6,7 +6,7 @@ const state = {
 };
 
 const getters = {
-  getEmployeeById: (state) => (id) => {
+  getEmployeeSalariesAndAllowancesById: (state) => (id) => {
     return state.employeeSalariesAndAllowancesList.find(employeeSalariesAndAllowances => employeeSalariesAndAllowances.id === id);
   },
   getEmployeeSalariesAndAllowancesList: (state) => {
