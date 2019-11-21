@@ -41,7 +41,7 @@
           </v-card>
         </v-flex>
       </v-container>
-      <v-container fluid>
+      <v-container fluid v-if="employeeId">
         <v-flex xs12 sm12 md12 lg12>
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on }">
@@ -89,7 +89,6 @@ export default {
 
   data: () => ({
     dialog: false,
-    date_issued: false,
     defaultFormData: {
       employee_id: null
     },
@@ -112,6 +111,7 @@ export default {
   computed: {
     ...mapGetters("employees", ["getEmployeeList"]),
     ...mapState("employeeSalariesAndAllowances", [
+      "employeeId",
       "employeeSalariesAndAllowancesByEmployeeList"
     ])
   },

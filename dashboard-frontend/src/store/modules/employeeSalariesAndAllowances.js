@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const state = {
+  employeeId: null,
   employeeSalariesAndAllowancesList: [],
   employeeSalariesAndAllowancesByEmployeeList: []
 };
@@ -52,6 +53,7 @@ const actions = {
         axios
           .get(url, header)
           .then(response => {
+            commit("SET_EMPLOYEE", payload);
             commit("SET_DATA_BY_EMPLOYEE", response.data.result);
             resolve(response);
           });
@@ -128,6 +130,13 @@ const actions = {
 };
 
 const mutations = {
+  SET_EMPLOYEE(state, payload) {
+    if (payload) {
+      state.employeeId = payload;
+    } else {
+      state.employeeId = null;
+    }
+  },
   SET_DATA(state, payload) {
     if (payload) {
       state.employeeSalariesAndAllowancesList = payload;
