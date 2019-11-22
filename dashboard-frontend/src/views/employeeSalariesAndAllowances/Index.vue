@@ -123,6 +123,7 @@ export default {
   },
 
   created() {
+    this.formData.employee_id = this.employeeId;
     this.getEmployeesData();
   },
 

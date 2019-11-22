@@ -75,7 +75,7 @@
 
 <script>
 import Index from "./Index";
-import { mapGetters, mapActions } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
@@ -87,12 +87,14 @@ export default {
     defaultFormData: {
       salary_amount: null,
       allowance_amount: null,
+      employee_id: null,
       date_issued: new Date().toISOString().substr(0, 10)
     },
     formType: "new",
     formData: {
       salary_amount: null,
       allowance_amount: null,
+      employee_id: null,
       date_issued: new Date().toISOString().substr(0, 10)
     },
     valid: true,
@@ -107,6 +109,7 @@ export default {
     ...mapGetters("employeeSalariesAndAllowances", [
       "getEmployeeSalariesAndAllowancesById"
     ]),
+    ...mapState("employeeSalariesAndAllowances", ["employeeId"]),
     formTitle() {
       return this.formType === "new" ? "New" : "Edit";
     },
@@ -117,6 +120,10 @@ export default {
 
   mounted() {
     this.getEmployeeSalariesAndAllowancesData();
+  },
+
+  created() {
+    this.formData.employee_id = this.employeeId;
   },
 
   methods: {

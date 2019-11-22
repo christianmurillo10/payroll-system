@@ -70,14 +70,14 @@ const actions = {
         let obj = {
           salary_amount: payload.salary_amount,
           allowance_amount: payload.allowance_amount,
-          employee_id: payload.employee_id,
-          user_id: payload.user_id,
+          employee_id: payload.employee_id.toLocaleString(),
           date_issued: payload.date_issued
         };
 
         axios
           .post(url, obj, header)
           .then(response => {
+            console.log(response.data.result)
             commit("ADD_DATA", response.data.result);
             resolve(response);
           });
@@ -95,7 +95,6 @@ const actions = {
           salary_amount: payload.salary_amount,
           allowance_amount: payload.allowance_amount,
           employee_id: payload.employee_id,
-          user_id: payload.user_id,
           date_issued: payload.date_issued,
           is_current: payload.is_current
         };
