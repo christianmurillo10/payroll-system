@@ -142,8 +142,10 @@ export default {
     editItem(id) {
       let data = this.getEmployeeSalariesAndAllowancesById(id);
       this.formData.id = data.id;
-      this.formData.name = data.name;
-      this.formData.description = data.description;
+      this.formData.salary_amount = data.salary_amount;
+      this.formData.allowance_amount = data.allowance_amount;
+      this.formData.date_issued = data.date_issued;
+      this.formData.is_current = data.is_current;
       this.formType = "update";
     },
 

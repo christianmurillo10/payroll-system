@@ -2,16 +2,12 @@ import axios from "axios";
 
 const state = {
   employeeId: null,
-  employeeSalariesAndAllowancesList: [],
   employeeSalariesAndAllowancesByEmployeeList: []
 };
 
 const getters = {
   getEmployeeSalariesAndAllowancesById: (state) => (id) => {
-    return state.employeeSalariesAndAllowancesList.find(employeeSalariesAndAllowances => employeeSalariesAndAllowances.id === id);
-  },
-  getEmployeeSalariesAndAllowancesList: (state) => {
-    return state.employeeSalariesAndAllowancesList;
+    return state.employeeSalariesAndAllowancesByEmployeeList.find(employeeSalariesAndAllowances => employeeSalariesAndAllowances.id === id);
   }
 };
 
@@ -101,7 +97,7 @@ const actions = {
         axios
           .put(url, obj, header)
           .then(response => {
-            commit("UPDATE_DATA", response.data.result);
+            commit("UPDATE_DATA_BY_EMPLOYEE", response.data.result);
             resolve(response);
           });
       } catch (err) {
@@ -117,7 +113,7 @@ const actions = {
         axios
           .put(url, '', header)
           .then(response => {
-            commit("DELETE_DATA", payload);
+            commit("DELETE_DATA_BY_EMPLOYEE", payload);
             resolve(response);
           });
       } catch (err) {
@@ -135,31 +131,6 @@ const mutations = {
       state.employeeId = null;
     }
   },
-  SET_DATA(state, payload) {
-    if (payload) {
-      state.employeeSalariesAndAllowancesList = payload;
-    } else {
-      state.employeeSalariesAndAllowancesList = [];
-    }
-  },
-  ADD_DATA(state, payload) {
-    state.employeeSalariesAndAllowancesList.push(payload);
-  },
-  UPDATE_DATA(state, payload) {
-    let index = state.employeeSalariesAndAllowancesList.map(employeeSalariesAndAllowances => employeeSalariesAndAllowances.id).indexOf(payload.id);
-    Object.assign(state.employeeSalariesAndAllowancesList[index], {
-      salary_amount: payload.salary_amount,
-      allowance_amount: payload.allowance_amount,
-      employee_id: payload.employee_id,
-      user_id: payload.user_id,
-      date_issued: payload.date_issued,
-      is_current: payload.is_current
-    });
-  },
-  DELETE_DATA(state, payload) {
-    let index = state.employeeSalariesAndAllowancesList.map(employeeSalariesAndAllowances => employeeSalariesAndAllowances.id).indexOf(payload);
-    state.employeeSalariesAndAllowancesList.splice(index, 1);
-  },
   SET_DATA_BY_EMPLOYEE(state, payload) {
     if (payload) {
       state.employeeSalariesAndAllowancesByEmployeeList = payload;
@@ -169,6 +140,21 @@ const mutations = {
   },
   ADD_DATA_BY_EMPLOYEE(state, payload) {
     state.employeeSalariesAndAllowancesByEmployeeList.push(payload);
+  },
+  UPDATE_DATA_BY_EMPLOYEE(state, payload) {
+    let index = state.employeeSalariesAndAllowancesByEmployeeList.map(employeeSalariesAndAllowances => employeeSalariesAndAllowances.id).indexOf(payload.id);
+    Object.assign(state.employeeSalariesAndAllowancesByEmployeeList[index], {
+      salary_amount: payload.salary_amount,
+      allowance_amount: payload.allowance_amount,
+      employee_id: payload.employee_id,
+      user_id: payload.user_id,
+      date_issued: payload.date_issued,
+      is_current: payload.is_current
+    });
+  },
+  DELETE_DATA_BY_EMPLOYEE(state, payload) {
+    let index = state.employeeSalariesAndAllowancesByEmployeeList.map(employeeSalariesAndAllowances => employeeSalariesAndAllowances.id).indexOf(payload);
+    state.employeeSalariesAndAllowancesByEmployeeList.splice(index, 1);
   }
 };
 
