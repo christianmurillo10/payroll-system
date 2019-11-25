@@ -70,15 +70,14 @@ const actions = {
         let obj = {
           salary_amount: payload.salary_amount,
           allowance_amount: payload.allowance_amount,
-          employee_id: payload.employee_id.toLocaleString(),
+          employee_id: payload.employee_id,
           date_issued: payload.date_issued
         };
 
         axios
           .post(url, obj, header)
           .then(response => {
-            console.log(response.data.result)
-            commit("ADD_DATA", response.data.result);
+            commit("ADD_DATA_BY_EMPLOYEE", response.data.result);
             resolve(response);
           });
       } catch (err) {
@@ -143,13 +142,6 @@ const mutations = {
       state.employeeSalariesAndAllowancesList = [];
     }
   },
-  SET_DATA_BY_EMPLOYEE(state, payload) {
-    if (payload) {
-      state.employeeSalariesAndAllowancesByEmployeeList = payload;
-    } else {
-      state.employeeSalariesAndAllowancesByEmployeeList = [];
-    }
-  },
   ADD_DATA(state, payload) {
     state.employeeSalariesAndAllowancesList.push(payload);
   },
@@ -167,6 +159,16 @@ const mutations = {
   DELETE_DATA(state, payload) {
     let index = state.employeeSalariesAndAllowancesList.map(employeeSalariesAndAllowances => employeeSalariesAndAllowances.id).indexOf(payload);
     state.employeeSalariesAndAllowancesList.splice(index, 1);
+  },
+  SET_DATA_BY_EMPLOYEE(state, payload) {
+    if (payload) {
+      state.employeeSalariesAndAllowancesByEmployeeList = payload;
+    } else {
+      state.employeeSalariesAndAllowancesByEmployeeList = [];
+    }
+  },
+  ADD_DATA_BY_EMPLOYEE(state, payload) {
+    state.employeeSalariesAndAllowancesByEmployeeList.push(payload);
   }
 };
 

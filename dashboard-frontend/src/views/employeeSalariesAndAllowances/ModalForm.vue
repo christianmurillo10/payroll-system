@@ -36,7 +36,11 @@
                 <v-date-picker v-model="formData.date_issued" no-title scrollable>
                   <v-spacer></v-spacer>
                   <v-btn flat color="primary" @click="date_issued = false">Cancel</v-btn>
-                  <v-btn flat color="primary" @click="$refs.date_issued.save(formData.date_issued)">OK</v-btn>
+                  <v-btn
+                    flat
+                    color="primary"
+                    @click="$refs.date_issued.save(formData.date_issued)"
+                  >OK</v-btn>
                 </v-date-picker>
               </v-menu>
             </v-flex>
@@ -163,6 +167,7 @@ export default {
       this.formType = "new";
       setTimeout(() => {
         this.formData = Object.assign({}, this.defaultFormData);
+        this.formData.employee_id = this.employeeId;
       }, 300);
     },
 

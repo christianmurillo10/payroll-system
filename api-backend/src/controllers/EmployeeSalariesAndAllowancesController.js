@@ -21,6 +21,7 @@ module.exports = {
     // Override variables
     params.created_at = moment().utc(8).format('YYYY-MM-DD HH:mm:ss');
     params.user_id = req.user.id.toLocaleString();
+    params.employee_id = params.employee_id.toLocaleString();
 
     try {
       // Validators
