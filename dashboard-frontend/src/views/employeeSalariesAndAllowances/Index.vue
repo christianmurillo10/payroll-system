@@ -60,7 +60,7 @@
               <td class="text-xs-left">{{ props.item.date_issued }}</td>
               <td class="text-xs-left">{{ props.item.salary_amount }}</td>
               <td class="text-xs-left">{{ props.item.allowance_amount }}</td>
-              <td class="text-xs-left">{{ props.item.is_current }}</td>
+              <td class="text-xs-left">{{ getYesNoStatus(props.item.is_current) }}</td>
               <td class="justify-center layout px-0">
                 <v-icon small class="mr-2" @click="editItem(props.item.id)">edit</v-icon>
                 <v-icon small @click="deleteItem(props.item.id)">delete</v-icon>
@@ -78,6 +78,7 @@
 
 <script>
 import Alerts from "@/components/utilities/Alerts";
+import Mixins from "@/helpers/Mixins.js";
 import ModalForm from "./ModalForm";
 import { mapState, mapGetters, mapActions } from "vuex";
 
@@ -86,6 +87,7 @@ export default {
     Alerts,
     ModalForm
   },
+  mixins: [Mixins],
 
   data: () => ({
     dialog: false,

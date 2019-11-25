@@ -12,35 +12,6 @@ const getters = {
 };
 
 const actions = {
-  getData({ dispatch, commit, state, rootState, getters, rootGetters }) {
-    let url = `${process.env.VUE_APP_API_BACKEND}/employeeSalariesAndAllowances/`;
-    let header = { headers: { Token: localStorage.getItem("token") } };
-    return new Promise((resolve, reject) => {
-      try {
-        axios.get(url, header)
-          .then(response => {
-            commit("SET_DATA", response.data.result);
-          });
-      } catch (err) {
-        reject(err);
-      }
-    });
-  },
-  getDataById({ dispatch, commit, state, rootState, getters, rootGetters }, payload) {
-    let url = `${process.env.VUE_APP_API_BACKEND}/employeeSalariesAndAllowances/${payload}`;
-    let header = { headers: { Token: localStorage.getItem("token") } };
-    return new Promise((resolve, reject) => {
-      try {
-        axios
-          .get(url, header)
-          .then(response => {
-            resolve(response);
-          });
-      } catch (err) {
-        reject(err);
-      }
-    });
-  },
   getDataByEmployeeId({ dispatch, commit, state, rootState, getters, rootGetters }, payload) {
     let url = `${process.env.VUE_APP_API_BACKEND}/employeeSalariesAndAllowances/findAllbyEmployeeId/${payload}`;
     let header = { headers: { Token: localStorage.getItem("token") } };

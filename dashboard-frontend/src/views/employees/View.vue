@@ -171,7 +171,7 @@
                       <v-list-tile-content>Active?:</v-list-tile-content>
                     </v-flex>
                     <v-flex xs6 sm6 md6 lg6>
-                      <v-list-tile-content>{{ getActive(employeeDetails.is_active) }}</v-list-tile-content>
+                      <v-list-tile-content>{{ getYesNoStatus(employeeDetails.is_active) }}</v-list-tile-content>
                     </v-flex>
                   </v-list-tile>
                 </v-list>

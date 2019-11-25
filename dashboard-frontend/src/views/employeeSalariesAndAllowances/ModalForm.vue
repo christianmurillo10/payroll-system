@@ -62,6 +62,17 @@
                 prepend-icon="money"
               ></v-text-field>
             </v-flex>
+            <v-flex xs12 sm12 md12 v-if="this.formType === 'update'">
+              <v-autocomplete
+                :items="getIsCurrentStatus"
+                item-text="name"
+                item-value="id"
+                v-model="formData.is_current"
+                label="Current?"
+                persistent-hint
+                prepend-icon="list"
+              ></v-autocomplete>
+            </v-flex>
           </v-layout>
         </v-container>
       </v-card-text>
@@ -87,19 +98,22 @@ export default {
   },
 
   data: () => ({
+    getIsCurrentStatus: [{ id: 0, name: "No" }, { id: 1, name: "Yes" }],
     date_issued: false,
     defaultFormData: {
       salary_amount: null,
       allowance_amount: null,
       employee_id: null,
-      date_issued: new Date().toISOString().substr(0, 10)
+      date_issued: new Date().toISOString().substr(0, 10),
+      is_current: null
     },
     formType: "new",
     formData: {
       salary_amount: null,
       allowance_amount: null,
       employee_id: null,
-      date_issued: new Date().toISOString().substr(0, 10)
+      date_issued: new Date().toISOString().substr(0, 10),
+      is_current: null
     },
     valid: true,
     validateItem: {
@@ -122,10 +136,6 @@ export default {
     }
   },
 
-  mounted() {
-    this.getEmployeeSalariesAndAllowancesData();
-  },
-
   created() {
     this.formData.employee_id = this.employeeId;
   },
@@ -133,7 +143,6 @@ export default {
   methods: {
     ...mapActions("alerts", ["setAlert"]),
     ...mapActions("employeeSalariesAndAllowances", {
-      getEmployeeSalariesAndAllowancesData: "getData",
       saveEmployeeSalariesAndAllowancesData: "saveData",
       updateEmployeeSalariesAndAllowancesData: "updateData",
       deleteEmployeeSalariesAndAllowancesData: "deleteData"

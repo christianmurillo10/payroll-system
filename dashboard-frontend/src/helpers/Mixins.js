@@ -1,6 +1,6 @@
 export default {
   methods: {
-    getActive(value) {
+    getYesNoStatus(value) {
       let response = null;
       if (value == 0) {
         response = "NO";
