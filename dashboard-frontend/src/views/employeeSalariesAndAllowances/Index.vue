@@ -55,6 +55,7 @@
             :headers="headers"
             :items="employeeSalariesAndAllowancesByEmployeeList"
             class="elevation-1"
+            v-bind:pagination.sync="pagination"
           >
             <template v-slot:items="props">
               <td class="text-xs-left">{{ props.item.date_issued }}</td>
@@ -90,6 +91,7 @@ export default {
   mixins: [Mixins],
 
   data: () => ({
+    pagination: {'sortBy': 'date_issued', 'descending': true},
     dialog: false,
     defaultFormData: {
       employee_id: null
@@ -107,7 +109,7 @@ export default {
       { text: "Allowance Amount", value: "allowance_amount" },
       { text: "Current?", value: "is_current" },
       { text: "Actions", align: "center", value: "name", sortable: false }
-    ]
+    ],
   }),
 
   computed: {
