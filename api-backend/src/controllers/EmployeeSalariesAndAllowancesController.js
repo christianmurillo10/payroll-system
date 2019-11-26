@@ -37,6 +37,13 @@ module.exports = {
       // Execute findAll query
       data = await Model.EmployeeSalariesAndAllowances.findAll(criteria);
       if (_.isEmpty(data[0])) {
+        // Update all is_current from 1 to 0
+        let criteria2 = { where: { employee_id: params.employee_id, is_current: 1 } };
+        let data2 = await Model.EmployeeSalariesAndAllowances.findAll(criteria2);
+        data2.forEach(async obj => {
+          await obj.update({ is_current: 0 });
+        });
+
         let finalData = await Model.EmployeeSalariesAndAllowances.create(initialValues);
         res.json({
           status: 200,
@@ -46,7 +53,7 @@ module.exports = {
       } else {
         res.json({
           status: 200,
-          message: "Data already exist.",
+          message: "Date already exist.",
           result: false
         });
       }
