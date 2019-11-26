@@ -143,6 +143,7 @@ export default {
   methods: {
     ...mapActions("alerts", ["setAlert"]),
     ...mapActions("employeeSalariesAndAllowances", {
+      getEmployeeSalariesAndAllowancesDataByEmployeeId: "getDataByEmployeeId",
       saveEmployeeSalariesAndAllowancesData: "saveData",
       updateEmployeeSalariesAndAllowancesData: "updateData",
       deleteEmployeeSalariesAndAllowancesData: "deleteData"
@@ -195,6 +196,7 @@ export default {
 
               if (!response.data.result) obj.type = "error";
               this.setAlert(obj);
+              this.getEmployeeSalariesAndAllowancesDataByEmployeeId(this.formData.employee_id);
             })
             .catch(err => console.log(err));
         } else if (this.formType === "update") {

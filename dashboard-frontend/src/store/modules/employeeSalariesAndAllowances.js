@@ -44,7 +44,6 @@ const actions = {
         axios
           .post(url, obj, header)
           .then(response => {
-            commit("ADD_DATA_BY_EMPLOYEE", response.data.result);
             resolve(response);
           });
       } catch (err) {
