@@ -21,7 +21,7 @@
         <td class="text-xs-left">
           <router-link v-bind:to="'/employees/view/' + props.item.id">{{ props.item.employee_no }}</router-link>
         </td>
-        <td class="text-xs-left">{{ props.item.firstname }}</td>
+        <td class="text-xs-left">{{ `${props.item.firstname} ${props.item.lastname}` }}</td>
         <td class="text-xs-left">{{ props.item.email }}</td>
         <td class="text-xs-left">{{ props.item.date_start }}</td>
         <td class="text-xs-left">{{ props.item.date_endo }}</td>
