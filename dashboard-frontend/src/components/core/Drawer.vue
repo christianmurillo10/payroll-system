@@ -127,6 +127,17 @@ export default {
         ]
       },
       {
+        icon: "local_atm",
+        text: "Payroll",
+        submenus: true,
+        childs: [
+          {
+            to: "/employees",
+            text: "Lists"
+          }
+        ]
+      },
+      {
         icon: "settings_applications",
         text: "Parameters",
         submenus: true,
