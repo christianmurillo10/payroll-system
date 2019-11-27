@@ -11,6 +11,7 @@ import WithholdingTaxTables from "../views/withholdingTaxTables/Index";
 import Employees from "../views/employees/Index";
 import EmployeesView from "../views/employees/View";
 import EmployeeSalariesAndAllowances from "../views/employeeSalariesAndAllowances/Index";
+import Payrolls from "../views/payrolls/Index";
 
 Vue.use(Router);
 
@@ -72,6 +73,11 @@ let router = new Router({
       path: "/employeeSalariesAndAllowances",
       name: "employeeSalariesAndAllowances",
       component: EmployeeSalariesAndAllowances
+    },
+    {
+      path: "/payrolls",
+      name: "payrolls",
+      component: Payrolls
     },
   ]
 })

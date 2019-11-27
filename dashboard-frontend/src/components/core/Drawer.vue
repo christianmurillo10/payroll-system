@@ -132,7 +132,7 @@ export default {
         submenus: true,
         childs: [
           {
-            to: "/employees",
+            to: "/payrolls",
             text: "Lists"
           }
         ]

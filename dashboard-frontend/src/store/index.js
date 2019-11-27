@@ -9,6 +9,7 @@ import userAuthentication from './modules/userAuthentication'
 import users from './modules/users'
 import roles from './modules/roles'
 import payFrequencies from './modules/payFrequencies'
+import payrolls from './modules/payrolls'
 import sssContributionTables from './modules/sssContributionTables'
 import withholdingTaxTables from './modules/withholdingTaxTables'
 import employees from './modules/employees'
@@ -29,6 +30,7 @@ export default new Vuex.Store({
     users,
     roles,
     payFrequencies,
+    payrolls,
     sssContributionTables,
     withholdingTaxTables,
     employees,
