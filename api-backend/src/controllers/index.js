@@ -3,6 +3,7 @@ const employees = require('./EmployeesController');
 const employeeSalariesAndAllowances = require('./EmployeeSalariesAndAllowancesController');
 const payFrequencies = require('./PayFrequenciesController');
 const payrolls = require('./PayrollsController');
+const payrollWorkingDays = require('./PayrollWorkingDaysController');
 const roles = require('./RolesController');
 const sssContributionTables = require('./SssContributionTablesController');
 const users = require('./UsersController');
@@ -14,6 +15,7 @@ module.exports = {
     employeeSalariesAndAllowances,
     payFrequencies,
     payrolls,
+    payrollWorkingDays,
     roles,
     sssContributionTables,
     users,

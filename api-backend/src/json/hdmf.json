@@ -1,0 +1,17 @@
+[
+    {
+        "date": 2019,
+        "employee_amount": 100,
+        "employer_amount": 100
+    },
+    {
+        "date": 2021,
+        "employee_amount": 150,
+        "employer_amount": 100
+    },
+    {
+        "date": 2023,
+        "employee_amount": 200,
+        "employer_amount": 100
+    }
+]

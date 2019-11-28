@@ -1,0 +1,11 @@
+{
+    "workingDay": {
+        "regularDay": 1,
+        "specialDay": 1.3,
+        "specialDayFord": 1.5,
+        "holiday": 2,
+        "holidayFord": 2.6,
+        "doubleHoliday": 3,
+        "doubleHolidayFord": 3.9
+    }
+}
