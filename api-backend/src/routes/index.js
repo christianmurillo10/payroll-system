@@ -7,6 +7,7 @@ router.use('/payFrequency', require('./payFrequencies'));
 router.use('/payroll', require('./payrolls'));
 router.use('/payrollWorkingDay', require('./payrollWorkingDays'));
 router.use('/payrollNightDifferential', require('./payrollNightDifferentials'));
+router.use('/payrollOvertime', require('./payrollOvertimes'));
 router.use('/role', require('./roles'));
 router.use('/sssContributionTable', require('./sssContributionTables'));
 router.use('/user', require('./users'));

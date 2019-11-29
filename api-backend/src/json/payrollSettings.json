@@ -18,5 +18,14 @@
     "holidayFord": 0.1,
     "doubleHoliday": 0.1,
     "doubleHolidayFord": 0.1
+  },
+  "overtime": {
+    "regularDay": 1.25,
+    "specialDay": 1.3,
+    "specialDayFord": 1.3,
+    "holiday": 1.3,
+    "holidayFord": 1.3,
+    "doubleHoliday": 1.3,
+    "doubleHolidayFord": 1.3
   }
 }
