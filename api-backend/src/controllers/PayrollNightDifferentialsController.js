@@ -7,7 +7,7 @@ module.exports = {
    * @param req
    * @param res
    * @returns {Promise<void>}
-   * @routes POST /payrollWorkingDay/create
+   * @routes POST /payrollNightDifferentials/create
    */
   create: async (req, res) => {
     const params = req.body;
@@ -68,9 +68,9 @@ module.exports = {
         'user_id'
       ]);
       // Execute findAll query
-      data = await Model.PayrollWorkingDays.findAll(criteria);
+      data = await Model.PayrollNightDifferentials.findAll(criteria);
       if (_.isEmpty(data[0])) {
-        let finalData = await Model.PayrollWorkingDays.create(initialValues);
+        let finalData = await Model.PayrollNightDifferentials.create(initialValues);
         res.json({
           status: 200,
           message: "Successfully created data.",
@@ -98,13 +98,13 @@ module.exports = {
 
     jsonfile.readFile(file, (err, data) => {
       let basic = params.basic;
-      let regularDay = computationTools(basic, data.fixedWorkingDays, params.regular_day, data.workingDay.regularDay);
-      let specialDay = computationTools(basic, data.fixedWorkingDays, params.special_day, data.workingDay.specialDay);
-      let specialDayFord = computationTools(basic, data.fixedWorkingDays, params.special_day_ford, data.workingDay.specialDayFord);
-      let holiday = computationTools(basic, data.fixedWorkingDays, params.holiday, data.workingDay.holiday);
-      let holidayFord = computationTools(basic, data.fixedWorkingDays, params.holiday_ford, data.workingDay.holidayFord);
-      let doubleHoliday = computationTools(basic, data.fixedWorkingDays, params.double_holiday, data.workingDay.doubleHoliday);
-      let doubleHolidayFord = computationTools(basic, data.fixedWorkingDays, params.double_holiday_ford, data.workingDay.doubleHolidayFord);
+      let regularDay = computationTools(basic, data.fixedWorkingDays, data.fixedWorkingHours, params.regular_day, data.workingDay.regularDay, data.nightDifferential.regularDay);
+      let specialDay = computationTools(basic, data.fixedWorkingDays, data.fixedWorkingHours, params.special_day, data.workingDay.specialDay, data.nightDifferential.specialDay);
+      let specialDayFord = computationTools(basic, data.fixedWorkingDays, data.fixedWorkingHours, params.special_day_ford, data.workingDay.specialDayFord, data.nightDifferential.specialDayFord);
+      let holiday = computationTools(basic, data.fixedWorkingDays, data.fixedWorkingHours, params.holiday, data.workingDay.holiday, data.nightDifferential.holiday);
+      let holidayFord = computationTools(basic, data.fixedWorkingDays, data.fixedWorkingHours, params.holiday_ford, data.workingDay.holidayFord, data.nightDifferential.holidayFord);
+      let doubleHoliday = computationTools(basic, data.fixedWorkingDays, data.fixedWorkingHours, params.double_holiday, data.workingDay.doubleHoliday, data.nightDifferential.doubleHoliday);
+      let doubleHolidayFord = computationTools(basic, data.fixedWorkingDays, data.fixedWorkingHours, params.double_holiday_ford, data.workingDay.doubleHolidayFord, data.nightDifferential.doubleHolidayFord);
       let totalAmount = sum([regularDay, specialDay, specialDayFord, holiday, holidayFord, doubleHoliday, doubleHolidayFord]);
       let finalResult = {
         regularDay: regularDay.toFixed(2),
@@ -130,10 +130,10 @@ module.exports = {
  * Other Functions
  */
 
-const computationTools = (basic, fixedWorkingDays, numberOfDays, percentage) => {
+const computationTools = (basic, fixedWorkingDays, fixedWorkingHours, numberOfHours, percentage, nightPercentage) => {
   let finalComputation = 0.00;
-  let dailyRate = (basic / fixedWorkingDays) * percentage;
-  finalComputation = dailyRate * numberOfDays;
+  let hourlyRate = (basic / fixedWorkingDays / fixedWorkingHours) * percentage;
+  finalComputation = (hourlyRate * nightPercentage) * numberOfHours;
   return finalComputation;
 };
 
