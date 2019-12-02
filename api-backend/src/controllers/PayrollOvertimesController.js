@@ -68,9 +68,9 @@ module.exports = {
         'user_id'
       ]);
       // Execute findAll query
-      data = await Model.PayrollWorkingDays.findAll(criteria);
+      data = await Model.PayrollOvertimes.findAll(criteria);
       if (_.isEmpty(data[0])) {
-        let finalData = await Model.PayrollWorkingDays.create(initialValues);
+        let finalData = await Model.PayrollOvertimes.create(initialValues);
         res.json({
           status: 200,
           message: "Successfully created data.",
@@ -92,6 +92,13 @@ module.exports = {
     }
   },
 
+  /**
+   * Compute
+   * @param req
+   * @param res
+   * @returns {Promise<void>}
+   * @routes POST /payrollOvertime/compute
+   */
   compute: (req, res) => {
     let params = req.body;
     let file = 'src/json/payrollSettings.json';

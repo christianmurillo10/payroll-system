@@ -92,6 +92,13 @@ module.exports = {
     }
   },
 
+  /**
+   * Compute
+   * @param req
+   * @param res
+   * @returns {Promise<void>}
+   * @routes POST /payrollWorkingDay/compute
+   */
   compute: (req, res) => {
     let params = req.body;
     let file = 'src/json/payrollSettings.json';

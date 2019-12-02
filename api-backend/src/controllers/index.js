@@ -6,6 +6,7 @@ const payrolls = require('./PayrollsController');
 const payrollWorkingDays = require('./PayrollWorkingDaysController');
 const payrollNightDifferentials = require('./PayrollNightDifferentialsController');
 const payrollOvertimes = require('./PayrollOvertimesController');
+const payrollTardiness = require('./PayrollTardinessController');
 const roles = require('./RolesController');
 const sssContributionTables = require('./SssContributionTablesController');
 const users = require('./UsersController');
@@ -20,6 +21,7 @@ module.exports = {
     payrollWorkingDays,
     payrollNightDifferentials,
     payrollOvertimes,
+    payrollTardiness,
     roles,
     sssContributionTables,
     users,

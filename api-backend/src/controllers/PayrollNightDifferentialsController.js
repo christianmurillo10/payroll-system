@@ -7,7 +7,7 @@ module.exports = {
    * @param req
    * @param res
    * @returns {Promise<void>}
-   * @routes POST /payrollNightDifferentials/create
+   * @routes POST /payrollNightDifferential/create
    */
   create: async (req, res) => {
     const params = req.body;
@@ -92,6 +92,13 @@ module.exports = {
     }
   },
 
+  /**
+   * Compute
+   * @param req
+   * @param res
+   * @returns {Promise<void>}
+   * @routes POST /payrollNightDifferential/compute
+   */
   compute: (req, res) => {
     let params = req.body;
     let file = 'src/json/payrollSettings.json';

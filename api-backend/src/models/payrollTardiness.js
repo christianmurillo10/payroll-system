@@ -37,6 +37,12 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: '0.00'
     },
+    'total_absent': {
+      type: DataTypes.DECIMAL(2, 2),
+      allowNull: false,
+      comment: 'Scope: Sick Leave, Vacation Leave, Holiday, Absent',
+      defaultValue: '0.00'
+    },
     'undertime_amount': {
       type: DataTypes.DECIMAL(12, 2),
       allowNull: false,
@@ -71,6 +77,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DECIMAL(12, 2),
       allowNull: false,
       comment: 'Scope: Sick Leave, Vacation Leave, Holiday, Absent',
+      defaultValue: '0.00'
+    },
+    'total_amount': {
+      type: DataTypes.DECIMAL(12, 2),
+      allowNull: false,
       defaultValue: '0.00'
     },
     'payroll_id': {
