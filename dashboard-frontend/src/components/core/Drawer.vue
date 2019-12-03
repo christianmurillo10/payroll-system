@@ -132,6 +132,10 @@ export default {
         submenus: true,
         childs: [
           {
+            to: "/payroll/create",
+            text: "Create"
+          },
+          {
             to: "/payrolls",
             text: "Lists"
           }

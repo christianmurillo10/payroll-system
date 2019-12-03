@@ -12,6 +12,7 @@ import Employees from "../views/employees/Index";
 import EmployeesView from "../views/employees/View";
 import EmployeeSalariesAndAllowances from "../views/employeeSalariesAndAllowances/Index";
 import Payrolls from "../views/payrolls/Index";
+import PayrollsCreate from "../views/payrolls/Create";
 
 Vue.use(Router);
 
@@ -78,6 +79,11 @@ let router = new Router({
       path: "/payrolls",
       name: "payrolls",
       component: Payrolls
+    },
+    {
+      path: "/payroll/create",
+      name: "payrollsCreate",
+      component: PayrollsCreate
     },
   ]
 })

@@ -303,4 +303,42 @@ module.exports = {
       });
     }
   },
+
+  /**
+   * Find is_current = 1 by employeeId
+   * @route GET /employeeSalariesAndAllowances/findIsCurrentByEmployeeId/:employeeId
+   * @param req
+   * @param res
+   * @returns {never}
+   */
+  findIsCurrentByEmployeeId: async (req, res) => {
+    const params = req.params;
+    let data, criteria;
+
+    try {
+      // Pre-setting variables
+      criteria = { where: { employee_id: params.employeeId, is_current: 1, is_deleted: 0 }, include: [{ model: Model.Employees, as: 'employees' }, { model: Model.Users, as: 'users' }] };
+      // Execute findAll query
+      data = await Model.EmployeeSalariesAndAllowances.findAll(criteria);
+      if (!_.isEmpty(data[0])) {
+        res.json({
+          status: 200,
+          message: "Successfully find data.",
+          result: data
+        });
+      } else {
+        res.json({
+          status: 200,
+          message: "No Data Found.",
+          result: false
+        });
+      }
+    } catch (err) {
+      res.json({
+        status: 401,
+        err: err,
+        message: "Failed to find data."
+      });
+    }
+  },
 };

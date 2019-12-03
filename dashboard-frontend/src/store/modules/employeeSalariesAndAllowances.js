@@ -2,12 +2,13 @@ import axios from "axios";
 
 const state = {
   employeeId: null,
-  employeeSalariesAndAllowancesByEmployeeList: []
+  employeeSalariesAndAllowancesEmployeeList: [],
+  employeeSalariesAndAllowancesIsCurrentData: []
 };
 
 const getters = {
   getEmployeeSalariesAndAllowancesById: (state) => (id) => {
-    return state.employeeSalariesAndAllowancesByEmployeeList.find(employeeSalariesAndAllowances => employeeSalariesAndAllowances.id === id);
+    return state.employeeSalariesAndAllowancesEmployeeList.find(employeeSalariesAndAllowances => employeeSalariesAndAllowances.id === id);
   }
 };
 
@@ -22,6 +23,23 @@ const actions = {
           .then(response => {
             commit("SET_EMPLOYEE", payload);
             commit("SET_DATA_BY_EMPLOYEE", response.data.result);
+            resolve(response);
+          });
+      } catch (err) {
+        reject(err);
+      }
+    });
+  },
+  getIsCurrentDataByEmployeeId({ dispatch, commit, state, rootState, getters, rootGetters }, payload) {
+    let url = `${process.env.VUE_APP_API_BACKEND}/employeeSalariesAndAllowances/findIsCurrentByEmployeeId/${payload}`;
+    let header = { headers: { Token: localStorage.getItem("token") } };
+    return new Promise((resolve, reject) => {
+      try {
+        axios
+          .get(url, header)
+          .then(response => {
+            commit("SET_EMPLOYEE", payload);
+            commit("SET_IS_CURRENT_DATA_BY_EMPLOYEE", response.data.result[0]);
             resolve(response);
           });
       } catch (err) {
@@ -103,17 +121,25 @@ const mutations = {
   },
   SET_DATA_BY_EMPLOYEE(state, payload) {
     if (payload) {
-      state.employeeSalariesAndAllowancesByEmployeeList = payload;
+      state.employeeSalariesAndAllowancesEmployeeList = payload;
     } else {
-      state.employeeSalariesAndAllowancesByEmployeeList = [];
+      state.employeeSalariesAndAllowancesEmployeeList = [];
+    }
+  },
+  SET_IS_CURRENT_DATA_BY_EMPLOYEE(state, payload) {
+    console.log(payload)
+    if (payload) {
+      state.employeeSalariesAndAllowancesIsCurrentData = payload;
+    } else {
+      state.employeeSalariesAndAllowancesIsCurrentData = [];
     }
   },
   ADD_DATA_BY_EMPLOYEE(state, payload) {
-    state.employeeSalariesAndAllowancesByEmployeeList.push(payload);
+    state.employeeSalariesAndAllowancesEmployeeList.push(payload);
   },
   UPDATE_DATA_BY_EMPLOYEE(state, payload) {
-    let index = state.employeeSalariesAndAllowancesByEmployeeList.map(employeeSalariesAndAllowances => employeeSalariesAndAllowances.id).indexOf(payload.id);
-    Object.assign(state.employeeSalariesAndAllowancesByEmployeeList[index], {
+    let index = state.employeeSalariesAndAllowancesEmployeeList.map(employeeSalariesAndAllowances => employeeSalariesAndAllowances.id).indexOf(payload.id);
+    Object.assign(state.employeeSalariesAndAllowancesEmployeeList[index], {
       salary_amount: payload.salary_amount,
       allowance_amount: payload.allowance_amount,
       employee_id: payload.employee_id,
@@ -123,8 +149,8 @@ const mutations = {
     });
   },
   DELETE_DATA_BY_EMPLOYEE(state, payload) {
-    let index = state.employeeSalariesAndAllowancesByEmployeeList.map(employeeSalariesAndAllowances => employeeSalariesAndAllowances.id).indexOf(payload);
-    state.employeeSalariesAndAllowancesByEmployeeList.splice(index, 1);
+    let index = state.employeeSalariesAndAllowancesEmployeeList.map(employeeSalariesAndAllowances => employeeSalariesAndAllowances.id).indexOf(payload);
+    state.employeeSalariesAndAllowancesEmployeeList.splice(index, 1);
   }
 };
 

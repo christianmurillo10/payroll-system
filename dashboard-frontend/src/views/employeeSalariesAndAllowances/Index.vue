@@ -53,7 +53,7 @@
           </v-dialog>
           <v-data-table
             :headers="headers"
-            :items="employeeSalariesAndAllowancesByEmployeeList"
+            :items="employeeSalariesAndAllowancesEmployeeList"
             class="elevation-1"
             v-bind:pagination.sync="pagination"
           >
@@ -116,7 +116,7 @@ export default {
     ...mapGetters("employees", ["getEmployeeList"]),
     ...mapState("employeeSalariesAndAllowances", [
       "employeeId",
-      "employeeSalariesAndAllowancesByEmployeeList"
+      "employeeSalariesAndAllowancesEmployeeList"
     ])
   },
 
