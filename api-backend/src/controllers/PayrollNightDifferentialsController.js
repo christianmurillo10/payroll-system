@@ -126,7 +126,7 @@ module.exports = {
 
       res.json({
         status: 200,
-        message: "Successfully created data.",
+        message: "Successfully computed data.",
         result: finalResult
       });
     });
