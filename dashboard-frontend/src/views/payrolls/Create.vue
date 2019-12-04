@@ -132,476 +132,537 @@
           <v-card class="mx-auto my-12" :elevation="3" max-width="auto">
             <v-container grid-list-md>
               <v-layout wrap>
-                <!-- Working Days -->
-                <v-flex xs12 sm12 md3>
-                  <v-flex xs12 sm12 md12 lg12 pb-4>
-                    <v-card>
-                      <v-card-title>
-                        <h4>Working Days</h4>
-                      </v-card-title>
-                      <v-divider></v-divider>
-                      <v-list dense>
-                        <v-list-tile>
-                          <v-list-tile-content>Regular Day:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.workingDay.regular_day_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Special Day:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.workingDay.special_day_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Special Day falling on rest day:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.workingDay.special_day_ford_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Holiday:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.workingDay.holiday_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Holiday falling on rest day:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.workingDay.holiday_ford_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Double Holiday:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.workingDay.double_holiday_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Double Holiday falling on rest day:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.workingDay.double_holiday_ford_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-divider></v-divider>
-                        <v-list-tile>
-                          <v-list-tile-content>Total:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.workingDay.total_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                      </v-list>
-                    </v-card>
-                  </v-flex>
+                <v-flex xs12 sm12 md12>
+                  <v-tabs color="cyan" dark show-arrows>
+                    <v-tabs-slider color="yellow"></v-tabs-slider>
+                    <v-tab
+                      v-for="(header, i) in tabHeaders"
+                      :key="i"
+                      :href="'#tab-' + header.key"
+                    >{{ header.title }}</v-tab>
 
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.workingDay.regular_day"
-                      label="Regular"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.workingDay.special_day"
-                      label="Regular Day"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.workingDay.special_day_ford"
-                      label="Special Day"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.workingDay.holiday"
-                      label="Holiday"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.workingDay.holiday_ford"
-                      label="Holiday falling on rest day"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.workingDay.double_holiday"
-                      label="Double Holiday"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.workingDay.double_holiday_ford"
-                      label="Double Holiday falling on rest day"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                </v-flex>
+                    <v-tabs-items>
+                      <v-tab-item value="tab-working-days">
+                        <v-layout wrap>
+                          <!-- Working Days -->
+                          <v-flex xs12 sm12 md3>
+                            <v-flex xs12 sm12 md12 lg12>
+                              <v-card>
+                                <v-card-title>
+                                  <h4>Working Days</h4>
+                                </v-card-title>
+                                <v-divider></v-divider>
+                                <v-list dense>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Regular Day:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.workingDay.regular_day_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Special Day:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.workingDay.special_day_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Special Day falling on rest day:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.workingDay.special_day_ford_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Holiday:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.workingDay.holiday_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Holiday falling on rest day:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.workingDay.holiday_ford_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Double Holiday:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.workingDay.double_holiday_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Double Holiday falling on rest day:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.workingDay.double_holiday_ford_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-divider></v-divider>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Total:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.workingDay.total_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                </v-list>
+                              </v-card>
+                            </v-flex>
+                          </v-flex>
+                          
+                          <v-flex xs12 sm12 md9 lg9>
+                            <v-layout wrap>
+                              <v-flex xs12 sm12 md4 lg4>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.workingDay.regular_day"
+                                    label="Regular"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                </v-flex>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.workingDay.special_day"
+                                    label="Regular Day"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                </v-flex>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.workingDay.special_day_ford"
+                                    label="Special Day"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                  <v-flex xs12 sm12 md12>
+                                    <v-text-field
+                                      v-model="formData.workingDay.holiday"
+                                      label="Holiday"
+                                      type="number"
+                                      prepend-icon="money"
+                                    ></v-text-field>
+                                  </v-flex>
+                                  <v-flex xs12 sm12 md12>
+                                    <v-text-field
+                                      v-model="formData.workingDay.holiday_ford"
+                                      label="Holiday falling on rest day"
+                                      type="number"
+                                      prepend-icon="money"
+                                    ></v-text-field>
+                                  </v-flex>
+                                </v-flex>
+                              </v-flex>
+                              <v-flex xs12 sm12 md4 lg4>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.workingDay.double_holiday"
+                                    label="Double Holiday"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                </v-flex>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.workingDay.double_holiday_ford"
+                                    label="Double Holiday falling on rest day"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                </v-flex>
+                              </v-flex>
+                            </v-layout>
+                          </v-flex>
+                        </v-layout>
+                      </v-tab-item>
 
-                <!-- Night Differentials -->
-                <v-flex xs12 sm12 md3>
-                  <v-flex xs12 sm12 md12 lg12 pb-4>
-                    <v-card>
-                      <v-card-title>
-                        <h4>Night Differentials</h4>
-                      </v-card-title>
-                      <v-divider></v-divider>
-                      <v-list dense>
-                        <v-list-tile>
-                          <v-list-tile-content>Regular Day:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.nightDifferential.regular_day_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Special Day:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.nightDifferential.special_day_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Special Day falling on rest day:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.nightDifferential.special_day_ford_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Holiday:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.nightDifferential.holiday_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Holiday falling on rest day:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.nightDifferential.holiday_ford_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Double Holiday:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.nightDifferential.double_holiday_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Double Holiday falling on rest day:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.nightDifferential.double_holiday_ford_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-divider></v-divider>
-                        <v-list-tile>
-                          <v-list-tile-content>Total:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.nightDifferential.total_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                      </v-list>
-                    </v-card>
-                  </v-flex>
+                      <v-tab-item value="tab-night-differentials">
+                        <v-layout wrap>
+                          <!-- Night Differentials -->
+                          <v-flex xs12 sm12 md3>
+                            <v-flex xs12 sm12 md12 lg12 pb-4>
+                              <v-card>
+                                <v-card-title>
+                                  <h4>Night Differentials</h4>
+                                </v-card-title>
+                                <v-divider></v-divider>
+                                <v-list dense>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Regular Day:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.nightDifferential.regular_day_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Special Day:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.nightDifferential.special_day_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Special Day falling on rest day:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.nightDifferential.special_day_ford_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Holiday:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.nightDifferential.holiday_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Holiday falling on rest day:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.nightDifferential.holiday_ford_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Double Holiday:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.nightDifferential.double_holiday_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Double Holiday falling on rest day:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.nightDifferential.double_holiday_ford_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-divider></v-divider>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Total:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.nightDifferential.total_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                </v-list>
+                              </v-card>
+                            </v-flex>
+                          </v-flex>
 
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.nightDifferential.regular_day"
-                      label="Regular"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.nightDifferential.special_day"
-                      label="Regular Day"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.nightDifferential.special_day_ford"
-                      label="Special Day"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.nightDifferential.holiday"
-                      label="Holiday"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.nightDifferential.holiday_ford"
-                      label="Holiday falling on rest day"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.nightDifferential.double_holiday"
-                      label="Double Holiday"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.nightDifferential.double_holiday_ford"
-                      label="Double Holiday falling on rest day"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                </v-flex>
+                          <v-flex xs12 sm12 md9 lg9>
+                            <v-layout wrap>
+                              <v-flex xs12 sm12 md4 lg4>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.nightDifferential.regular_day"
+                                    label="Regular"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                </v-flex>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.nightDifferential.special_day"
+                                    label="Regular Day"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                </v-flex>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.nightDifferential.special_day_ford"
+                                    label="Special Day"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                  <v-flex xs12 sm12 md12>
+                                    <v-text-field
+                                      v-model="formData.nightDifferential.holiday"
+                                      label="Holiday"
+                                      type="number"
+                                      prepend-icon="money"
+                                    ></v-text-field>
+                                  </v-flex>
+                                  <v-flex xs12 sm12 md12>
+                                    <v-text-field
+                                      v-model="formData.nightDifferential.holiday_ford"
+                                      label="Holiday falling on rest day"
+                                      type="number"
+                                      prepend-icon="money"
+                                    ></v-text-field>
+                                  </v-flex>
+                                </v-flex>
+                              </v-flex>
+                              <v-flex xs12 sm12 md4 lg4>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.workingDay.double_holiday"
+                                    label="Double Holiday"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                </v-flex>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.workingDay.double_holiday_ford"
+                                    label="Double Holiday falling on rest day"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                </v-flex>
+                              </v-flex>
+                            </v-layout>
+                          </v-flex>
+                        </v-layout>
+                      </v-tab-item>
 
-                <!-- Overtimes -->
-                <v-flex xs12 sm12 md3>
-                  <v-flex xs12 sm12 md12 lg12 pb-4>
-                    <v-card>
-                      <v-card-title>
-                        <h4>Overtimes</h4>
-                      </v-card-title>
-                      <v-divider></v-divider>
-                      <v-list dense>
-                        <v-list-tile>
-                          <v-list-tile-content>Regular Day:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.overtime.regular_day_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Special Day:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.overtime.special_day_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Special Day falling on rest day:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.overtime.special_day_ford_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Holiday:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.overtime.holiday_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Holiday falling on rest day:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.overtime.holiday_ford_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Double Holiday:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.overtime.double_holiday_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Double Holiday falling on rest day:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.overtime.double_holiday_ford_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-divider></v-divider>
-                        <v-list-tile>
-                          <v-list-tile-content>Total:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.overtime.total_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                      </v-list>
-                    </v-card>
-                  </v-flex>
+                      <v-tab-item value="tab-overtimes">
+                        <v-layout wrap>
+                          <!-- Overtimes -->
+                          <v-flex xs12 sm12 md3>
+                            <v-flex xs12 sm12 md12 lg12 pb-4>
+                              <v-card>
+                                <v-card-title>
+                                  <h4>Overtimes</h4>
+                                </v-card-title>
+                                <v-divider></v-divider>
+                                <v-list dense>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Regular Day:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.overtime.regular_day_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Special Day:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.overtime.special_day_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Special Day falling on rest day:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.overtime.special_day_ford_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Holiday:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.overtime.holiday_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Holiday falling on rest day:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.overtime.holiday_ford_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Double Holiday:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.overtime.double_holiday_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Double Holiday falling on rest day:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.overtime.double_holiday_ford_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-divider></v-divider>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Total:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.overtime.total_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                </v-list>
+                              </v-card>
+                            </v-flex>
+                          </v-flex>
 
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.overtime.regular_day"
-                      label="Regular"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.overtime.special_day"
-                      label="Regular Day"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.overtime.special_day_ford"
-                      label="Special Day"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.overtime.holiday"
-                      label="Holiday"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.overtime.holiday_ford"
-                      label="Holiday falling on rest day"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.overtime.double_holiday"
-                      label="Double Holiday"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.overtime.double_holiday_ford"
-                      label="Double Holiday falling on rest day"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                </v-flex>
+                          <v-flex xs12 sm12 md9 lg9>
+                            <v-layout wrap>
+                              <v-flex xs12 sm12 md4 lg4>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.overtime.regular_day"
+                                    label="Regular"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                </v-flex>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.overtime.special_day"
+                                    label="Regular Day"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                </v-flex>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.overtime.special_day_ford"
+                                    label="Special Day"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                  <v-flex xs12 sm12 md12>
+                                    <v-text-field
+                                      v-model="formData.overtime.holiday"
+                                      label="Holiday"
+                                      type="number"
+                                      prepend-icon="money"
+                                    ></v-text-field>
+                                  </v-flex>
+                                  <v-flex xs12 sm12 md12>
+                                    <v-text-field
+                                      v-model="formData.overtime.holiday_ford"
+                                      label="Holiday falling on rest day"
+                                      type="number"
+                                      prepend-icon="money"
+                                    ></v-text-field>
+                                  </v-flex>
+                                </v-flex>
+                              </v-flex>
+                              <v-flex xs12 sm12 md4 lg4>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.overtime.double_holiday"
+                                    label="Double Holiday"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                </v-flex>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.overtime.double_holiday_ford"
+                                    label="Double Holiday falling on rest day"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                </v-flex>
+                              </v-flex>
+                            </v-layout>
+                          </v-flex>
+                        </v-layout>
+                      </v-tab-item>
 
-                <!-- Tardiness -->
-                <v-flex xs12 sm12 md3>
-                  <v-flex xs12 sm12 md12 lg12 pb-4>
-                    <v-card>
-                      <v-card-title>
-                        <h4>Tardiness</h4>
-                      </v-card-title>
-                      <v-divider></v-divider>
-                      <v-list dense>
-                        <v-list-tile>
-                          <v-list-tile-content>Undertime:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.tardiness.undertime_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Half Day:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.tardiness.half_day_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Sick Leave:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.tardiness.sick_leave_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Vacation Leave:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.tardiness.vacation_leave_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Holiday:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.tardiness.holiday_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Absent:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.tardiness.absent_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Total Absent:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.tardiness.total_absent_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-divider></v-divider>
-                        <v-list-tile>
-                          <v-list-tile-content>Total:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.tardiness.total_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                      </v-list>
-                    </v-card>
-                  </v-flex>
+                      <v-tab-item value="tab-tardiness">
+                        <v-layout wrap>
+                          <!-- Tardiness -->
+                          <v-flex xs12 sm12 md3>
+                            <v-flex xs12 sm12 md12 lg12 pb-4>
+                              <v-card>
+                                <v-card-title>
+                                  <h4>Tardiness</h4>
+                                </v-card-title>
+                                <v-divider></v-divider>
+                                <v-list dense>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Undertime:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.tardiness.undertime_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Half Day:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.tardiness.half_day_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Sick Leave:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.tardiness.sick_leave_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Vacation Leave:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.tardiness.vacation_leave_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Holiday:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.tardiness.holiday_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Absent:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.tardiness.absent_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Total Absent:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.tardiness.total_absent_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                  <v-divider></v-divider>
+                                  <v-list-tile>
+                                    <v-list-tile-content>Total:</v-list-tile-content>
+                                    <v-list-tile-content
+                                      class="align-end"
+                                    >{{ formData.tardiness.total_amount }}</v-list-tile-content>
+                                  </v-list-tile>
+                                </v-list>
+                              </v-card>
+                            </v-flex>
+                          </v-flex>
 
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.tardiness.undertime"
-                      label="Overtime"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.tardiness.half_day"
-                      label="Half Day"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.tardiness.sick_leave"
-                      label="Sick Leave"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.tardiness.vacation_leave"
-                      label="Vacation Leave"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.tardiness.holiday"
-                      label="Holiday"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="formData.tardiness.absent"
-                      label="Absent"
-                      type="number"
-                      prepend-icon="money"
-                    ></v-text-field>
-                  </v-flex>
+                          <v-flex xs12 sm12 md9 lg9>
+                            <v-layout wrap>
+                              <v-flex xs12 sm12 md4 lg4>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.tardiness.undertime"
+                                    label="Overtime"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                </v-flex>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.tardiness.half_day"
+                                    label="Half Day"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                </v-flex>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.tardiness.sick_leave"
+                                    label="Sick Leave"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                </v-flex>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.tardiness.vacation_leave"
+                                    label="Vacation Leave"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                </v-flex>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.tardiness.holiday"
+                                    label="Holiday"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                </v-flex>
+                              </v-flex>
+                              <v-flex xs12 sm12 md4 lg4>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.tardiness.absent"
+                                    label="Absent"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                </v-flex>
+                              </v-flex>
+                            </v-layout>
+                          </v-flex>
+                        </v-layout>
+                      </v-tab-item>
+                    </v-tabs-items>
+                  </v-tabs>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -624,6 +685,24 @@ export default {
   mixins: [Mixins],
 
   data: () => ({
+    tabHeaders: [
+      {
+        key: "working-days",
+        title: "Working Days"
+      },
+      {
+        key: "night-differentials",
+        title: "Night Differentials"
+      },
+      {
+        key: "overtimes",
+        title: "Overtimes"
+      },
+      {
+        key: "tardiness",
+        title: "Tardiness"
+      }
+    ],
     defaultFormData: {
       employee_id: null,
       payroll: {
