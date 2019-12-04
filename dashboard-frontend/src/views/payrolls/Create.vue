@@ -3,34 +3,128 @@
     <v-layout row wrap>
       <v-container fluid grid-list-md>
         <Alerts />
-        <v-flex xs12 sm12 md4 lg4>
-          <v-card class="mx-auto my-12" :elevation="3" max-width="auto">
-            <v-card-title>
-              <v-icon class="black--text" large left>view_list</v-icon>
-              <span class="title">Payroll - Create</span>
-            </v-card-title>
-
-            <v-divider></v-divider>
-
-            <v-container grid-list-md>
-              <v-layout wrap>
-                <v-flex xs12 sm12 md12>
-                  <v-autocomplete
-                    :items="getEmployeeList"
-                    item-text="firstname"
-                    item-value="id"
-                    v-model="formData.employee_id"
-                    :rules="validateItem.employeeRules"
-                    label="Employee"
-                    required
-                    persistent-hint
-                    prepend-icon="list"
-                    @change="getEmployeeDetails()"
-                  ></v-autocomplete>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-card>
+        <v-flex xs12 sm12 md12 lg12>
+          <v-layout wrap>
+            <v-flex xs12 sm12 md4 lg4>
+              <v-card class="mx-auto my-12" :elevation="3" max-width="auto">
+                <v-card-title>
+                  <v-icon class="black--text" large left>view_list</v-icon>
+                  <span class="title">Payroll - Create</span>
+                </v-card-title>
+                <v-divider></v-divider>
+                <v-container grid-list-md>
+                  <v-layout wrap>
+                    <v-flex xs12 sm12 md12>
+                      <v-autocomplete
+                        :items="getEmployeeList"
+                        item-text="firstname"
+                        item-value="id"
+                        v-model="formData.employee_id"
+                        :rules="validateItem.employeeRules"
+                        label="Employee"
+                        required
+                        persistent-hint
+                        prepend-icon="list"
+                        @change="getEmployeeDetails()"
+                      ></v-autocomplete>
+                    </v-flex>
+                  </v-layout>
+                </v-container>
+              </v-card>
+            </v-flex>
+            <v-flex xs12 sm12 md8 lg8>
+              <v-card>
+                <v-card-title>
+                  <h4>Payroll Summary</h4>
+                </v-card-title>
+                <v-divider></v-divider>
+                <v-list dense>
+                  <v-layout wrap>
+                    <v-flex xs12 sm12 md6 lg6>
+                      <v-list-tile>
+                        <v-list-tile-content>Basic Salary:</v-list-tile-content>
+                        <v-list-tile-content
+                          class="align-end"
+                        >{{ formData.payroll.basic_salary_amount }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Daily Rate:</v-list-tile-content>
+                        <v-list-tile-content
+                          class="align-end"
+                        >{{ formData.payroll.fixed_allowance_amount }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Fixed Allowance:</v-list-tile-content>
+                        <v-list-tile-content
+                          class="align-end"
+                        >{{ formData.payroll.daily_allowance_amount }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Daily Allowance:</v-list-tile-content>
+                        <v-list-tile-content
+                          class="align-end"
+                        >{{ formData.payroll.daily_rate_amount }}</v-list-tile-content>
+                      </v-list-tile>
+                    </v-flex>
+                    <v-flex xs12 sm12 md6 lg6>
+                      <v-list-tile>
+                        <v-list-tile-content>Total Working Day:</v-list-tile-content>
+                        <v-list-tile-content
+                          class="align-end"
+                        >{{ formData.payroll.total_working_day_amount }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Total Night Differential:</v-list-tile-content>
+                        <v-list-tile-content
+                          class="align-end"
+                        >{{ formData.payroll.total_night_differential_amount }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Total Overtime:</v-list-tile-content>
+                        <v-list-tile-content
+                          class="align-end"
+                        >{{ formData.payroll.total_overtime_amount }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Total Other Salary and Wages:</v-list-tile-content>
+                        <v-list-tile-content
+                          class="align-end"
+                        >{{ formData.payroll.total_other_salary_and_wages_amount }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Total Tardiness:</v-list-tile-content>
+                        <v-list-tile-content
+                          class="align-end"
+                        >{{ `(${formData.payroll.total_tardiness_amount})` }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-divider></v-divider>
+                      <v-list-tile>
+                        <v-list-tile-content>Gross Amount:</v-list-tile-content>
+                        <v-list-tile-content class="align-end">{{ formData.payroll.gross_amount }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Total Non-Taxable:</v-list-tile-content>
+                        <v-list-tile-content
+                          class="align-end"
+                        >{{ formData.payroll.total_non_taxable_amount }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Total Deduction:</v-list-tile-content>
+                        <v-list-tile-content
+                          class="align-end"
+                        >{{ `(${formData.payroll.total_deduction_amount})` }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-divider></v-divider>
+                      <v-list-tile>
+                        <v-list-tile-content>Net Amount:</v-list-tile-content>
+                        <v-list-tile-content class="align-end">{{ formData.payroll.net_amount }}</v-list-tile-content>
+                      </v-list-tile>
+                    </v-flex>
+                  </v-layout>
+                </v-list>
+              </v-card>
+            </v-flex>
+          </v-layout>
         </v-flex>
       </v-container>
       <v-container>
@@ -38,46 +132,9 @@
           <v-card class="mx-auto my-12" :elevation="3" max-width="auto">
             <v-container grid-list-md>
               <v-layout wrap>
-                <v-flex xs12 sm12 md12>
-                  <v-flex xs12 sm12 md3 offset-lg4>
-                    <v-card>
-                      <v-card-title>
-                        <h4>Employee Details</h4>
-                      </v-card-title>
-                      <v-divider></v-divider>
-                      <v-list dense>
-                        <v-list-tile>
-                          <v-list-tile-content>Basic Salary:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.payroll.basic_salary_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Daily Rate:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.payroll.fixed_allowance_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Fixed Allowance:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.payroll.daily_allowance_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                        <v-list-tile>
-                          <v-list-tile-content>Daily Allowance:</v-list-tile-content>
-                          <v-list-tile-content
-                            class="align-end"
-                          >{{ formData.payroll.daily_rate_amount }}</v-list-tile-content>
-                        </v-list-tile>
-                      </v-list>
-                    </v-card>
-                  </v-flex>
-                </v-flex>
-
                 <!-- Working Days -->
                 <v-flex xs12 sm12 md3>
-                  <v-flex xs12 sm12 md12 lg12>
+                  <v-flex xs12 sm12 md12 lg12 pb-4>
                     <v-card>
                       <v-card-title>
                         <h4>Working Days</h4>
@@ -85,28 +142,53 @@
                       <v-divider></v-divider>
                       <v-list dense>
                         <v-list-tile>
-                          <v-list-tile-content>Basic Salary:</v-list-tile-content>
+                          <v-list-tile-content>Regular Day:</v-list-tile-content>
                           <v-list-tile-content
                             class="align-end"
-                          >{{ formData.payroll.basic_salary_amount }}</v-list-tile-content>
+                          >{{ formData.workingDay.regular_day_amount }}</v-list-tile-content>
                         </v-list-tile>
                         <v-list-tile>
-                          <v-list-tile-content>Daily Rate:</v-list-tile-content>
+                          <v-list-tile-content>Special Day:</v-list-tile-content>
                           <v-list-tile-content
                             class="align-end"
-                          >{{ formData.payroll.fixed_allowance_amount }}</v-list-tile-content>
+                          >{{ formData.workingDay.special_day_amount }}</v-list-tile-content>
                         </v-list-tile>
                         <v-list-tile>
-                          <v-list-tile-content>Fixed Allowance:</v-list-tile-content>
+                          <v-list-tile-content>Special Day falling on rest day:</v-list-tile-content>
                           <v-list-tile-content
                             class="align-end"
-                          >{{ formData.payroll.daily_allowance_amount }}</v-list-tile-content>
+                          >{{ formData.workingDay.special_day_ford_amount }}</v-list-tile-content>
                         </v-list-tile>
                         <v-list-tile>
-                          <v-list-tile-content>Daily Allowance:</v-list-tile-content>
+                          <v-list-tile-content>Holiday:</v-list-tile-content>
                           <v-list-tile-content
                             class="align-end"
-                          >{{ formData.payroll.daily_rate_amount }}</v-list-tile-content>
+                          >{{ formData.workingDay.holiday_amount }}</v-list-tile-content>
+                        </v-list-tile>
+                        <v-list-tile>
+                          <v-list-tile-content>Holiday falling on rest day:</v-list-tile-content>
+                          <v-list-tile-content
+                            class="align-end"
+                          >{{ formData.workingDay.holiday_ford_amount }}</v-list-tile-content>
+                        </v-list-tile>
+                        <v-list-tile>
+                          <v-list-tile-content>Double Holiday:</v-list-tile-content>
+                          <v-list-tile-content
+                            class="align-end"
+                          >{{ formData.workingDay.double_holiday_amount }}</v-list-tile-content>
+                        </v-list-tile>
+                        <v-list-tile>
+                          <v-list-tile-content>Double Holiday falling on rest day:</v-list-tile-content>
+                          <v-list-tile-content
+                            class="align-end"
+                          >{{ formData.workingDay.double_holiday_ford_amount }}</v-list-tile-content>
+                        </v-list-tile>
+                        <v-divider></v-divider>
+                        <v-list-tile>
+                          <v-list-tile-content>Total:</v-list-tile-content>
+                          <v-list-tile-content
+                            class="align-end"
+                          >{{ formData.workingDay.total_amount }}</v-list-tile-content>
                         </v-list-tile>
                       </v-list>
                     </v-card>
@@ -114,27 +196,65 @@
 
                   <v-flex xs12 sm12 md12>
                     <v-text-field
-                      v-model="formData.payroll.basic_salary_amount"
-                      label="Basic Salary Amount"
+                      v-model="formData.workingDay.regular_day"
+                      label="Regular"
                       type="number"
                       prepend-icon="money"
-                      readonly
                     ></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm12 md12>
                     <v-text-field
-                      v-model="formData.payroll.fixed_allowance_amount"
-                      label="Fixed Allowance Amount"
+                      v-model="formData.workingDay.special_day"
+                      label="Regular Day"
                       type="number"
                       prepend-icon="money"
-                      readonly
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm12 md12>
+                    <v-text-field
+                      v-model="formData.workingDay.special_day_ford"
+                      label="Special Day"
+                      type="number"
+                      prepend-icon="money"
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm12 md12>
+                    <v-text-field
+                      v-model="formData.workingDay.holiday"
+                      label="Holiday"
+                      type="number"
+                      prepend-icon="money"
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm12 md12>
+                    <v-text-field
+                      v-model="formData.workingDay.holiday_ford"
+                      label="Holiday falling on rest day"
+                      type="number"
+                      prepend-icon="money"
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm12 md12>
+                    <v-text-field
+                      v-model="formData.workingDay.double_holiday"
+                      label="Double Holiday"
+                      type="number"
+                      prepend-icon="money"
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm12 md12>
+                    <v-text-field
+                      v-model="formData.workingDay.double_holiday_ford"
+                      label="Double Holiday falling on rest day"
+                      type="number"
+                      prepend-icon="money"
                     ></v-text-field>
                   </v-flex>
                 </v-flex>
 
                 <!-- Night Differentials -->
                 <v-flex xs12 sm12 md3>
-                  <v-flex xs12 sm12 md12 lg12>
+                  <v-flex xs12 sm12 md12 lg12 pb-4>
                     <v-card>
                       <v-card-title>
                         <h4>Night Differentials</h4>
@@ -142,28 +262,53 @@
                       <v-divider></v-divider>
                       <v-list dense>
                         <v-list-tile>
-                          <v-list-tile-content>Basic Salary:</v-list-tile-content>
+                          <v-list-tile-content>Regular Day:</v-list-tile-content>
                           <v-list-tile-content
                             class="align-end"
-                          >{{ formData.payroll.basic_salary_amount }}</v-list-tile-content>
+                          >{{ formData.nightDifferential.regular_day_amount }}</v-list-tile-content>
                         </v-list-tile>
                         <v-list-tile>
-                          <v-list-tile-content>Daily Rate:</v-list-tile-content>
+                          <v-list-tile-content>Special Day:</v-list-tile-content>
                           <v-list-tile-content
                             class="align-end"
-                          >{{ formData.payroll.fixed_allowance_amount }}</v-list-tile-content>
+                          >{{ formData.nightDifferential.special_day_amount }}</v-list-tile-content>
                         </v-list-tile>
                         <v-list-tile>
-                          <v-list-tile-content>Fixed Allowance:</v-list-tile-content>
+                          <v-list-tile-content>Special Day falling on rest day:</v-list-tile-content>
                           <v-list-tile-content
                             class="align-end"
-                          >{{ formData.payroll.daily_allowance_amount }}</v-list-tile-content>
+                          >{{ formData.nightDifferential.special_day_ford_amount }}</v-list-tile-content>
                         </v-list-tile>
                         <v-list-tile>
-                          <v-list-tile-content>Daily Allowance:</v-list-tile-content>
+                          <v-list-tile-content>Holiday:</v-list-tile-content>
                           <v-list-tile-content
                             class="align-end"
-                          >{{ formData.payroll.daily_rate_amount }}</v-list-tile-content>
+                          >{{ formData.nightDifferential.holiday_amount }}</v-list-tile-content>
+                        </v-list-tile>
+                        <v-list-tile>
+                          <v-list-tile-content>Holiday falling on rest day:</v-list-tile-content>
+                          <v-list-tile-content
+                            class="align-end"
+                          >{{ formData.nightDifferential.holiday_ford_amount }}</v-list-tile-content>
+                        </v-list-tile>
+                        <v-list-tile>
+                          <v-list-tile-content>Double Holiday:</v-list-tile-content>
+                          <v-list-tile-content
+                            class="align-end"
+                          >{{ formData.nightDifferential.double_holiday_amount }}</v-list-tile-content>
+                        </v-list-tile>
+                        <v-list-tile>
+                          <v-list-tile-content>Double Holiday falling on rest day:</v-list-tile-content>
+                          <v-list-tile-content
+                            class="align-end"
+                          >{{ formData.nightDifferential.double_holiday_ford_amount }}</v-list-tile-content>
+                        </v-list-tile>
+                        <v-divider></v-divider>
+                        <v-list-tile>
+                          <v-list-tile-content>Total:</v-list-tile-content>
+                          <v-list-tile-content
+                            class="align-end"
+                          >{{ formData.nightDifferential.total_amount }}</v-list-tile-content>
                         </v-list-tile>
                       </v-list>
                     </v-card>
@@ -171,27 +316,65 @@
 
                   <v-flex xs12 sm12 md12>
                     <v-text-field
-                      v-model="formData.payroll.basic_salary_amount"
-                      label="Basic Salary Amount"
+                      v-model="formData.nightDifferential.regular_day"
+                      label="Regular"
                       type="number"
                       prepend-icon="money"
-                      readonly
                     ></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm12 md12>
                     <v-text-field
-                      v-model="formData.payroll.fixed_allowance_amount"
-                      label="Fixed Allowance Amount"
+                      v-model="formData.nightDifferential.special_day"
+                      label="Regular Day"
                       type="number"
                       prepend-icon="money"
-                      readonly
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm12 md12>
+                    <v-text-field
+                      v-model="formData.nightDifferential.special_day_ford"
+                      label="Special Day"
+                      type="number"
+                      prepend-icon="money"
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm12 md12>
+                    <v-text-field
+                      v-model="formData.nightDifferential.holiday"
+                      label="Holiday"
+                      type="number"
+                      prepend-icon="money"
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm12 md12>
+                    <v-text-field
+                      v-model="formData.nightDifferential.holiday_ford"
+                      label="Holiday falling on rest day"
+                      type="number"
+                      prepend-icon="money"
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm12 md12>
+                    <v-text-field
+                      v-model="formData.nightDifferential.double_holiday"
+                      label="Double Holiday"
+                      type="number"
+                      prepend-icon="money"
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm12 md12>
+                    <v-text-field
+                      v-model="formData.nightDifferential.double_holiday_ford"
+                      label="Double Holiday falling on rest day"
+                      type="number"
+                      prepend-icon="money"
                     ></v-text-field>
                   </v-flex>
                 </v-flex>
 
                 <!-- Overtimes -->
                 <v-flex xs12 sm12 md3>
-                  <v-flex xs12 sm12 md12 lg12>
+                  <v-flex xs12 sm12 md12 lg12 pb-4>
                     <v-card>
                       <v-card-title>
                         <h4>Overtimes</h4>
@@ -199,28 +382,53 @@
                       <v-divider></v-divider>
                       <v-list dense>
                         <v-list-tile>
-                          <v-list-tile-content>Basic Salary:</v-list-tile-content>
+                          <v-list-tile-content>Regular Day:</v-list-tile-content>
                           <v-list-tile-content
                             class="align-end"
-                          >{{ formData.payroll.basic_salary_amount }}</v-list-tile-content>
+                          >{{ formData.overtime.regular_day_amount }}</v-list-tile-content>
                         </v-list-tile>
                         <v-list-tile>
-                          <v-list-tile-content>Daily Rate:</v-list-tile-content>
+                          <v-list-tile-content>Special Day:</v-list-tile-content>
                           <v-list-tile-content
                             class="align-end"
-                          >{{ formData.payroll.fixed_allowance_amount }}</v-list-tile-content>
+                          >{{ formData.overtime.special_day_amount }}</v-list-tile-content>
                         </v-list-tile>
                         <v-list-tile>
-                          <v-list-tile-content>Fixed Allowance:</v-list-tile-content>
+                          <v-list-tile-content>Special Day falling on rest day:</v-list-tile-content>
                           <v-list-tile-content
                             class="align-end"
-                          >{{ formData.payroll.daily_allowance_amount }}</v-list-tile-content>
+                          >{{ formData.overtime.special_day_ford_amount }}</v-list-tile-content>
                         </v-list-tile>
                         <v-list-tile>
-                          <v-list-tile-content>Daily Allowance:</v-list-tile-content>
+                          <v-list-tile-content>Holiday:</v-list-tile-content>
                           <v-list-tile-content
                             class="align-end"
-                          >{{ formData.payroll.daily_rate_amount }}</v-list-tile-content>
+                          >{{ formData.overtime.holiday_amount }}</v-list-tile-content>
+                        </v-list-tile>
+                        <v-list-tile>
+                          <v-list-tile-content>Holiday falling on rest day:</v-list-tile-content>
+                          <v-list-tile-content
+                            class="align-end"
+                          >{{ formData.overtime.holiday_ford_amount }}</v-list-tile-content>
+                        </v-list-tile>
+                        <v-list-tile>
+                          <v-list-tile-content>Double Holiday:</v-list-tile-content>
+                          <v-list-tile-content
+                            class="align-end"
+                          >{{ formData.overtime.double_holiday_amount }}</v-list-tile-content>
+                        </v-list-tile>
+                        <v-list-tile>
+                          <v-list-tile-content>Double Holiday falling on rest day:</v-list-tile-content>
+                          <v-list-tile-content
+                            class="align-end"
+                          >{{ formData.overtime.double_holiday_ford_amount }}</v-list-tile-content>
+                        </v-list-tile>
+                        <v-divider></v-divider>
+                        <v-list-tile>
+                          <v-list-tile-content>Total:</v-list-tile-content>
+                          <v-list-tile-content
+                            class="align-end"
+                          >{{ formData.overtime.total_amount }}</v-list-tile-content>
                         </v-list-tile>
                       </v-list>
                     </v-card>
@@ -228,27 +436,65 @@
 
                   <v-flex xs12 sm12 md12>
                     <v-text-field
-                      v-model="formData.payroll.basic_salary_amount"
-                      label="Basic Salary Amount"
+                      v-model="formData.overtime.regular_day"
+                      label="Regular"
                       type="number"
                       prepend-icon="money"
-                      readonly
                     ></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm12 md12>
                     <v-text-field
-                      v-model="formData.payroll.fixed_allowance_amount"
-                      label="Fixed Allowance Amount"
+                      v-model="formData.overtime.special_day"
+                      label="Regular Day"
                       type="number"
                       prepend-icon="money"
-                      readonly
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm12 md12>
+                    <v-text-field
+                      v-model="formData.overtime.special_day_ford"
+                      label="Special Day"
+                      type="number"
+                      prepend-icon="money"
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm12 md12>
+                    <v-text-field
+                      v-model="formData.overtime.holiday"
+                      label="Holiday"
+                      type="number"
+                      prepend-icon="money"
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm12 md12>
+                    <v-text-field
+                      v-model="formData.overtime.holiday_ford"
+                      label="Holiday falling on rest day"
+                      type="number"
+                      prepend-icon="money"
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm12 md12>
+                    <v-text-field
+                      v-model="formData.overtime.double_holiday"
+                      label="Double Holiday"
+                      type="number"
+                      prepend-icon="money"
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm12 md12>
+                    <v-text-field
+                      v-model="formData.overtime.double_holiday_ford"
+                      label="Double Holiday falling on rest day"
+                      type="number"
+                      prepend-icon="money"
                     ></v-text-field>
                   </v-flex>
                 </v-flex>
 
                 <!-- Tardiness -->
                 <v-flex xs12 sm12 md3>
-                  <v-flex xs12 sm12 md12 lg12>
+                  <v-flex xs12 sm12 md12 lg12 pb-4>
                     <v-card>
                       <v-card-title>
                         <h4>Tardiness</h4>
@@ -256,28 +502,53 @@
                       <v-divider></v-divider>
                       <v-list dense>
                         <v-list-tile>
-                          <v-list-tile-content>Basic Salary:</v-list-tile-content>
+                          <v-list-tile-content>Undertime:</v-list-tile-content>
                           <v-list-tile-content
                             class="align-end"
-                          >{{ formData.payroll.basic_salary_amount }}</v-list-tile-content>
+                          >{{ formData.tardiness.undertime_amount }}</v-list-tile-content>
                         </v-list-tile>
                         <v-list-tile>
-                          <v-list-tile-content>Daily Rate:</v-list-tile-content>
+                          <v-list-tile-content>Half Day:</v-list-tile-content>
                           <v-list-tile-content
                             class="align-end"
-                          >{{ formData.payroll.fixed_allowance_amount }}</v-list-tile-content>
+                          >{{ formData.tardiness.half_day_amount }}</v-list-tile-content>
                         </v-list-tile>
                         <v-list-tile>
-                          <v-list-tile-content>Fixed Allowance:</v-list-tile-content>
+                          <v-list-tile-content>Sick Leave:</v-list-tile-content>
                           <v-list-tile-content
                             class="align-end"
-                          >{{ formData.payroll.daily_allowance_amount }}</v-list-tile-content>
+                          >{{ formData.tardiness.sick_leave_amount }}</v-list-tile-content>
                         </v-list-tile>
                         <v-list-tile>
-                          <v-list-tile-content>Daily Allowance:</v-list-tile-content>
+                          <v-list-tile-content>Vacation Leave:</v-list-tile-content>
                           <v-list-tile-content
                             class="align-end"
-                          >{{ formData.payroll.daily_rate_amount }}</v-list-tile-content>
+                          >{{ formData.tardiness.vacation_leave_amount }}</v-list-tile-content>
+                        </v-list-tile>
+                        <v-list-tile>
+                          <v-list-tile-content>Holiday:</v-list-tile-content>
+                          <v-list-tile-content
+                            class="align-end"
+                          >{{ formData.tardiness.holiday_amount }}</v-list-tile-content>
+                        </v-list-tile>
+                        <v-list-tile>
+                          <v-list-tile-content>Absent:</v-list-tile-content>
+                          <v-list-tile-content
+                            class="align-end"
+                          >{{ formData.tardiness.absent_amount }}</v-list-tile-content>
+                        </v-list-tile>
+                        <v-list-tile>
+                          <v-list-tile-content>Total Absent:</v-list-tile-content>
+                          <v-list-tile-content
+                            class="align-end"
+                          >{{ formData.tardiness.total_absent_amount }}</v-list-tile-content>
+                        </v-list-tile>
+                        <v-divider></v-divider>
+                        <v-list-tile>
+                          <v-list-tile-content>Total:</v-list-tile-content>
+                          <v-list-tile-content
+                            class="align-end"
+                          >{{ formData.tardiness.total_amount }}</v-list-tile-content>
                         </v-list-tile>
                       </v-list>
                     </v-card>
@@ -285,20 +556,50 @@
 
                   <v-flex xs12 sm12 md12>
                     <v-text-field
-                      v-model="formData.payroll.basic_salary_amount"
-                      label="Basic Salary Amount"
+                      v-model="formData.tardiness.undertime"
+                      label="Overtime"
                       type="number"
                       prepend-icon="money"
-                      readonly
                     ></v-text-field>
                   </v-flex>
                   <v-flex xs12 sm12 md12>
                     <v-text-field
-                      v-model="formData.payroll.fixed_allowance_amount"
-                      label="Fixed Allowance Amount"
+                      v-model="formData.tardiness.half_day"
+                      label="Half Day"
                       type="number"
                       prepend-icon="money"
-                      readonly
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm12 md12>
+                    <v-text-field
+                      v-model="formData.tardiness.sick_leave"
+                      label="Sick Leave"
+                      type="number"
+                      prepend-icon="money"
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm12 md12>
+                    <v-text-field
+                      v-model="formData.tardiness.vacation_leave"
+                      label="Vacation Leave"
+                      type="number"
+                      prepend-icon="money"
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm12 md12>
+                    <v-text-field
+                      v-model="formData.tardiness.holiday"
+                      label="Holiday"
+                      type="number"
+                      prepend-icon="money"
+                    ></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm12 md12>
+                    <v-text-field
+                      v-model="formData.tardiness.absent"
+                      label="Absent"
+                      type="number"
+                      prepend-icon="money"
                     ></v-text-field>
                   </v-flex>
                 </v-flex>
@@ -326,37 +627,141 @@ export default {
     defaultFormData: {
       employee_id: null,
       payroll: {
-        basic_salary_amount: null,
-        fixed_allowance_amount: null,
-        daily_allowance_amount: null,
-        daily_rate_amount: null,
-        total_working_day_amount: null,
-        total_night_differential_amount: null,
-        total_overtime_amount: null,
-        total_other_salary_and_wages_amount: null,
-        total_tardiness_amount: null,
-        gross_amount: null,
-        total_non_taxable_amount: null,
-        total_deduction_amount: null,
-        net_amount: null
+        basic_salary_amount: "0.00",
+        fixed_allowance_amount: "0.00",
+        daily_allowance_amount: "0.00",
+        daily_rate_amount: "0.00",
+        total_working_day_amount: "0.00",
+        total_night_differential_amount: "0.00",
+        total_overtime_amount: "0.00",
+        total_other_salary_and_wages_amount: "0.00",
+        total_tardiness_amount: "0.00",
+        gross_amount: "0.00",
+        total_non_taxable_amount: "0.00",
+        total_deduction_amount: "0.00",
+        net_amount: "0.00"
+      },
+      workingDay: {
+        regular_day: "0.00",
+        special_day: "0.00",
+        special_day_ford: "0.00",
+        holiday: "0.00",
+        holiday_ford: "0.00",
+        double_holiday: "0.00",
+        double_holiday_ford: "0.00"
+      },
+      nightDifferential: {
+        regular_day: "0.00",
+        special_day: "0.00",
+        special_day_ford: "0.00",
+        holiday: "0.00",
+        holiday_ford: "0.00",
+        double_holiday: "0.00",
+        double_holiday_ford: "0.00"
+      },
+      overtime: {
+        regular_day: "0.00",
+        special_day: "0.00",
+        special_day_ford: "0.00",
+        holiday: "0.00",
+        holiday_ford: "0.00",
+        double_holiday: "0.00",
+        double_holiday_ford: "0.00"
+      },
+      tardiness: {
+        undertime: "0.00",
+        half_day: "0.00",
+        sick_leave: "0.00",
+        vacation_leave: "0.00",
+        holiday: "0.00",
+        absent: "0.00",
+        total_absent: "0.00"
       }
     },
     formData: {
       employee_id: null,
       payroll: {
-        basic_salary_amount: null,
-        fixed_allowance_amount: null,
-        daily_allowance_amount: null,
-        daily_rate_amount: null,
-        total_working_day_amount: null,
-        total_night_differential_amount: null,
-        total_overtime_amount: null,
-        total_other_salary_and_wages_amount: null,
-        total_tardiness_amount: null,
-        gross_amount: null,
-        total_non_taxable_amount: null,
-        total_deduction_amount: null,
-        net_amount: null
+        basic_salary_amount: "0.00",
+        fixed_allowance_amount: "0.00",
+        daily_allowance_amount: "0.00",
+        daily_rate_amount: "0.00",
+        total_working_day_amount: "0.00",
+        total_night_differential_amount: "0.00",
+        total_overtime_amount: "0.00",
+        total_other_salary_and_wages_amount: "0.00",
+        total_tardiness_amount: "0.00",
+        gross_amount: "0.00",
+        total_non_taxable_amount: "0.00",
+        total_deduction_amount: "0.00",
+        net_amount: "0.00"
+      },
+      workingDay: {
+        regular_day: "0.00",
+        special_day: "0.00",
+        special_day_ford: "0.00",
+        holiday: "0.00",
+        holiday_ford: "0.00",
+        double_holiday: "0.00",
+        double_holiday_ford: "0.00",
+        regular_day_amount: "0.00",
+        special_day_amount: "0.00",
+        special_day_ford_amount: "0.00",
+        holiday_amount: "0.00",
+        holiday_ford_amount: "0.00",
+        double_holiday_amount: "0.00",
+        double_holiday_ford_amount: "0.00",
+        total_amount: "0.00"
+      },
+      nightDifferential: {
+        regular_day: "0.00",
+        special_day: "0.00",
+        special_day_ford: "0.00",
+        holiday: "0.00",
+        holiday_ford: "0.00",
+        double_holiday: "0.00",
+        double_holiday_ford: "0.00",
+        regular_day_amount: "0.00",
+        special_day_amount: "0.00",
+        special_day_ford_amount: "0.00",
+        holiday_amount: "0.00",
+        holiday_ford_amount: "0.00",
+        double_holiday_amount: "0.00",
+        double_holiday_ford_amount: "0.00",
+        total_amount: "0.00"
+      },
+      overtime: {
+        regular_day: "0.00",
+        special_day: "0.00",
+        special_day_ford: "0.00",
+        holiday: "0.00",
+        holiday_ford: "0.00",
+        double_holiday: "0.00",
+        double_holiday_ford: "0.00",
+        regular_day_amount: "0.00",
+        special_day_amount: "0.00",
+        special_day_ford_amount: "0.00",
+        holiday_amount: "0.00",
+        holiday_ford_amount: "0.00",
+        double_holiday_amount: "0.00",
+        double_holiday_ford_amount: "0.00",
+        total_amount: "0.00"
+      },
+      tardiness: {
+        undertime: "0.00",
+        half_day: "0.00",
+        sick_leave: "0.00",
+        vacation_leave: "0.00",
+        holiday: "0.00",
+        absent: "0.00",
+        total_absent: "0.00",
+        undertime_amount: "0.00",
+        half_day_amount: "0.00",
+        sick_leave_amount: "0.00",
+        vacation_leave_amount: "0.00",
+        holiday_amount: "0.00",
+        absent_amount: "0.00",
+        total_absent_amount: "0.00",
+        total_amount: "0.00"
       }
     },
     valid: true,
