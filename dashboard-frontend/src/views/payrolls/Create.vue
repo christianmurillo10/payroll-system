@@ -206,73 +206,75 @@
                       </v-flex>
 
                       <v-flex xs12 sm12 md9 lg7>
-                        <v-layout wrap>
-                          <v-flex xs12 sm12 md4 lg4>
-                            <v-flex xs12 sm12 md12>
-                              <v-text-field
-                                v-model="formData.workingDay.regular_day"
-                                label="Regular"
-                                type="number"
-                                prepend-icon="money"
-                              ></v-text-field>
-                            </v-flex>
-                            <v-flex xs12 sm12 md12>
-                              <v-text-field
-                                v-model="formData.workingDay.special_day"
-                                label="Regular Day"
-                                type="number"
-                                prepend-icon="money"
-                              ></v-text-field>
-                            </v-flex>
-                            <v-flex xs12 sm12 md12>
-                              <v-text-field
-                                v-model="formData.workingDay.special_day_ford"
-                                label="Special Day"
-                                type="number"
-                                prepend-icon="money"
-                              ></v-text-field>
+                        <v-form ref="form" @submit.prevent="computeWorkingDays">
+                          <v-layout wrap>
+                            <v-flex xs12 sm12 md4 lg4>
                               <v-flex xs12 sm12 md12>
                                 <v-text-field
-                                  v-model="formData.workingDay.holiday"
-                                  label="Holiday"
+                                  v-model="formData.workingDay.regular_day"
+                                  label="Regular Day"
                                   type="number"
                                   prepend-icon="money"
                                 ></v-text-field>
                               </v-flex>
                               <v-flex xs12 sm12 md12>
                                 <v-text-field
-                                  v-model="formData.workingDay.holiday_ford"
-                                  label="Holiday falling on rest day"
+                                  v-model="formData.workingDay.special_day"
+                                  label="Special Day"
                                   type="number"
                                   prepend-icon="money"
                                 ></v-text-field>
                               </v-flex>
+                              <v-flex xs12 sm12 md12>
+                                <v-text-field
+                                  v-model="formData.workingDay.special_day_ford"
+                                  label="Special Day falling on rest day"
+                                  type="number"
+                                  prepend-icon="money"
+                                ></v-text-field>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.workingDay.holiday"
+                                    label="Holiday"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                </v-flex>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.workingDay.holiday_ford"
+                                    label="Holiday falling on rest day"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                </v-flex>
+                              </v-flex>
                             </v-flex>
-                          </v-flex>
-                          <v-flex xs12 sm12 md4 lg4>
-                            <v-flex xs12 sm12 md12>
-                              <v-text-field
-                                v-model="formData.workingDay.double_holiday"
-                                label="Double Holiday"
-                                type="number"
-                                prepend-icon="money"
-                              ></v-text-field>
+                            <v-flex xs12 sm12 md4 lg4>
+                              <v-flex xs12 sm12 md12>
+                                <v-text-field
+                                  v-model="formData.workingDay.double_holiday"
+                                  label="Double Holiday"
+                                  type="number"
+                                  prepend-icon="money"
+                                ></v-text-field>
+                              </v-flex>
+                              <v-flex xs12 sm12 md12>
+                                <v-text-field
+                                  v-model="formData.workingDay.double_holiday_ford"
+                                  label="Double Holiday falling on rest day"
+                                  type="number"
+                                  prepend-icon="money"
+                                ></v-text-field>
+                              </v-flex>
+                              <v-flex xs12 sm12 md12>
+                                <div class="text-xs-center">
+                                  <v-btn type="submit" round color="primary" dark>Compute</v-btn>
+                                </div>
+                              </v-flex>
                             </v-flex>
-                            <v-flex xs12 sm12 md12>
-                              <v-text-field
-                                v-model="formData.workingDay.double_holiday_ford"
-                                label="Double Holiday falling on rest day"
-                                type="number"
-                                prepend-icon="money"
-                              ></v-text-field>
-                            </v-flex>
-                            <v-flex xs12 sm12 md12>
-                              <div class="text-xs-center">
-                                <v-btn round color="primary" dark>Compute</v-btn>
-                              </div>
-                            </v-flex>
-                          </v-flex>
-                        </v-layout>
+                          </v-layout>
+                        </v-form>
                       </v-flex>
                     </v-layout>
                   </v-tab-item>
@@ -343,73 +345,75 @@
                       </v-flex>
 
                       <v-flex xs12 sm12 md9 lg7>
-                        <v-layout wrap>
-                          <v-flex xs12 sm12 md4 lg4>
-                            <v-flex xs12 sm12 md12>
-                              <v-text-field
-                                v-model="formData.nightDifferential.regular_day"
-                                label="Regular"
-                                type="number"
-                                prepend-icon="money"
-                              ></v-text-field>
-                            </v-flex>
-                            <v-flex xs12 sm12 md12>
-                              <v-text-field
-                                v-model="formData.nightDifferential.special_day"
-                                label="Regular Day"
-                                type="number"
-                                prepend-icon="money"
-                              ></v-text-field>
-                            </v-flex>
-                            <v-flex xs12 sm12 md12>
-                              <v-text-field
-                                v-model="formData.nightDifferential.special_day_ford"
-                                label="Special Day"
-                                type="number"
-                                prepend-icon="money"
-                              ></v-text-field>
+                        <v-form ref="form" @submit.prevent="computeNightDifferentials">
+                          <v-layout wrap>
+                            <v-flex xs12 sm12 md4 lg4>
                               <v-flex xs12 sm12 md12>
                                 <v-text-field
-                                  v-model="formData.nightDifferential.holiday"
-                                  label="Holiday"
+                                  v-model="formData.nightDifferential.regular_day"
+                                  label="Regular Day"
                                   type="number"
                                   prepend-icon="money"
                                 ></v-text-field>
                               </v-flex>
                               <v-flex xs12 sm12 md12>
                                 <v-text-field
-                                  v-model="formData.nightDifferential.holiday_ford"
-                                  label="Holiday falling on rest day"
+                                  v-model="formData.nightDifferential.special_day"
+                                  label="Special Day"
                                   type="number"
                                   prepend-icon="money"
                                 ></v-text-field>
                               </v-flex>
+                              <v-flex xs12 sm12 md12>
+                                <v-text-field
+                                  v-model="formData.nightDifferential.special_day_ford"
+                                  label="Special Day falling on rest day"
+                                  type="number"
+                                  prepend-icon="money"
+                                ></v-text-field>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.nightDifferential.holiday"
+                                    label="Holiday"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                </v-flex>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.nightDifferential.holiday_ford"
+                                    label="Holiday falling on rest day"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                </v-flex>
+                              </v-flex>
                             </v-flex>
-                          </v-flex>
-                          <v-flex xs12 sm12 md4 lg4>
-                            <v-flex xs12 sm12 md12>
-                              <v-text-field
-                                v-model="formData.workingDay.double_holiday"
-                                label="Double Holiday"
-                                type="number"
-                                prepend-icon="money"
-                              ></v-text-field>
+                            <v-flex xs12 sm12 md4 lg4>
+                              <v-flex xs12 sm12 md12>
+                                <v-text-field
+                                  v-model="formData.workingDay.double_holiday"
+                                  label="Double Holiday"
+                                  type="number"
+                                  prepend-icon="money"
+                                ></v-text-field>
+                              </v-flex>
+                              <v-flex xs12 sm12 md12>
+                                <v-text-field
+                                  v-model="formData.workingDay.double_holiday_ford"
+                                  label="Double Holiday falling on rest day"
+                                  type="number"
+                                  prepend-icon="money"
+                                ></v-text-field>
+                              </v-flex>
+                              <v-flex xs12 sm12 md12>
+                                <div class="text-xs-center">
+                                  <v-btn type="submit" round color="primary" dark>Compute</v-btn>
+                                </div>
+                              </v-flex>
                             </v-flex>
-                            <v-flex xs12 sm12 md12>
-                              <v-text-field
-                                v-model="formData.workingDay.double_holiday_ford"
-                                label="Double Holiday falling on rest day"
-                                type="number"
-                                prepend-icon="money"
-                              ></v-text-field>
-                            </v-flex>
-                            <v-flex xs12 sm12 md12>
-                              <div class="text-xs-center">
-                                <v-btn round color="primary" dark>Compute</v-btn>
-                              </div>
-                            </v-flex>
-                          </v-flex>
-                        </v-layout>
+                          </v-layout>
+                        </v-form>
                       </v-flex>
                     </v-layout>
                   </v-tab-item>
@@ -480,73 +484,75 @@
                       </v-flex>
 
                       <v-flex xs12 sm12 md9 lg7>
-                        <v-layout wrap>
-                          <v-flex xs12 sm12 md4 lg4>
-                            <v-flex xs12 sm12 md12>
-                              <v-text-field
-                                v-model="formData.overtime.regular_day"
-                                label="Regular"
-                                type="number"
-                                prepend-icon="money"
-                              ></v-text-field>
-                            </v-flex>
-                            <v-flex xs12 sm12 md12>
-                              <v-text-field
-                                v-model="formData.overtime.special_day"
-                                label="Regular Day"
-                                type="number"
-                                prepend-icon="money"
-                              ></v-text-field>
-                            </v-flex>
-                            <v-flex xs12 sm12 md12>
-                              <v-text-field
-                                v-model="formData.overtime.special_day_ford"
-                                label="Special Day"
-                                type="number"
-                                prepend-icon="money"
-                              ></v-text-field>
+                        <v-form ref="form" @submit.prevent="computeOvertimes">
+                          <v-layout wrap>
+                            <v-flex xs12 sm12 md4 lg4>
                               <v-flex xs12 sm12 md12>
                                 <v-text-field
-                                  v-model="formData.overtime.holiday"
-                                  label="Holiday"
+                                  v-model="formData.overtime.regular_day"
+                                  label="Regular Day"
                                   type="number"
                                   prepend-icon="money"
                                 ></v-text-field>
                               </v-flex>
                               <v-flex xs12 sm12 md12>
                                 <v-text-field
-                                  v-model="formData.overtime.holiday_ford"
-                                  label="Holiday falling on rest day"
+                                  v-model="formData.overtime.special_day"
+                                  label="Special Day"
                                   type="number"
                                   prepend-icon="money"
                                 ></v-text-field>
                               </v-flex>
+                              <v-flex xs12 sm12 md12>
+                                <v-text-field
+                                  v-model="formData.overtime.special_day_ford"
+                                  label="Special Day falling on rest day"
+                                  type="number"
+                                  prepend-icon="money"
+                                ></v-text-field>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.overtime.holiday"
+                                    label="Holiday"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                </v-flex>
+                                <v-flex xs12 sm12 md12>
+                                  <v-text-field
+                                    v-model="formData.overtime.holiday_ford"
+                                    label="Holiday falling on rest day"
+                                    type="number"
+                                    prepend-icon="money"
+                                  ></v-text-field>
+                                </v-flex>
+                              </v-flex>
                             </v-flex>
-                          </v-flex>
-                          <v-flex xs12 sm12 md4 lg4>
-                            <v-flex xs12 sm12 md12>
-                              <v-text-field
-                                v-model="formData.overtime.double_holiday"
-                                label="Double Holiday"
-                                type="number"
-                                prepend-icon="money"
-                              ></v-text-field>
+                            <v-flex xs12 sm12 md4 lg4>
+                              <v-flex xs12 sm12 md12>
+                                <v-text-field
+                                  v-model="formData.overtime.double_holiday"
+                                  label="Double Holiday"
+                                  type="number"
+                                  prepend-icon="money"
+                                ></v-text-field>
+                              </v-flex>
+                              <v-flex xs12 sm12 md12>
+                                <v-text-field
+                                  v-model="formData.overtime.double_holiday_ford"
+                                  label="Double Holiday falling on rest day"
+                                  type="number"
+                                  prepend-icon="money"
+                                ></v-text-field>
+                              </v-flex>
+                              <v-flex xs12 sm12 md12>
+                                <div class="text-xs-center">
+                                  <v-btn type="submit" round color="primary" dark>Compute</v-btn>
+                                </div>
+                              </v-flex>
                             </v-flex>
-                            <v-flex xs12 sm12 md12>
-                              <v-text-field
-                                v-model="formData.overtime.double_holiday_ford"
-                                label="Double Holiday falling on rest day"
-                                type="number"
-                                prepend-icon="money"
-                              ></v-text-field>
-                            </v-flex>
-                            <v-flex xs12 sm12 md12>
-                              <div class="text-xs-center">
-                                <v-btn round color="primary" dark>Compute</v-btn>
-                              </div>
-                            </v-flex>
-                          </v-flex>
-                        </v-layout>
+                          </v-layout>
+                        </v-form>
                       </v-flex>
                     </v-layout>
                   </v-tab-item>
@@ -885,6 +891,15 @@ export default {
       getEmployeeSalariesAndAllowancesIsCurrentDataByEmployeeId:
         "getIsCurrentDataByEmployeeId"
     }),
+    ...mapActions("payrollWorkingDays", {
+      computePayrollWorkingDaysData: "computeData"
+    }),
+    ...mapActions("payrollNightDifferentials", {
+      computePayrollNightDifferentialsData: "computeData"
+    }),
+    ...mapActions("payrollOvertimes", {
+      computePayrollOvertimesData: "computeData"
+    }),
 
     getEmployeeDetails() {
       this.getEmployeeSalariesAndAllowancesIsCurrentDataByEmployeeId(
@@ -911,21 +926,67 @@ export default {
         .catch(err => console.log(err));
     },
 
-    generate() {
+    computeWorkingDays() {
       if (this.$refs.form.validate()) {
-        // this.getEmployeeSalariesAndAllowancesDataByEmployeeId(
-        //   this.formData.employee_id
-        // )
-        //   .then(response => {
-        //     let obj = {
-        //       alert: true,
-        //       type: "success",
-        //       message: response.data.message
-        //     };
-        //     if (!response.data.result) obj.type = "error";
-        //     this.setAlert(obj);
-        //   })
-        //   .catch(err => console.log(err));
+        let obj = {
+          basic: this.formData.payroll.basic_salary_amount,
+          regular_day: this.formData.workingDay.regular_day,
+          special_day: this.formData.workingDay.special_day,
+          special_day_ford: this.formData.workingDay.special_day_ford,
+          holiday: this.formData.workingDay.holiday,
+          holiday_ford: this.formData.workingDay.holiday_ford,
+          double_holiday: this.formData.workingDay.double_holiday,
+          double_holiday_ford: this.formData.workingDay.double_holiday_ford
+        };
+
+        this.computePayrollWorkingDaysData(obj)
+          .then(response => {
+            console.log(response);
+          })
+          .catch(err => console.log(err));
+      }
+    },
+
+    computeNightDifferentials() {
+      if (this.$refs.form.validate()) {
+        let obj = {
+          basic: this.formData.payroll.basic_salary_amount,
+          regular_day: this.formData.nightDifferential.regular_day,
+          special_day: this.formData.nightDifferential.special_day,
+          special_day_ford: this.formData.nightDifferential.special_day_ford,
+          holiday: this.formData.nightDifferential.holiday,
+          holiday_ford: this.formData.nightDifferential.holiday_ford,
+          double_holiday: this.formData.nightDifferential.double_holiday,
+          double_holiday_ford: this.formData.nightDifferential
+            .double_holiday_ford
+        };
+
+        this.computePayrollNightDifferentialsData(obj)
+          .then(response => {
+            console.log(response);
+          })
+          .catch(err => console.log(err));
+      }
+    },
+
+    computeOvertimes() {
+      if (this.$refs.form.validate()) {
+        let obj = {
+          basic: this.formData.payroll.basic_salary_amount,
+          regular_day: this.formData.overtime.regular_day,
+          special_day: this.formData.overtime.special_day,
+          special_day_ford: this.formData.overtime.special_day_ford,
+          holiday: this.formData.overtime.holiday,
+          holiday_ford: this.formData.overtime.holiday_ford,
+          double_holiday: this.formData.overtime.double_holiday,
+          double_holiday_ford: this.formData.overtime.double_holiday_ford
+        };
+
+        this.computePayrollOvertimesData(obj)
+          .then(response => {
+            console.log(response);
+          })
+          .catch(err => console.log(err));
       }
     }
   }
