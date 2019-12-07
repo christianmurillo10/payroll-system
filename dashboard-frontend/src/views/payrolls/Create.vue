@@ -51,19 +51,19 @@
                         <v-list-tile-content>Daily Rate:</v-list-tile-content>
                         <v-list-tile-content
                           class="align-end"
-                        >{{ formData.payroll.fixed_allowance_amount }}</v-list-tile-content>
+                        >{{ formData.payroll.daily_rate_amount }}</v-list-tile-content>
                       </v-list-tile>
                       <v-list-tile>
                         <v-list-tile-content>Fixed Allowance:</v-list-tile-content>
                         <v-list-tile-content
                           class="align-end"
-                        >{{ formData.payroll.daily_allowance_amount }}</v-list-tile-content>
+                        >{{ formData.payroll.fixed_allowance_amount }}</v-list-tile-content>
                       </v-list-tile>
                       <v-list-tile>
                         <v-list-tile-content>Daily Allowance:</v-list-tile-content>
                         <v-list-tile-content
                           class="align-end"
-                        >{{ formData.payroll.daily_rate_amount }}</v-list-tile-content>
+                        >{{ formData.payroll.daily_allowance_amount }}</v-list-tile-content>
                       </v-list-tile>
                     </v-flex>
                     <v-flex xs12 sm12 md6 lg6>
@@ -629,7 +629,7 @@
                               <v-flex xs12 sm12 md12>
                                 <v-text-field
                                   v-model="formData.tardiness.undertime"
-                                  label="Overtime"
+                                  label="Undertime"
                                   type="number"
                                   prepend-icon="money"
                                 ></v-text-field>
@@ -687,6 +687,86 @@
                       </v-flex>
                     </v-layout>
                   </v-tab-item>
+
+                  <v-tab-item value="tab-other-salaries-and-wages">
+                    <v-layout wrap pa-3>
+                      <!-- Other Salaries and Wages -->
+                      <v-flex xs12 sm12 md3 offset-xs2>
+                        <v-flex xs12 sm12 md12 lg12 pb-4>
+                          <v-card>
+                            <v-card-title>
+                              <h4>Other Salaries and Wages</h4>
+                            </v-card-title>
+                            <v-divider></v-divider>
+                            <v-list dense>
+                              <v-list-tile>
+                                <v-list-tile-content>Taxable:</v-list-tile-content>
+                                <v-list-tile-content
+                                  class="align-end"
+                                >{{ formData.otherSalariesAndWages.taxable_amount }}</v-list-tile-content>
+                              </v-list-tile>
+                              <v-list-tile>
+                                <v-list-tile-content>Non-Taxable:</v-list-tile-content>
+                                <v-list-tile-content
+                                  class="align-end"
+                                >{{ formData.otherSalariesAndWages.non_taxable_amount }}</v-list-tile-content>
+                              </v-list-tile>
+                            </v-list>
+                            <v-list dense three-line>
+                              <v-list-tile>
+                                <v-list-tile-content>
+                                  <v-list-tile-title>Description:</v-list-tile-title>
+                                  <v-list-tile-sub-title>
+                                    {{ formData.otherSalariesAndWages.description }}
+                                  </v-list-tile-sub-title>
+                                </v-list-tile-content>
+                              </v-list-tile>
+                            </v-list>
+                          </v-card>
+                        </v-flex>
+                      </v-flex>
+
+                      <v-flex xs12 sm12 md9 lg7>
+                        <v-form ref="form" @submit.prevent="computeSalariesAndWages">
+                          <v-layout wrap>
+                            <v-flex xs12 sm12 md4 lg4>
+                              <v-flex xs12 sm12 md12>
+                                <v-text-field
+                                  v-model="formData.otherSalariesAndWages.taxable_amount"
+                                  label="Taxable"
+                                  type="number"
+                                  prepend-icon="money"
+                                ></v-text-field>
+                              </v-flex>
+                              <v-flex xs12 sm12 md12>
+                                <v-text-field
+                                  v-model="formData.otherSalariesAndWages.non_taxable_amount"
+                                  label="Non-Taxable"
+                                  type="number"
+                                  prepend-icon="money"
+                                ></v-text-field>
+                              </v-flex>
+                            </v-flex>
+                            <v-flex xs12 sm12 md4 lg4>
+                              <v-flex xs12 sm12 md12>
+                                <v-textarea
+                                  v-model="formData.otherSalariesAndWages.description"
+                                  auto-grow
+                                  label="Description"
+                                  rows="1"
+                                ></v-textarea>
+                              </v-flex>
+                              <v-flex xs12 sm12 md12>
+                                <div class="text-xs-center">
+                                  <v-btn type="submit" round color="primary" dark>Compute</v-btn>
+                                </div>
+                              </v-flex>
+                            </v-flex>
+                          </v-layout>
+                        </v-form>
+                      </v-flex>
+                    </v-layout>
+                  </v-tab-item>
                 </v-tabs-items>
               </v-tabs>
             </v-flex>
@@ -725,6 +805,10 @@ export default {
       {
         key: "tardiness",
         title: "Tardiness"
+      },
+      {
+        key: "other-salaries-and-wages",
+        title: "Other Salaries and Wages"
       }
     ],
     defaultFormData: {
@@ -811,6 +895,11 @@ export default {
         absent_amount: "0.00",
         total_absent_amount: "0.00",
         total_amount: "0.00"
+      },
+      otherSalariesAndWages: {
+        taxable_amount: "0.00",
+        non_taxable_amount: "0.00",
+        description: ""
       }
     },
     formData: {
@@ -897,6 +986,11 @@ export default {
         absent_amount: "0.00",
         total_absent_amount: "0.00",
         total_amount: "0.00"
+      },
+      otherSalariesAndWages: {
+        taxable_amount: "0.00",
+        non_taxable_amount: "0.00",
+        description: ""
       }
     },
     valid: true,
@@ -974,6 +1068,7 @@ export default {
             this.formData.workingDay.double_holiday_ford_amount = response.data.result.doubleHolidayFord;
             this.formData.workingDay.total_amount = response.data.result.totalAmount;
             this.formData.payroll.total_working_day_amount = response.data.result.totalAmount;
+            this.computeNetAmount();
           })
           .catch(err => console.log(err));
       }
@@ -989,8 +1084,7 @@ export default {
           holiday: this.formData.nightDifferential.holiday,
           holiday_ford: this.formData.nightDifferential.holiday_ford,
           double_holiday: this.formData.nightDifferential.double_holiday,
-          double_holiday_ford: this.formData.nightDifferential
-            .double_holiday_ford
+          double_holiday_ford: this.formData.nightDifferential.double_holiday_ford
         };
 
         this.computePayrollNightDifferentialsData(obj)
@@ -1004,6 +1098,7 @@ export default {
             this.formData.nightDifferential.double_holiday_ford_amount = response.data.result.doubleHolidayFord;
             this.formData.nightDifferential.total_amount = response.data.result.totalAmount;
             this.formData.payroll.total_night_differential_amount = response.data.result.totalAmount;
+            this.computeNetAmount();
           })
           .catch(err => console.log(err));
       }
@@ -1033,6 +1128,7 @@ export default {
             this.formData.overtime.double_holiday_ford_amount = response.data.result.doubleHolidayFord;
             this.formData.overtime.total_amount = response.data.result.totalAmount;
             this.formData.payroll.total_overtime_amount = response.data.result.totalAmount;
+            this.computeNetAmount();
           })
           .catch(err => console.log(err));
       }
@@ -1060,9 +1156,60 @@ export default {
             this.formData.tardiness.absent_amount = response.data.result.absent;
             this.formData.tardiness.total_amount = response.data.result.totalAmount;
             this.formData.payroll.total_tardiness_amount = response.data.result.totalAmount;
+            this.computeNetAmount();
           })
           .catch(err => console.log(err));
       }
+    },
+
+    computeSalariesAndWages() {
+      this.formData.payroll.total_other_salary_and_wages_amount = this.formData.otherSalariesAndWages.taxable_amount;
+      this.computeGrossAmount();
+    },
+
+    computeGrossAmount() {
+      let totalWorkingDay = this.formData.payroll.total_working_day_amount;
+      let totalNighDifferential =  this.formData.payroll.total_night_differential_amount;
+      let totalOvertime = this.formData.payroll.total_overtime_amount;
+      let totalOtherSalaryAndWages = this.formData.payroll.total_other_salary_and_wages_amount;
+      let totalTardiness = this.formData.payroll.total_tardiness_amount;
+      let totalAmount = this.sum([totalWorkingDay, totalNighDifferential, totalOvertime, totalOtherSalaryAndWages]);
+      let totalGrossAmount = totalAmount - totalTardiness;
+      this.formData.payroll.gross_amount = totalGrossAmount.toFixed(2);
+      return totalGrossAmount.toFixed(2);
+    },
+
+    computeTotalNonTaxable() {
+      let allowance = this.formData.payroll.fixed_allowance_amount;
+      let sickLeave =  this.formData.tardiness.sick_leave_amount;
+      let vacation_leave = this.formData.tardiness.vacation_leave_amount;
+      let holiday = this.formData.tardiness.holiday_amount;
+      let otherSalariesAndWages = this.formData.otherSalariesAndWages.non_taxable_amount;
+      let totalNonTaxableAmount = this.sum([allowance, sickLeave, vacation_leave, holiday, otherSalariesAndWages]);
+      this.formData.payroll.total_non_taxable_amount = totalNonTaxableAmount.toFixed(2);
+      return totalNonTaxableAmount.toFixed(2);
+    },
+
+    computeNetAmount() {
+      let grossAmount = this.computeGrossAmount();
+      let totalNonTaxable = this.computeTotalNonTaxable();
+      let totalDeduction = this.formData.payroll.total_deduction_amount;
+      let netAmount = (parseFloat(grossAmount) + parseFloat(totalNonTaxable)) - totalDeduction;
+      this.formData.payroll.net_amount = netAmount;
+    },
+
+    sum (input) {
+      if (toString.call(input) !== "[object Array]")
+        return false;
+
+      let total = 0;
+      for (let i = 0; i < input.length; i++) {
+        if (isNaN(input[i])) {
+          continue;
+        }
+        total += Number(input[i]);
+      }
+      return total;
     }
   }
 };

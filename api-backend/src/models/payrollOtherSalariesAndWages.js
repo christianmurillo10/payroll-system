@@ -7,7 +7,12 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true
     },
-    'amount': {
+    'taxable_amount': {
+      type: DataTypes.DECIMAL(12, 2),
+      allowNull: false,
+      defaultValue: '0.00'
+    },
+    'non_taxable_amount': {
       type: DataTypes.DECIMAL(12, 2),
       allowNull: false,
       defaultValue: '0.00'
@@ -42,12 +47,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       comment: 'refd to users.id',
       allowNull: false
-    },
-    'type': {
-      type: DataTypes.SMALLINT(1),
-      allowNull: false,
-      comment: '1=taxable 2=non taxable',
-      defaultValue: '1'
     },
     'created_at': {
       type: 'TIMESTAMP',
