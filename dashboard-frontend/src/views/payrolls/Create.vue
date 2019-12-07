@@ -42,6 +42,9 @@
                   <v-layout wrap>
                     <v-flex xs12 sm12 md6 lg6>
                       <v-list-tile>
+                        <v-list-tile-title><h3>Taxable</h3></v-list-tile-title>
+                      </v-list-tile>
+                      <v-list-tile>
                         <v-list-tile-content>Basic Salary:</v-list-tile-content>
                         <v-list-tile-content
                           class="align-end"
@@ -52,6 +55,10 @@
                         <v-list-tile-content
                           class="align-end"
                         >{{ formData.payroll.daily_rate_amount }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-divider></v-divider>
+                      <v-list-tile>
+                        <v-list-tile-title><h3>Non-Taxable</h3></v-list-tile-title>
                       </v-list-tile>
                       <v-list-tile>
                         <v-list-tile-content>Fixed Allowance:</v-list-tile-content>
@@ -64,6 +71,24 @@
                         <v-list-tile-content
                           class="align-end"
                         >{{ formData.payroll.daily_allowance_amount }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Sick Leave:</v-list-tile-content>
+                        <v-list-tile-content
+                          class="align-end"
+                        >{{ formData.tardiness.sick_leave_amount }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Vacation Leave:</v-list-tile-content>
+                        <v-list-tile-content
+                          class="align-end"
+                        >{{ formData.tardiness.vacation_leave_amount }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Holiday:</v-list-tile-content>
+                        <v-list-tile-content
+                          class="align-end"
+                        >{{ formData.tardiness.holiday_amount }}</v-list-tile-content>
                       </v-list-tile>
                     </v-flex>
                     <v-flex xs12 sm12 md6 lg6>
@@ -1164,7 +1189,7 @@ export default {
 
     computeSalariesAndWages() {
       this.formData.payroll.total_other_salary_and_wages_amount = this.formData.otherSalariesAndWages.taxable_amount;
-      this.computeGrossAmount();
+      this.computeNetAmount();
     },
 
     computeGrossAmount() {
@@ -1195,7 +1220,7 @@ export default {
       let totalNonTaxable = this.computeTotalNonTaxable();
       let totalDeduction = this.formData.payroll.total_deduction_amount;
       let netAmount = (parseFloat(grossAmount) + parseFloat(totalNonTaxable)) - totalDeduction;
-      this.formData.payroll.net_amount = netAmount;
+      this.formData.payroll.net_amount = netAmount.toFixed(2);
     },
 
     sum (input) {
