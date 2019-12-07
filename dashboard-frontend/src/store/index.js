@@ -13,6 +13,7 @@ import payrolls from './modules/payrolls'
 import payrollWorkingDays from './modules/payrollWorkingDays'
 import payrollNightDifferentials from './modules/payrollNightDifferentials'
 import payrollOvertimes from './modules/payrollOvertimes'
+import payrollTardiness from './modules/payrollTardiness'
 import sssContributionTables from './modules/sssContributionTables'
 import withholdingTaxTables from './modules/withholdingTaxTables'
 import employees from './modules/employees'
@@ -37,6 +38,7 @@ export default new Vuex.Store({
     payrollWorkingDays,
     payrollNightDifferentials,
     payrollOvertimes,
+    payrollTardiness,
     sssContributionTables,
     withholdingTaxTables,
     employees,

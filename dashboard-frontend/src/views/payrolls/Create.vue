@@ -623,65 +623,67 @@
                       </v-flex>
 
                       <v-flex xs12 sm12 md9 lg7>
-                        <v-layout wrap>
-                          <v-flex xs12 sm12 md4 lg4>
-                            <v-flex xs12 sm12 md12>
-                              <v-text-field
-                                v-model="formData.tardiness.undertime"
-                                label="Overtime"
-                                type="number"
-                                prepend-icon="money"
-                              ></v-text-field>
+                        <v-form ref="form" @submit.prevent="computeTardiness">
+                          <v-layout wrap>
+                            <v-flex xs12 sm12 md4 lg4>
+                              <v-flex xs12 sm12 md12>
+                                <v-text-field
+                                  v-model="formData.tardiness.undertime"
+                                  label="Overtime"
+                                  type="number"
+                                  prepend-icon="money"
+                                ></v-text-field>
+                              </v-flex>
+                              <v-flex xs12 sm12 md12>
+                                <v-text-field
+                                  v-model="formData.tardiness.half_day"
+                                  label="Half Day"
+                                  type="number"
+                                  prepend-icon="money"
+                                ></v-text-field>
+                              </v-flex>
+                              <v-flex xs12 sm12 md12>
+                                <v-text-field
+                                  v-model="formData.tardiness.sick_leave"
+                                  label="Sick Leave"
+                                  type="number"
+                                  prepend-icon="money"
+                                ></v-text-field>
+                              </v-flex>
+                              <v-flex xs12 sm12 md12>
+                                <v-text-field
+                                  v-model="formData.tardiness.vacation_leave"
+                                  label="Vacation Leave"
+                                  type="number"
+                                  prepend-icon="money"
+                                ></v-text-field>
+                              </v-flex>
+                              <v-flex xs12 sm12 md12>
+                                <v-text-field
+                                  v-model="formData.tardiness.holiday"
+                                  label="Holiday"
+                                  type="number"
+                                  prepend-icon="money"
+                                ></v-text-field>
+                              </v-flex>
                             </v-flex>
-                            <v-flex xs12 sm12 md12>
-                              <v-text-field
-                                v-model="formData.tardiness.half_day"
-                                label="Half Day"
-                                type="number"
-                                prepend-icon="money"
-                              ></v-text-field>
+                            <v-flex xs12 sm12 md4 lg4>
+                              <v-flex xs12 sm12 md12>
+                                <v-text-field
+                                  v-model="formData.tardiness.absent"
+                                  label="Absent"
+                                  type="number"
+                                  prepend-icon="money"
+                                ></v-text-field>
+                              </v-flex>
+                              <v-flex xs12 sm12 md12>
+                                <div class="text-xs-center">
+                                  <v-btn type="submit" round color="primary" dark>Compute</v-btn>
+                                </div>
+                              </v-flex>
                             </v-flex>
-                            <v-flex xs12 sm12 md12>
-                              <v-text-field
-                                v-model="formData.tardiness.sick_leave"
-                                label="Sick Leave"
-                                type="number"
-                                prepend-icon="money"
-                              ></v-text-field>
-                            </v-flex>
-                            <v-flex xs12 sm12 md12>
-                              <v-text-field
-                                v-model="formData.tardiness.vacation_leave"
-                                label="Vacation Leave"
-                                type="number"
-                                prepend-icon="money"
-                              ></v-text-field>
-                            </v-flex>
-                            <v-flex xs12 sm12 md12>
-                              <v-text-field
-                                v-model="formData.tardiness.holiday"
-                                label="Holiday"
-                                type="number"
-                                prepend-icon="money"
-                              ></v-text-field>
-                            </v-flex>
-                          </v-flex>
-                          <v-flex xs12 sm12 md4 lg4>
-                            <v-flex xs12 sm12 md12>
-                              <v-text-field
-                                v-model="formData.tardiness.absent"
-                                label="Absent"
-                                type="number"
-                                prepend-icon="money"
-                              ></v-text-field>
-                            </v-flex>
-                            <v-flex xs12 sm12 md12>
-                              <div class="text-xs-center">
-                                <v-btn round color="primary" dark>Compute</v-btn>
-                              </div>
-                            </v-flex>
-                          </v-flex>
-                        </v-layout>
+                          </v-layout>
+                        </v-form>
                       </v-flex>
                     </v-layout>
                   </v-tab-item>
@@ -749,7 +751,15 @@ export default {
         holiday: "0.00",
         holiday_ford: "0.00",
         double_holiday: "0.00",
-        double_holiday_ford: "0.00"
+        double_holiday_ford: "0.00",
+        regular_day_amount: "0.00",
+        special_day_amount: "0.00",
+        special_day_ford_amount: "0.00",
+        holiday_amount: "0.00",
+        holiday_ford_amount: "0.00",
+        double_holiday_amount: "0.00",
+        double_holiday_ford_amount: "0.00",
+        total_amount: "0.00"
       },
       nightDifferential: {
         regular_day: "0.00",
@@ -758,7 +768,15 @@ export default {
         holiday: "0.00",
         holiday_ford: "0.00",
         double_holiday: "0.00",
-        double_holiday_ford: "0.00"
+        double_holiday_ford: "0.00",
+        regular_day_amount: "0.00",
+        special_day_amount: "0.00",
+        special_day_ford_amount: "0.00",
+        holiday_amount: "0.00",
+        holiday_ford_amount: "0.00",
+        double_holiday_amount: "0.00",
+        double_holiday_ford_amount: "0.00",
+        total_amount: "0.00"
       },
       overtime: {
         regular_day: "0.00",
@@ -767,7 +785,15 @@ export default {
         holiday: "0.00",
         holiday_ford: "0.00",
         double_holiday: "0.00",
-        double_holiday_ford: "0.00"
+        double_holiday_ford: "0.00",
+        regular_day_amount: "0.00",
+        special_day_amount: "0.00",
+        special_day_ford_amount: "0.00",
+        holiday_amount: "0.00",
+        holiday_ford_amount: "0.00",
+        double_holiday_amount: "0.00",
+        double_holiday_ford_amount: "0.00",
+        total_amount: "0.00"
       },
       tardiness: {
         undertime: "0.00",
@@ -776,7 +802,15 @@ export default {
         vacation_leave: "0.00",
         holiday: "0.00",
         absent: "0.00",
-        total_absent: "0.00"
+        total_absent: "0.00",
+        undertime_amount: "0.00",
+        half_day_amount: "0.00",
+        sick_leave_amount: "0.00",
+        vacation_leave_amount: "0.00",
+        holiday_amount: "0.00",
+        absent_amount: "0.00",
+        total_absent_amount: "0.00",
+        total_amount: "0.00"
       }
     },
     formData: {
@@ -887,19 +921,11 @@ export default {
   methods: {
     ...mapActions("alerts", ["setAlert"]),
     ...mapActions("employees", { getEmployeesData: "getData" }),
-    ...mapActions("employeeSalariesAndAllowances", {
-      getEmployeeSalariesAndAllowancesIsCurrentDataByEmployeeId:
-        "getIsCurrentDataByEmployeeId"
-    }),
-    ...mapActions("payrollWorkingDays", {
-      computePayrollWorkingDaysData: "computeData"
-    }),
-    ...mapActions("payrollNightDifferentials", {
-      computePayrollNightDifferentialsData: "computeData"
-    }),
-    ...mapActions("payrollOvertimes", {
-      computePayrollOvertimesData: "computeData"
-    }),
+    ...mapActions("employeeSalariesAndAllowances", { getEmployeeSalariesAndAllowancesIsCurrentDataByEmployeeId: "getIsCurrentDataByEmployeeId" }),
+    ...mapActions("payrollWorkingDays", { computePayrollWorkingDaysData: "computeData" }),
+    ...mapActions("payrollNightDifferentials", { computePayrollNightDifferentialsData: "computeData" }),
+    ...mapActions("payrollOvertimes", { computePayrollOvertimesData: "computeData" }),
+    ...mapActions("payrollTardiness", { computePayrollTardinessData: "computeData" }),
 
     getEmployeeDetails() {
       this.getEmployeeSalariesAndAllowancesIsCurrentDataByEmployeeId(
@@ -914,10 +940,8 @@ export default {
           if (!response.data.result) obj.type = "error";
           this.setAlert(obj);
           if (response.data.result) {
-            this.formData.payroll.basic_salary_amount =
-              response.data.result[0].salary_amount;
-            this.formData.payroll.fixed_allowance_amount =
-              response.data.result[0].allowance_amount;
+            this.formData.payroll.basic_salary_amount = response.data.result[0].salary_amount;
+            this.formData.payroll.fixed_allowance_amount = response.data.result[0].allowance_amount;
           } else {
             this.formData.payroll.basic_salary_amount = this.defaultFormData.payroll.basic_salary_amount;
             this.formData.payroll.fixed_allowance_amount = this.defaultFormData.payroll.fixed_allowance_amount;
@@ -941,7 +965,15 @@ export default {
 
         this.computePayrollWorkingDaysData(obj)
           .then(response => {
-            console.log(response);
+            this.formData.workingDay.regular_day_amount = response.data.result.regularDay;
+            this.formData.workingDay.special_day_amount = response.data.result.specialDay;
+            this.formData.workingDay.special_day_ford_amount = response.data.result.specialDayFord;
+            this.formData.workingDay.holiday_amount = response.data.result.holiday;
+            this.formData.workingDay.holiday_ford_amount = response.data.result.holidayFord;
+            this.formData.workingDay.double_holiday_amount = response.data.result.doubleHoliday;
+            this.formData.workingDay.double_holiday_ford_amount = response.data.result.doubleHolidayFord;
+            this.formData.workingDay.total_amount = response.data.result.totalAmount;
+            this.formData.payroll.total_working_day_amount = response.data.result.totalAmount;
           })
           .catch(err => console.log(err));
       }
@@ -963,7 +995,15 @@ export default {
 
         this.computePayrollNightDifferentialsData(obj)
           .then(response => {
-            console.log(response);
+            this.formData.nightDifferential.regular_day_amount = response.data.result.regularDay;
+            this.formData.nightDifferential.special_day_amount = response.data.result.specialDay;
+            this.formData.nightDifferential.special_day_ford_amount = response.data.result.specialDayFord;
+            this.formData.nightDifferential.holiday_amount = response.data.result.holiday;
+            this.formData.nightDifferential.holiday_ford_amount = response.data.result.holidayFord;
+            this.formData.nightDifferential.double_holiday_amount = response.data.result.doubleHoliday;
+            this.formData.nightDifferential.double_holiday_ford_amount = response.data.result.doubleHolidayFord;
+            this.formData.nightDifferential.total_amount = response.data.result.totalAmount;
+            this.formData.payroll.total_night_differential_amount = response.data.result.totalAmount;
           })
           .catch(err => console.log(err));
       }
@@ -984,7 +1024,42 @@ export default {
 
         this.computePayrollOvertimesData(obj)
           .then(response => {
-            console.log(response);
+            this.formData.overtime.regular_day_amount = response.data.result.regularDay;
+            this.formData.overtime.special_day_amount = response.data.result.specialDay;
+            this.formData.overtime.special_day_ford_amount = response.data.result.specialDayFord;
+            this.formData.overtime.holiday_amount = response.data.result.holiday;
+            this.formData.overtime.holiday_ford_amount = response.data.result.holidayFord;
+            this.formData.overtime.double_holiday_amount = response.data.result.doubleHoliday;
+            this.formData.overtime.double_holiday_ford_amount = response.data.result.doubleHolidayFord;
+            this.formData.overtime.total_amount = response.data.result.totalAmount;
+            this.formData.payroll.total_overtime_amount = response.data.result.totalAmount;
+          })
+          .catch(err => console.log(err));
+      }
+    },
+
+    computeTardiness() {
+      if (this.$refs.form.validate()) {
+        let obj = {
+          basic: this.formData.payroll.basic_salary_amount,
+          undertime: this.formData.tardiness.undertime,
+          half_day: this.formData.tardiness.half_day,
+          sick_leave: this.formData.tardiness.sick_leave,
+          vacation_leave: this.formData.tardiness.vacation_leave,
+          holiday: this.formData.tardiness.holiday,
+          absent: this.formData.tardiness.absent
+        };
+
+        this.computePayrollTardinessData(obj)
+          .then(response => {
+            this.formData.tardiness.undertime_amount = response.data.result.undertime;
+            this.formData.tardiness.half_day_amount = response.data.result.halfDay;
+            this.formData.tardiness.sick_leave_amount = response.data.result.sickLeave;
+            this.formData.tardiness.vacation_leave_amount = response.data.result.vacationLeave;
+            this.formData.tardiness.holiday_amount = response.data.result.holiday;
+            this.formData.tardiness.absent_amount = response.data.result.absent;
+            this.formData.tardiness.total_amount = response.data.result.totalAmount;
+            this.formData.payroll.total_tardiness_amount = response.data.result.totalAmount;
           })
           .catch(err => console.log(err));
       }
