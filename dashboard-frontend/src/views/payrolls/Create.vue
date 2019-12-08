@@ -5,41 +5,20 @@
         <Alerts />
         <v-flex xs12 sm12 md12 lg12>
           <v-layout wrap>
-            <v-flex xs12 sm12 md4 lg4>
-              <v-card class="mx-auto my-12" :elevation="3" max-width="auto">
-                <v-card-title>
-                  <v-icon class="black--text" large left>view_list</v-icon>
-                  <span class="title">Payroll - Create</span>
-                </v-card-title>
-                <v-divider></v-divider>
-                <v-container grid-list-md>
-                  <v-layout wrap>
-                    <v-flex xs12 sm12 md12>
-                      <v-autocomplete
-                        :items="getEmployeeList"
-                        item-text="firstname"
-                        item-value="id"
-                        v-model="formData.employee_id"
-                        :rules="validateItem.employeeRules"
-                        label="Employee"
-                        required
-                        persistent-hint
-                        prepend-icon="list"
-                        @change="getEmployeeDetails()"
-                      ></v-autocomplete>
-                    </v-flex>
-                  </v-layout>
-                </v-container>
-              </v-card>
-            </v-flex>
-            <v-flex xs12 sm12 md8 lg8>
+            <v-flex xs12 sm12 md12 lg12>
               <v-card>
                 <v-card-title>
-                  <h4>Payroll Summary</h4>
+                  <v-icon class="black--text" left>view_list</v-icon>
+                  <span class="title">Payroll - Create</span>
                 </v-card-title>
                 <v-divider></v-divider>
                 <v-list dense>
                   <v-layout wrap>
+                    <v-flex xs12 sm12 md12 lg12>
+                      <v-list-tile-content class="align-center">
+                        <h3>SUMMARY</h3>
+                      </v-list-tile-content>
+                    </v-flex>
                     <v-flex xs12 sm12 md6 lg6>
                       <v-list-tile>
                         <v-list-tile-title><h3>Taxable</h3></v-list-tile-title>
@@ -165,10 +144,136 @@
                 >{{ header.title }}</v-tab>
 
                 <v-tabs-items>
+                  <v-tab-item value="tab-payroll-details">
+                    <v-layout wrap pa-3>
+                      <!-- Payroll Details -->
+                      <v-flex xs12 sm12 md12 lg7 offset-lg4>
+                          <v-layout wrap>
+                            <v-flex xs12 sm12 md6 lg4>
+                              <v-flex xs12 sm12 md12>
+                                <v-autocomplete
+                                  :items="getEmployeeList"
+                                  item-text="firstname"
+                                  item-value="id"
+                                  v-model="formData.employee_id"
+                                  :rules="validateItem.employeeRules"
+                                  label="Employee"
+                                  required
+                                  persistent-hint
+                                  prepend-icon="list"
+                                  @change="getEmployeeDetails()"
+                                ></v-autocomplete>
+                              </v-flex>
+                              <v-flex xs12 sm12 md12>
+                                <v-menu
+                                  ref="date"
+                                  v-model="date"
+                                  :close-on-content-click="false"
+                                  :nudge-right="40"
+                                  :return-value.sync="formData.date"
+                                  lazy
+                                  transition="scale-transition"
+                                  offset-y
+                                  full-width
+                                  min-width="290px"
+                                >
+                                  <template v-slot:activator="{ on }">
+                                    <v-text-field
+                                      v-model="formData.date"
+                                      label="Date"
+                                      prepend-icon="event"
+                                      readonly
+                                      v-on="on"
+                                    ></v-text-field>
+                                  </template>
+                                  <v-date-picker v-model="formData.date" no-title scrollable>
+                                    <v-spacer></v-spacer>
+                                    <v-btn flat color="primary" @click="date = false">Cancel</v-btn>
+                                    <v-btn
+                                      flat
+                                      color="primary"
+                                      @click="$refs.date.save(formData.date)"
+                                    >OK</v-btn>
+                                  </v-date-picker>
+                                </v-menu>
+                              </v-flex>
+                            </v-flex>
+                            <v-flex xs12 sm12 md6 lg4>
+                              <v-flex xs12 sm12 md12>
+                                <v-menu
+                                  ref="date_from"
+                                  v-model="date_from"
+                                  :close-on-content-click="false"
+                                  :nudge-right="40"
+                                  :return-value.sync="formData.date_from"
+                                  lazy
+                                  transition="scale-transition"
+                                  offset-y
+                                  full-width
+                                  min-width="290px"
+                                >
+                                  <template v-slot:activator="{ on }">
+                                    <v-text-field
+                                      v-model="formData.date_from"
+                                      label="Date From"
+                                      prepend-icon="event"
+                                      readonly
+                                      v-on="on"
+                                    ></v-text-field>
+                                  </template>
+                                  <v-date-picker v-model="formData.date_from" no-title scrollable>
+                                    <v-spacer></v-spacer>
+                                    <v-btn flat color="primary" @click="date_from = false">Cancel</v-btn>
+                                    <v-btn
+                                      flat
+                                      color="primary"
+                                      @click="$refs.date_from.save(formData.date_from)"
+                                    >OK</v-btn>
+                                  </v-date-picker>
+                                </v-menu>
+                              </v-flex>
+                              <v-flex xs12 sm12 md12>
+                                <v-menu
+                                  ref="date_to"
+                                  v-model="date_to"
+                                  :close-on-content-click="false"
+                                  :nudge-right="40"
+                                  :return-value.sync="formData.date_to"
+                                  lazy
+                                  transition="scale-transition"
+                                  offset-y
+                                  full-width
+                                  min-width="290px"
+                                >
+                                  <template v-slot:activator="{ on }">
+                                    <v-text-field
+                                      v-model="formData.date_to"
+                                      label="Date To"
+                                      prepend-icon="event"
+                                      readonly
+                                      v-on="on"
+                                    ></v-text-field>
+                                  </template>
+                                  <v-date-picker v-model="formData.date_to" no-title scrollable>
+                                    <v-spacer></v-spacer>
+                                    <v-btn flat color="primary" @click="date_to = false">Cancel</v-btn>
+                                    <v-btn
+                                      flat
+                                      color="primary"
+                                      @click="$refs.date_to.save(formData.date_to)"
+                                    >OK</v-btn>
+                                  </v-date-picker>
+                                </v-menu>
+                              </v-flex>
+                            </v-flex>
+                          </v-layout>
+                      </v-flex>
+                    </v-layout>
+                  </v-tab-item>
                   <v-tab-item value="tab-working-days">
                     <v-layout wrap pa-3>
                       <!-- Working Days -->
-                      <v-flex xs12 sm12 md3 offset-xs2>
+                      <v-flex xs12 sm12 md12 lg3 offset-lg2>
                         <v-flex xs12 sm12 md12 lg12>
                           <v-card>
                             <v-card-title>
@@ -230,10 +335,10 @@
                         </v-flex>
                       </v-flex>
 
-                      <v-flex xs12 sm12 md9 lg7>
+                      <v-flex xs12 sm12 md12 lg7>
                         <v-form ref="form" @submit.prevent="computeWorkingDays">
                           <v-layout wrap>
-                            <v-flex xs12 sm12 md4 lg4>
+                            <v-flex xs12 sm12 md6 lg4>
                               <v-flex xs12 sm12 md12>
                                 <v-text-field
                                   v-model="formData.workingDay.regular_day"
@@ -275,7 +380,7 @@
                                 </v-flex>
                               </v-flex>
                             </v-flex>
-                            <v-flex xs12 sm12 md4 lg4>
+                            <v-flex xs12 sm12 md6 lg4>
                               <v-flex xs12 sm12 md12>
                                 <v-text-field
                                   v-model="formData.workingDay.double_holiday"
@@ -307,8 +412,8 @@
                   <v-tab-item value="tab-night-differentials">
                     <v-layout wrap pa-3>
                       <!-- Night Differentials -->
-                      <v-flex xs12 sm12 md3 offset-xs2>
-                        <v-flex xs12 sm12 md12 lg12 pb-4>
+                      <v-flex xs12 sm12 md12 lg3 offset-lg2>
+                        <v-flex xs12 sm12 md12 lg12>
                           <v-card>
                             <v-card-title>
                               <h4>Night Differentials</h4>
@@ -369,10 +474,10 @@
                         </v-flex>
                       </v-flex>
 
-                      <v-flex xs12 sm12 md9 lg7>
+                      <v-flex xs12 sm12 md12 lg7>
                         <v-form ref="form" @submit.prevent="computeNightDifferentials">
                           <v-layout wrap>
-                            <v-flex xs12 sm12 md4 lg4>
+                            <v-flex xs12 sm12 md6 lg4>
                               <v-flex xs12 sm12 md12>
                                 <v-text-field
                                   v-model="formData.nightDifferential.regular_day"
@@ -414,7 +519,7 @@
                                 </v-flex>
                               </v-flex>
                             </v-flex>
-                            <v-flex xs12 sm12 md4 lg4>
+                            <v-flex xs12 sm12 md6 lg4>
                               <v-flex xs12 sm12 md12>
                                 <v-text-field
                                   v-model="formData.workingDay.double_holiday"
@@ -446,8 +551,8 @@
                   <v-tab-item value="tab-overtimes">
                     <v-layout wrap pa-3>
                       <!-- Overtimes -->
-                      <v-flex xs12 sm12 md3 offset-xs2>
-                        <v-flex xs12 sm12 md12 lg12 pb-4>
+                      <v-flex xs12 sm12 md12 lg3 offset-lg2>
+                        <v-flex xs12 sm12 md12 lg12>
                           <v-card>
                             <v-card-title>
                               <h4>Overtimes</h4>
@@ -508,10 +613,10 @@
                         </v-flex>
                       </v-flex>
 
-                      <v-flex xs12 sm12 md9 lg7>
+                      <v-flex xs12 sm12 md12 lg7>
                         <v-form ref="form" @submit.prevent="computeOvertimes">
                           <v-layout wrap>
-                            <v-flex xs12 sm12 md4 lg4>
+                            <v-flex xs12 sm12 md6 lg4>
                               <v-flex xs12 sm12 md12>
                                 <v-text-field
                                   v-model="formData.overtime.regular_day"
@@ -553,7 +658,7 @@
                                 </v-flex>
                               </v-flex>
                             </v-flex>
-                            <v-flex xs12 sm12 md4 lg4>
+                            <v-flex xs12 sm12 md6 lg4>
                               <v-flex xs12 sm12 md12>
                                 <v-text-field
                                   v-model="formData.overtime.double_holiday"
@@ -585,8 +690,8 @@
                   <v-tab-item value="tab-tardiness">
                     <v-layout wrap pa-3>
                       <!-- Tardiness -->
-                      <v-flex xs12 sm12 md3 offset-xs2>
-                        <v-flex xs12 sm12 md12 lg12 pb-4>
+                      <v-flex xs12 sm12 md12 lg3 offset-lg2>
+                        <v-flex xs12 sm12 md12 lg12>
                           <v-card>
                             <v-card-title>
                               <h4>Tardiness</h4>
@@ -647,10 +752,10 @@
                         </v-flex>
                       </v-flex>
 
-                      <v-flex xs12 sm12 md9 lg7>
+                      <v-flex xs12 sm12 md12 lg7>
                         <v-form ref="form" @submit.prevent="computeTardiness">
                           <v-layout wrap>
-                            <v-flex xs12 sm12 md4 lg4>
+                            <v-flex xs12 sm12 md6 lg4>
                               <v-flex xs12 sm12 md12>
                                 <v-text-field
                                   v-model="formData.tardiness.undertime"
@@ -692,7 +797,7 @@
                                 ></v-text-field>
                               </v-flex>
                             </v-flex>
-                            <v-flex xs12 sm12 md4 lg4>
+                            <v-flex xs12 sm12 md6 lg4>
                               <v-flex xs12 sm12 md12>
                                 <v-text-field
                                   v-model="formData.tardiness.absent"
@@ -716,8 +821,8 @@
                   <v-tab-item value="tab-other-salaries-and-wages">
                     <v-layout wrap pa-3>
                       <!-- Other Salaries and Wages -->
-                      <v-flex xs12 sm12 md3 offset-xs2>
-                        <v-flex xs12 sm12 md12 lg12 pb-4>
+                      <v-flex xs12 sm12 md12 lg3 offset-lg2>
+                        <v-flex xs12 sm12 md12 lg12>
                           <v-card>
                             <v-card-title>
                               <h4>Other Salaries and Wages</h4>
@@ -751,10 +856,10 @@
                         </v-flex>
                       </v-flex>
 
-                      <v-flex xs12 sm12 md9 lg7>
+                      <v-flex xs12 sm12 md12 lg7>
                         <v-form ref="form" @submit.prevent="computeSalariesAndWages">
                           <v-layout wrap>
-                            <v-flex xs12 sm12 md4 lg4>
+                            <v-flex xs12 sm12 md6 lg4>
                               <v-flex xs12 sm12 md12>
                                 <v-text-field
                                   v-model="formData.otherSalariesAndWages.taxable_amount"
@@ -772,7 +877,7 @@
                                 ></v-text-field>
                               </v-flex>
                             </v-flex>
-                            <v-flex xs12 sm12 md4 lg4>
+                            <v-flex xs12 sm12 md6 lg4>
                               <v-flex xs12 sm12 md12>
                                 <v-textarea
                                   v-model="formData.otherSalariesAndWages.description"
@@ -816,6 +921,10 @@ export default {
   data: () => ({
     tabHeaders: [
       {
+        key: "payroll-details",
+        title: "Payroll Details"
+      },
+      {
         key: "working-days",
         title: "Working Days"
       },
@@ -836,6 +945,9 @@ export default {
         title: "Other Salaries and Wages"
       }
     ],
+    date: false,
+    date_from: false,
+    date_to: false,
     defaultFormData: {
       employee_id: null,
       payroll: {
@@ -851,7 +963,10 @@ export default {
         gross_amount: "0.00",
         total_non_taxable_amount: "0.00",
         total_deduction_amount: "0.00",
-        net_amount: "0.00"
+        net_amount: "0.00",
+        date: new Date().toISOString().substr(0, 10),
+        date_from: new Date().toISOString().substr(0, 10),
+        date_to: new Date().toISOString().substr(0, 10)
       },
       workingDay: {
         regular_day: "0.00",
@@ -942,7 +1057,10 @@ export default {
         gross_amount: "0.00",
         total_non_taxable_amount: "0.00",
         total_deduction_amount: "0.00",
-        net_amount: "0.00"
+        net_amount: "0.00",
+        date: new Date().toISOString().substr(0, 10),
+        date_from: new Date().toISOString().substr(0, 10),
+        date_to: new Date().toISOString().substr(0, 10)
       },
       workingDay: {
         regular_day: "0.00",
