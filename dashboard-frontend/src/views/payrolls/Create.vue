@@ -902,7 +902,8 @@
                   <v-tab-item value="tab-deductions">
                     <v-layout wrap pa-3>
                       <!-- Deductions -->
-                      <v-flex xs12 sm12 md12 lg3 offset-lg2>
+                      <!-- <v-flex xs12 sm12 md12 lg3 offset-lg2> -->
+                      <v-flex xs12 sm12 md12 lg3>
                         <v-flex xs12 sm12 md12 lg12>
                           <v-card>
                             <v-card-title>
@@ -914,106 +915,248 @@
                                 <v-list-tile-content>SSS Payable:</v-list-tile-content>
                                 <v-list-tile-content
                                   class="align-end"
-                                >{{ formData.workingDay.regular_day_amount }}</v-list-tile-content>
+                                >{{ formData.deductions.sss.bi_monthly.total }}</v-list-tile-content>
                               </v-list-tile>
                               <v-list-tile>
                                 <v-list-tile-content>SSS Salary:</v-list-tile-content>
                                 <v-list-tile-content
                                   class="align-end"
-                                >{{ formData.workingDay.special_day_amount }}</v-list-tile-content>
+                                >{{ formData.deductions.sss.bi_monthly_salary_loan.total }}</v-list-tile-content>
                               </v-list-tile>
                               <v-list-tile>
                                 <v-list-tile-content>PHIC Payable:</v-list-tile-content>
                                 <v-list-tile-content
                                   class="align-end"
-                                >{{ formData.workingDay.special_day_ford_amount }}</v-list-tile-content>
+                                >{{ formData.deductions.phic.bi_monthly.total }}</v-list-tile-content>
                               </v-list-tile>
                               <v-list-tile>
                                 <v-list-tile-content>HDMF Payable:</v-list-tile-content>
                                 <v-list-tile-content
                                   class="align-end"
-                                >{{ formData.workingDay.holiday_amount }}</v-list-tile-content>
+                                >{{ formData.deductions.hdmf.bi_monthly.total }}</v-list-tile-content>
                               </v-list-tile>
                               <v-list-tile>
                                 <v-list-tile-content>HDMF Salary:</v-list-tile-content>
                                 <v-list-tile-content
                                   class="align-end"
-                                >{{ formData.workingDay.holiday_ford_amount }}</v-list-tile-content>
+                                >{{ formData.deductions.hdmf.bi_monthly_salary_loan.total }}</v-list-tile-content>
                               </v-list-tile>
                               <v-list-tile>
                                 <v-list-tile-content>HDMF Housing:</v-list-tile-content>
                                 <v-list-tile-content
                                   class="align-end"
-                                >{{ formData.workingDay.double_holiday_amount }}</v-list-tile-content>
+                                >{{ formData.deductions.hdmf.bi_monthly_housing.total }}</v-list-tile-content>
                               </v-list-tile>
                               <v-list-tile>
                                 <v-list-tile-content>Personal Cash:</v-list-tile-content>
                                 <v-list-tile-content
                                   class="align-end"
-                                >{{ formData.workingDay.double_holiday_ford_amount }}</v-list-tile-content>
+                                >{{ formData.deductions.personal_cash.advances }}</v-list-tile-content>
                               </v-list-tile>
                               <v-list-tile>
                                 <v-list-tile-content>W/tax Compensation:</v-list-tile-content>
                                 <v-list-tile-content
                                   class="align-end"
-                                >{{ formData.workingDay.double_holiday_ford_amount }}</v-list-tile-content>
+                                >{{ formData.deductions.bir.with_tax_compensation.total }}</v-list-tile-content>
                               </v-list-tile>
                               <v-divider></v-divider>
                               <v-list-tile>
                                 <v-list-tile-content>Total:</v-list-tile-content>
                                 <v-list-tile-content
                                   class="align-end"
-                                >{{ formData.workingDay.total_amount }}</v-list-tile-content>
+                                >{{ formData.deductions.total_amount }}</v-list-tile-content>
                               </v-list-tile>
                             </v-list>
                           </v-card>
                         </v-flex>
                       </v-flex>
 
-                      <v-flex xs12 sm12 md12 lg7>
+                      <v-flex xs12 sm12 md12 lg9>
                         <v-form ref="form" @submit.prevent="computeWorkingDays">
                           <v-flex xs12 sm12 md12 lg12>
-                            <v-flex xs12 sm12 md12 lg12 offset-xs6 offset-sm6 offset-md6 offset-lg4>
-                              <h3>SSS</h3>
-                            </v-flex>
                             <v-layout wrap>
-                              <v-flex xs12>
-                                <h4>Bi-monthly Contribution</h4>
+                              <v-flex xs12 sm12 md12 lg6>
+                                <v-flex xs12 sm12 md12 lg12 offset-xs5 offset-sm6 offset-md5 offset-lg5>
+                                  <h3>SSS</h3>
+                                </v-flex>
+                                <v-layout wrap>
+                                  <v-flex xs12>
+                                    <h4>Bi-Monthly Contribution</h4>
+                                  </v-flex>
+                                  <v-flex xs12 sm12 md6 lg6>
+                                    <v-text-field
+                                      v-model="formData.deductions.sss.bi_monthly.fixed"
+                                      label="Fixed"
+                                      type="number"
+                                      prepend-icon="money"
+                                      readonly
+                                    ></v-text-field>
+                                  </v-flex>
+                                  <v-flex xs12 sm12 md6 lg6>
+                                    <v-text-field
+                                      v-model="formData.deductions.sss.bi_monthly.adjustment"
+                                      label="Adjustment"
+                                      type="number"
+                                      prepend-icon="money"
+                                    ></v-text-field>
+                                  </v-flex>
+                                  <v-flex xs12>
+                                    <h4>Bi-Monthly Salary Loan</h4>
+                                  </v-flex>
+                                  <v-flex xs12 sm12 md6 lg6>
+                                    <v-text-field
+                                      v-model="formData.deductions.sss.bi_monthly_salary_loan.fixed"
+                                      label="Fixed"
+                                      type="number"
+                                      prepend-icon="money"
+                                      readonly
+                                    ></v-text-field>
+                                  </v-flex>
+                                  <v-flex xs12 sm12 md6 lg6>
+                                    <v-text-field
+                                      v-model="formData.deductions.sss.bi_monthly_salary_loan.adjustment"
+                                      label="Adjustment"
+                                      type="number"
+                                      prepend-icon="money"
+                                    ></v-text-field>
+                                  </v-flex>
+                                </v-layout>
                               </v-flex>
-                              <v-flex xs12 sm12 md6 lg4>
-                                <v-text-field
-                                  v-model="formData.deductions.sss.bi_monthly.fixed"
-                                  label="Fixed"
-                                  type="number"
-                                  prepend-icon="money"
-                                ></v-text-field>
+                              <v-flex xs12 sm12 md12 lg6>
+                                <v-flex xs12 sm12 md12 lg12 offset-xs5 offset-sm6 offset-md5 offset-lg5>
+                                  <h3>PHIC</h3>
+                                </v-flex>
+                                <v-layout wrap>
+                                  <v-flex xs12>
+                                    <h4>Bi-Monthly Contribution</h4>
+                                  </v-flex>
+                                  <v-flex xs12 sm12 md6 lg6>
+                                    <v-text-field
+                                      v-model="formData.deductions.phic.bi_monthly.fixed"
+                                      label="Fixed"
+                                      type="number"
+                                      prepend-icon="money"
+                                      readonly
+                                    ></v-text-field>
+                                  </v-flex>
+                                  <v-flex xs12 sm12 md6 lg6>
+                                    <v-text-field
+                                      v-model="formData.deductions.phic.bi_monthly.adjustment"
+                                      label="Adjustment"
+                                      type="number"
+                                      prepend-icon="money"
+                                    ></v-text-field>
+                                  </v-flex>
+                                </v-layout>
                               </v-flex>
-                              <v-flex xs12 sm12 md6 lg4>
-                                <v-text-field
-                                  v-model="formData.deductions.sss.bi_monthly.adjustment"
-                                  label="Adjustment"
-                                  type="number"
-                                  prepend-icon="money"
-                                ></v-text-field>
+                            </v-layout>
+                          </v-flex>
+                          <v-flex xs12 sm12 md12 lg12>
+                            <v-layout wrap>
+                              <v-flex xs12 sm12 md12 lg6>
+                                <v-flex xs12 sm12 md12 lg12 offset-xs5 offset-sm6 offset-md5 offset-lg5>
+                                  <h3>HDMF</h3>
+                                </v-flex>
+                                <v-layout wrap>
+                                  <v-flex xs12>
+                                    <h4>Bi-Monthly Contribution</h4>
+                                  </v-flex>
+                                  <v-flex xs12 sm12 md6 lg6>
+                                    <v-text-field
+                                      v-model="formData.deductions.hdmf.bi_monthly.fixed"
+                                      label="Fixed"
+                                      type="number"
+                                      prepend-icon="money"
+                                      readonly
+                                    ></v-text-field>
+                                  </v-flex>
+                                  <v-flex xs12 sm12 md6 lg6>
+                                    <v-text-field
+                                      v-model="formData.deductions.hdmf.bi_monthly.adjustment"
+                                      label="Adjustment"
+                                      type="number"
+                                      prepend-icon="money"
+                                    ></v-text-field>
+                                  </v-flex>
+                                  <v-flex xs12>
+                                    <h4>Bi-Monthly Salary Loan</h4>
+                                  </v-flex>
+                                  <v-flex xs12 sm12 md6 lg6>
+                                    <v-text-field
+                                      v-model="formData.deductions.hdmf.bi_monthly_salary_loan.fixed"
+                                      label="Fixed"
+                                      type="number"
+                                      prepend-icon="money"
+                                      readonly
+                                    ></v-text-field>
+                                  </v-flex>
+                                  <v-flex xs12 sm12 md6 lg6>
+                                    <v-text-field
+                                      v-model="formData.deductions.hdmf.bi_monthly_salary_loan.adjustment"
+                                      label="Adjustment"
+                                      type="number"
+                                      prepend-icon="money"
+                                    ></v-text-field>
+                                  </v-flex>
+                                  <v-flex xs12>
+                                    <h4>Bi-Monthly housing</h4>
+                                  </v-flex>
+                                  <v-flex xs12 sm12 md6 lg6>
+                                    <v-text-field
+                                      v-model="formData.deductions.hdmf.bi_monthly_housing.fixed"
+                                      label="Fixed"
+                                      type="number"
+                                      prepend-icon="money"
+                                      readonly
+                                    ></v-text-field>
+                                  </v-flex>
+                                  <v-flex xs12 sm12 md6 lg6>
+                                    <v-text-field
+                                      v-model="formData.deductions.hdmf.bi_monthly_housing.adjustment"
+                                      label="Adjustment"
+                                      type="number"
+                                      prepend-icon="money"
+                                    ></v-text-field>
+                                  </v-flex>
+                                </v-layout>
                               </v-flex>
-                              <v-flex xs12>
-                                <h4>Bi-monthly Salary Loan</h4>
-                              </v-flex>
-                              <v-flex xs12 sm12 md6 lg4>
-                                <v-text-field
-                                  v-model="formData.deductions.sss.bi_monthly_salary_loan.fixed"
-                                  label="Fixed"
-                                  type="number"
-                                  prepend-icon="money"
-                                ></v-text-field>
-                              </v-flex>
-                              <v-flex xs12 sm12 md6 lg4>
-                                <v-text-field
-                                  v-model="formData.deductions.sss.bi_monthly_salary_loan.adjustment"
-                                  label="Adjustment"
-                                  type="number"
-                                  prepend-icon="money"
-                                ></v-text-field>
+                              <v-flex xs12 sm12 md12 lg6>
+                                <v-flex xs12 sm12 md12 lg12 offset-xs5 offset-sm6 offset-md5 offset-lg5>
+                                  <h3>OTHERS</h3>
+                                </v-flex>
+                                <v-layout wrap>
+                                  <v-flex xs12>
+                                    <h4>BIR W/tax Compensation</h4>
+                                  </v-flex>
+                                  <v-flex xs12 sm12 md6 lg6>
+                                    <v-text-field
+                                      v-model="formData.deductions.bir.with_tax_compensation.fixed"
+                                      label="Fixed"
+                                      type="number"
+                                      prepend-icon="money"
+                                      readonly
+                                    ></v-text-field>
+                                  </v-flex>
+                                  <v-flex xs12 sm12 md6 lg6>
+                                    <v-text-field
+                                      v-model="formData.deductions.bir.with_tax_compensation.adjustment"
+                                      label="Adjustment"
+                                      type="number"
+                                      prepend-icon="money"
+                                    ></v-text-field>
+                                  </v-flex>
+                                  <v-flex xs12>
+                                    <h4>Personal Cash</h4>
+                                  </v-flex>
+                                  <v-flex xs12 sm12 md6 lg6>
+                                    <v-text-field
+                                      v-model="formData.deductions.personal_cash.advances"
+                                      label="Advances"
+                                      type="number"
+                                      prepend-icon="money"
+                                    ></v-text-field>
+                                  </v-flex>
+                                </v-layout>
                               </v-flex>
                             </v-layout>
                           </v-flex>
@@ -1215,7 +1358,8 @@ export default {
             adjustment: "0.00",
             total: "0.00"
           }
-        }
+        },
+        total_amount: "0.00"
       }
     },
     formData: {
@@ -1357,7 +1501,8 @@ export default {
             adjustment: "0.00",
             total: "0.00"
           }
-        }
+        },
+        total_amount: "0.00"
       }
     },
     valid: true,
