@@ -270,6 +270,7 @@
                       </v-flex>
                     </v-layout>
                   </v-tab-item>
+
                   <v-tab-item value="tab-working-days">
                     <v-layout wrap pa-3>
                       <!-- Working Days -->
@@ -897,6 +898,129 @@
                       </v-flex>
                     </v-layout>
                   </v-tab-item>
+
+                  <v-tab-item value="tab-deductions">
+                    <v-layout wrap pa-3>
+                      <!-- Deductions -->
+                      <v-flex xs12 sm12 md12 lg3 offset-lg2>
+                        <v-flex xs12 sm12 md12 lg12>
+                          <v-card>
+                            <v-card-title>
+                              <h4>Deductions</h4>
+                            </v-card-title>
+                            <v-divider></v-divider>
+                            <v-list dense>
+                              <v-list-tile>
+                                <v-list-tile-content>SSS Payable:</v-list-tile-content>
+                                <v-list-tile-content
+                                  class="align-end"
+                                >{{ formData.workingDay.regular_day_amount }}</v-list-tile-content>
+                              </v-list-tile>
+                              <v-list-tile>
+                                <v-list-tile-content>SSS Salary:</v-list-tile-content>
+                                <v-list-tile-content
+                                  class="align-end"
+                                >{{ formData.workingDay.special_day_amount }}</v-list-tile-content>
+                              </v-list-tile>
+                              <v-list-tile>
+                                <v-list-tile-content>PHIC Payable:</v-list-tile-content>
+                                <v-list-tile-content
+                                  class="align-end"
+                                >{{ formData.workingDay.special_day_ford_amount }}</v-list-tile-content>
+                              </v-list-tile>
+                              <v-list-tile>
+                                <v-list-tile-content>HDMF Payable:</v-list-tile-content>
+                                <v-list-tile-content
+                                  class="align-end"
+                                >{{ formData.workingDay.holiday_amount }}</v-list-tile-content>
+                              </v-list-tile>
+                              <v-list-tile>
+                                <v-list-tile-content>HDMF Salary:</v-list-tile-content>
+                                <v-list-tile-content
+                                  class="align-end"
+                                >{{ formData.workingDay.holiday_ford_amount }}</v-list-tile-content>
+                              </v-list-tile>
+                              <v-list-tile>
+                                <v-list-tile-content>HDMF Housing:</v-list-tile-content>
+                                <v-list-tile-content
+                                  class="align-end"
+                                >{{ formData.workingDay.double_holiday_amount }}</v-list-tile-content>
+                              </v-list-tile>
+                              <v-list-tile>
+                                <v-list-tile-content>Personal Cash:</v-list-tile-content>
+                                <v-list-tile-content
+                                  class="align-end"
+                                >{{ formData.workingDay.double_holiday_ford_amount }}</v-list-tile-content>
+                              </v-list-tile>
+                              <v-list-tile>
+                                <v-list-tile-content>W/tax Compensation:</v-list-tile-content>
+                                <v-list-tile-content
+                                  class="align-end"
+                                >{{ formData.workingDay.double_holiday_ford_amount }}</v-list-tile-content>
+                              </v-list-tile>
+                              <v-divider></v-divider>
+                              <v-list-tile>
+                                <v-list-tile-content>Total:</v-list-tile-content>
+                                <v-list-tile-content
+                                  class="align-end"
+                                >{{ formData.workingDay.total_amount }}</v-list-tile-content>
+                              </v-list-tile>
+                            </v-list>
+                          </v-card>
+                        </v-flex>
+                      </v-flex>
+
+                      <v-flex xs12 sm12 md12 lg7>
+                        <v-form ref="form" @submit.prevent="computeWorkingDays">
+                          <v-flex xs12 sm12 md12 lg12>
+                            <v-flex xs12 sm12 md12 lg12 offset-xs6 offset-sm6 offset-md6 offset-lg4>
+                              <h3>SSS</h3>
+                            </v-flex>
+                            <v-layout wrap>
+                              <v-flex xs12>
+                                <h4>Bi-monthly Contribution</h4>
+                              </v-flex>
+                              <v-flex xs12 sm12 md6 lg4>
+                                <v-text-field
+                                  v-model="formData.deductions.sss.bi_monthly.fixed"
+                                  label="Fixed"
+                                  type="number"
+                                  prepend-icon="money"
+                                ></v-text-field>
+                              </v-flex>
+                              <v-flex xs12 sm12 md6 lg4>
+                                <v-text-field
+                                  v-model="formData.deductions.sss.bi_monthly.adjustment"
+                                  label="Adjustment"
+                                  type="number"
+                                  prepend-icon="money"
+                                ></v-text-field>
+                              </v-flex>
+                              <v-flex xs12>
+                                <h4>Bi-monthly Salary Loan</h4>
+                              </v-flex>
+                              <v-flex xs12 sm12 md6 lg4>
+                                <v-text-field
+                                  v-model="formData.deductions.sss.bi_monthly_salary_loan.fixed"
+                                  label="Fixed"
+                                  type="number"
+                                  prepend-icon="money"
+                                ></v-text-field>
+                              </v-flex>
+                              <v-flex xs12 sm12 md6 lg4>
+                                <v-text-field
+                                  v-model="formData.deductions.sss.bi_monthly_salary_loan.adjustment"
+                                  label="Adjustment"
+                                  type="number"
+                                  prepend-icon="money"
+                                ></v-text-field>
+                              </v-flex>
+                            </v-layout>
+                          </v-flex>
+                        </v-form>
+                      </v-flex>
+                    </v-layout>
+                  </v-tab-item>
                 </v-tabs-items>
               </v-tabs>
             </v-flex>
@@ -943,6 +1067,10 @@ export default {
       {
         key: "other-salaries-and-wages",
         title: "Other Salaries and Wages"
+      },
+      {
+        key: "deductions",
+        title: "Deductions"
       }
     ],
     date: false,
@@ -1040,6 +1168,54 @@ export default {
         taxable_amount: "0.00",
         non_taxable_amount: "0.00",
         description: ""
+      },
+      deductions: {
+        sss: {
+          bi_monthly: {
+            fixed: "0.00",
+            adjustment: "0.00",
+            total: "0.00"
+          },
+          bi_monthly_salary_loan: {
+            fixed: "0.00",
+            adjustment: "0.00",
+            total: "0.00"
+          }
+        },
+        phic: {
+          bi_monthly: {
+            fixed: "0.00",
+            adjustment: "0.00",
+            total: "0.00"
+          }
+        },
+        hdmf: {
+          bi_monthly: {
+            fixed: "0.00",
+            adjustment: "0.00",
+            total: "0.00"
+          },
+          bi_monthly_salary_loan: {
+            fixed: "0.00",
+            adjustment: "0.00",
+            total: "0.00"
+          },
+          bi_monthly_housing: {
+            fixed: "0.00",
+            adjustment: "0.00",
+            total: "0.00"
+          }
+        },
+        personal_cash: {
+          advances: "0.00"
+        },
+        bir: {
+          with_tax_compensation: {
+            fixed: "0.00",
+            adjustment: "0.00",
+            total: "0.00"
+          }
+        }
       }
     },
     formData: {
@@ -1134,6 +1310,54 @@ export default {
         taxable_amount: "0.00",
         non_taxable_amount: "0.00",
         description: ""
+      },
+      deductions: {
+        sss: {
+          bi_monthly: {
+            fixed: "0.00",
+            adjustment: "0.00",
+            total: "0.00"
+          },
+          bi_monthly_salary_loan: {
+            fixed: "0.00",
+            adjustment: "0.00",
+            total: "0.00"
+          }
+        },
+        phic: {
+          bi_monthly: {
+            fixed: "0.00",
+            adjustment: "0.00",
+            total: "0.00"
+          }
+        },
+        hdmf: {
+          bi_monthly: {
+            fixed: "0.00",
+            adjustment: "0.00",
+            total: "0.00"
+          },
+          bi_monthly_salary_loan: {
+            fixed: "0.00",
+            adjustment: "0.00",
+            total: "0.00"
+          },
+          bi_monthly_housing: {
+            fixed: "0.00",
+            adjustment: "0.00",
+            total: "0.00"
+          }
+        },
+        personal_cash: {
+          advances: "0.00"
+        },
+        bir: {
+          with_tax_compensation: {
+            fixed: "0.00",
+            adjustment: "0.00",
+            total: "0.00"
+          }
+        }
       }
     },
     valid: true,
