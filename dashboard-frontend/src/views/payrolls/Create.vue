@@ -1067,7 +1067,7 @@
                             <v-list-tile-content>Name:</v-list-tile-content>
                             <v-list-tile-content
                               class="align-end"
-                            >{{ `${formData.employeeDetails.lastname}, ${formData.employeeDetails.firstname} ${formData.employeeDetails.middlename}` }}</v-list-tile-content>
+                            >{{ formData.employeeDetails.name }}</v-list-tile-content>
                           </v-list-tile>
                           <v-list-tile>
                             <v-list-tile-content>Date:</v-list-tile-content>
@@ -1267,10 +1267,7 @@ export default {
     defaultFormData: {
       employeeDetails: {
         id: null,
-        employee_no: "",
-        firstname: "",
-        middlename: "",
-        lastname: ""
+        name: ""
       },
       payroll: {
         basic_salary_amount: "0.00",
@@ -1595,25 +1592,19 @@ export default {
         this.formData.employeeDetails.id
       )
         .then(response => {
-          let obj = {
-            alert: true,
-            type: "success",
-            message: response.data.message
-          };
-          if (!response.data.result) obj.type = "error";
-          this.setAlert(obj);
+          // let obj = {
+          //   alert: true,
+          //   type: "success",
+          //   message: response.data.message
+          // };
+          // if (!response.data.result) obj.type = "error";
+          // this.setAlert(obj);
           if (response.data.result) {
-            this.formData.employeeDetails.employee_no = response.data.result[0].employees.employee_no
-            this.formData.employeeDetails.firstname = response.data.result[0].employees.firstname
-            this.formData.employeeDetails.middlename = response.data.result[0].employees.middlename
-            this.formData.employeeDetails.lastname = response.data.result[0].employees.lastname
+            this.formData.employeeDetails.name = this.setFullnameLastnameFirst(response.data.result[0].employees.firstname, response.data.result[0].employees.middlename, response.data.result[0].employees.lastname);
             this.formData.payroll.basic_salary_amount = response.data.result[0].salary_amount;
             this.formData.payroll.fixed_allowance_amount = response.data.result[0].allowance_amount;
           } else {
-            this.formData.employeeDetails.employee_no = this.defaultFormData.employeeDetails.employee_no
-            this.formData.employeeDetails.firstname = this.defaultFormData.employeeDetails.firstname
-            this.formData.employeeDetails.middlename = this.defaultFormData.employeeDetails.middlename
-            this.formData.employeeDetails.lastname = this.defaultFormData.employeeDetails.lastname
+            this.formData.employeeDetails.name = this.defaultFormData.employeeDetails.name;
             this.formData.payroll.basic_salary_amount = this.defaultFormData.payroll.basic_salary_amount;
             this.formData.payroll.fixed_allowance_amount = this.defaultFormData.payroll.fixed_allowance_amount;
           }
