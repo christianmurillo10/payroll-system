@@ -1,176 +1,16 @@
 <template>
   <div>
     <v-layout row wrap>
-      <v-container fluid grid-list-md>
+      <v-container grid-list-md>
         <Alerts />
         <v-flex xs12 sm12 md12 lg12>
-          <v-layout wrap>
-            <v-flex xs12 sm12 md12 lg12>
-              <v-card>
-                <v-card-title>
-                  <v-icon class="black--text" left>view_list</v-icon>
-                  <span class="title">Payroll - Create</span>
-                </v-card-title>
-                <v-divider></v-divider>
-                <v-list dense>
-                  <v-layout wrap>
-                    <v-flex xs12 sm12 md12 lg12>
-                      <v-list-tile-content class="align-center">
-                        <h3>SUMMARY</h3>
-                      </v-list-tile-content>
-                    </v-flex>
-                    <v-flex xs12 sm12 md6 lg6>
-                      <v-layout wrap>
-                        <v-flex xs12 sm12 md6 lg6>
-                          <v-list-tile>
-                            <v-list-tile-title><h3>Employee Details</h3></v-list-tile-title>
-                          </v-list-tile>
-                          <v-list-tile>
-                            <v-list-tile-content>Name:</v-list-tile-content>
-                            <v-list-tile-content
-                              class="align-end"
-                            >{{ `${formData.employeeDetails.lastname}, ${formData.employeeDetails.firstname} ${formData.employeeDetails.middlename}` }}</v-list-tile-content>
-                          </v-list-tile>
-                          <v-list-tile>
-                            <v-list-tile-content>Date:</v-list-tile-content>
-                            <v-list-tile-content
-                              class="align-end"
-                            >{{ formData.payroll.date }}</v-list-tile-content>
-                          </v-list-tile>
-                          <v-list-tile>
-                            <v-list-tile-content>Date From:</v-list-tile-content>
-                            <v-list-tile-content
-                              class="align-end"
-                            >{{ formData.payroll.date_from }}</v-list-tile-content>
-                          </v-list-tile>
-                          <v-list-tile>
-                            <v-list-tile-content>Date To:</v-list-tile-content>
-                            <v-list-tile-content
-                              class="align-end"
-                            >{{ formData.payroll.date_to }}</v-list-tile-content>
-                          </v-list-tile>
-                        </v-flex>
-                        <v-flex xs12 sm12 md6 lg6>
-                          <v-list-tile>
-                            <v-list-tile-title><h3>Non-Taxable</h3></v-list-tile-title>
-                          </v-list-tile>
-                          <v-list-tile>
-                            <v-list-tile-content>Fixed Allowance:</v-list-tile-content>
-                            <v-list-tile-content
-                              class="align-end"
-                            >{{ formData.payroll.fixed_allowance_amount }}</v-list-tile-content>
-                          </v-list-tile>
-                          <v-list-tile>
-                            <v-list-tile-content>Daily Allowance:</v-list-tile-content>
-                            <v-list-tile-content
-                              class="align-end"
-                            >{{ formData.payroll.daily_allowance_amount }}</v-list-tile-content>
-                          </v-list-tile>
-                          <v-list-tile>
-                            <v-list-tile-content>Sick Leave:</v-list-tile-content>
-                            <v-list-tile-content
-                              class="align-end"
-                            >{{ formData.tardiness.sick_leave_amount }}</v-list-tile-content>
-                          </v-list-tile>
-                          <v-list-tile>
-                            <v-list-tile-content>Vacation Leave:</v-list-tile-content>
-                            <v-list-tile-content
-                              class="align-end"
-                            >{{ formData.tardiness.vacation_leave_amount }}</v-list-tile-content>
-                          </v-list-tile>
-                          <v-list-tile>
-                            <v-list-tile-content>Holiday:</v-list-tile-content>
-                            <v-list-tile-content
-                              class="align-end"
-                            >{{ formData.tardiness.holiday_amount }}</v-list-tile-content>
-                          </v-list-tile>
-                        </v-flex>
-                        <v-divider></v-divider>
-                        <v-flex xs12 sm12 md6 lg6 offset-md6 offset-lg6>
-                          <v-list-tile>
-                            <v-list-tile-title><h3>Taxable</h3></v-list-tile-title>
-                          </v-list-tile>
-                          <v-list-tile>
-                            <v-list-tile-content>Basic Salary:</v-list-tile-content>
-                            <v-list-tile-content
-                              class="align-end"
-                            >{{ formData.payroll.basic_salary_amount }}</v-list-tile-content>
-                          </v-list-tile>
-                          <v-list-tile>
-                            <v-list-tile-content>Daily Rate:</v-list-tile-content>
-                            <v-list-tile-content
-                              class="align-end"
-                            >{{ formData.payroll.daily_rate_amount }}</v-list-tile-content>
-                          </v-list-tile>
-                        </v-flex>
-                      </v-layout>
-                    </v-flex>
-                    <v-flex xs12 sm12 md6 lg6>
-                      <v-list-tile>
-                        <v-list-tile-content>Total Working Day:</v-list-tile-content>
-                        <v-list-tile-content
-                          class="align-end"
-                        >{{ formData.payroll.total_working_day_amount }}</v-list-tile-content>
-                      </v-list-tile>
-                      <v-list-tile>
-                        <v-list-tile-content>Total Night Differential:</v-list-tile-content>
-                        <v-list-tile-content
-                          class="align-end"
-                        >{{ formData.payroll.total_night_differential_amount }}</v-list-tile-content>
-                      </v-list-tile>
-                      <v-list-tile>
-                        <v-list-tile-content>Total Overtime:</v-list-tile-content>
-                        <v-list-tile-content
-                          class="align-end"
-                        >{{ formData.payroll.total_overtime_amount }}</v-list-tile-content>
-                      </v-list-tile>
-                      <v-list-tile>
-                        <v-list-tile-content>Total Other Salary and Wages:</v-list-tile-content>
-                        <v-list-tile-content
-                          class="align-end"
-                        >{{ formData.payroll.total_other_salary_and_wages_amount }}</v-list-tile-content>
-                      </v-list-tile>
-                      <v-list-tile>
-                        <v-list-tile-content>Total Tardiness:</v-list-tile-content>
-                        <v-list-tile-content
-                          class="align-end"
-                        >{{ `(${formData.payroll.total_tardiness_amount})` }}</v-list-tile-content>
-                      </v-list-tile>
-                      <v-divider></v-divider>
-                      <v-list-tile>
-                        <v-list-tile-content>Gross Amount:</v-list-tile-content>
-                        <v-list-tile-content class="align-end">{{ formData.payroll.gross_amount }}</v-list-tile-content>
-                      </v-list-tile>
-                      <v-list-tile>
-                        <v-list-tile-content>Total Non-Taxable:</v-list-tile-content>
-                        <v-list-tile-content
-                          class="align-end"
-                        >{{ formData.payroll.total_non_taxable_amount }}</v-list-tile-content>
-                      </v-list-tile>
-                      <v-list-tile>
-                        <v-list-tile-content>Total Deduction:</v-list-tile-content>
-                        <v-list-tile-content
-                          class="align-end"
-                        >{{ `(${formData.payroll.total_deduction_amount})` }}</v-list-tile-content>
-                      </v-list-tile>
-                      <v-divider></v-divider>
-                      <v-list-tile>
-                        <v-list-tile-content>Net Amount:</v-list-tile-content>
-                        <v-list-tile-content class="align-end">{{ formData.payroll.net_amount }}</v-list-tile-content>
-                      </v-list-tile>
-                    </v-flex>
-                  </v-layout>
-                </v-list>
-              </v-card>
-            </v-flex>
-          </v-layout>
-        </v-flex>
-      </v-container>
-      <v-container grid-list-md>
-        <v-flex xs12 sm12 md12 lg12>
           <v-card :elevation="3" max-width="auto">
+            <v-card-title>
+              <v-icon class="black--text" left>view_list</v-icon>
+              <span class="title">Payroll - Create</span>
+            </v-card-title>
             <v-flex xs12 sm12 md12>
-              <v-tabs fixed-tabs dark show-arrows>
+              <v-tabs fixed-tabs show-arrows>
                 <v-tabs-slider color="yellow"></v-tabs-slider>
                 <v-tab
                   v-for="(header, i) in tabHeaders"
@@ -1203,6 +1043,165 @@
               </v-tabs>
             </v-flex>
           </v-card>
+        </v-flex>
+      </v-container>
+      <v-container fluid grid-list-md>
+        <v-flex xs12 sm12 md12 lg12>
+          <v-layout wrap>
+            <v-flex xs12 sm12 md12 lg12>
+              <v-card>
+                <v-list dense>
+                  <v-layout wrap>
+                    <v-flex xs12 sm12 md12 lg12>
+                      <v-list-tile-content class="align-center">
+                        <h3>SUMMARY</h3>
+                      </v-list-tile-content>
+                    </v-flex>
+                    <v-flex xs12 sm12 md6 lg6>
+                      <v-layout wrap>
+                        <v-flex xs12 sm12 md6 lg6>
+                          <v-list-tile>
+                            <v-list-tile-title><h3>Employee Details</h3></v-list-tile-title>
+                          </v-list-tile>
+                          <v-list-tile>
+                            <v-list-tile-content>Name:</v-list-tile-content>
+                            <v-list-tile-content
+                              class="align-end"
+                            >{{ `${formData.employeeDetails.lastname}, ${formData.employeeDetails.firstname} ${formData.employeeDetails.middlename}` }}</v-list-tile-content>
+                          </v-list-tile>
+                          <v-list-tile>
+                            <v-list-tile-content>Date:</v-list-tile-content>
+                            <v-list-tile-content
+                              class="align-end"
+                            >{{ formData.payroll.date }}</v-list-tile-content>
+                          </v-list-tile>
+                          <v-list-tile>
+                            <v-list-tile-content>Date From:</v-list-tile-content>
+                            <v-list-tile-content
+                              class="align-end"
+                            >{{ formData.payroll.date_from }}</v-list-tile-content>
+                          </v-list-tile>
+                          <v-list-tile>
+                            <v-list-tile-content>Date To:</v-list-tile-content>
+                            <v-list-tile-content
+                              class="align-end"
+                            >{{ formData.payroll.date_to }}</v-list-tile-content>
+                          </v-list-tile>
+                        </v-flex>
+                        <v-flex xs12 sm12 md6 lg6>
+                          <v-list-tile>
+                            <v-list-tile-title><h3>Non-Taxable</h3></v-list-tile-title>
+                          </v-list-tile>
+                          <v-list-tile>
+                            <v-list-tile-content>Fixed Allowance:</v-list-tile-content>
+                            <v-list-tile-content
+                              class="align-end"
+                            >{{ formData.payroll.fixed_allowance_amount }}</v-list-tile-content>
+                          </v-list-tile>
+                          <v-list-tile>
+                            <v-list-tile-content>Daily Allowance:</v-list-tile-content>
+                            <v-list-tile-content
+                              class="align-end"
+                            >{{ formData.payroll.daily_allowance_amount }}</v-list-tile-content>
+                          </v-list-tile>
+                          <v-list-tile>
+                            <v-list-tile-content>Sick Leave:</v-list-tile-content>
+                            <v-list-tile-content
+                              class="align-end"
+                            >{{ formData.tardiness.sick_leave_amount }}</v-list-tile-content>
+                          </v-list-tile>
+                          <v-list-tile>
+                            <v-list-tile-content>Vacation Leave:</v-list-tile-content>
+                            <v-list-tile-content
+                              class="align-end"
+                            >{{ formData.tardiness.vacation_leave_amount }}</v-list-tile-content>
+                          </v-list-tile>
+                          <v-list-tile>
+                            <v-list-tile-content>Holiday:</v-list-tile-content>
+                            <v-list-tile-content
+                              class="align-end"
+                            >{{ formData.tardiness.holiday_amount }}</v-list-tile-content>
+                          </v-list-tile>
+                        </v-flex>
+                        <v-divider></v-divider>
+                        <v-flex xs12 sm12 md6 lg6 offset-md6 offset-lg6>
+                          <v-list-tile>
+                            <v-list-tile-title><h3>Taxable</h3></v-list-tile-title>
+                          </v-list-tile>
+                          <v-list-tile>
+                            <v-list-tile-content>Basic Salary:</v-list-tile-content>
+                            <v-list-tile-content
+                              class="align-end"
+                            >{{ formData.payroll.basic_salary_amount }}</v-list-tile-content>
+                          </v-list-tile>
+                          <v-list-tile>
+                            <v-list-tile-content>Daily Rate:</v-list-tile-content>
+                            <v-list-tile-content
+                              class="align-end"
+                            >{{ formData.payroll.daily_rate_amount }}</v-list-tile-content>
+                          </v-list-tile>
+                        </v-flex>
+                      </v-layout>
+                    </v-flex>
+                    <v-flex xs12 sm12 md6 lg6>
+                      <v-list-tile>
+                        <v-list-tile-content>Total Working Day:</v-list-tile-content>
+                        <v-list-tile-content
+                          class="align-end"
+                        >{{ formData.payroll.total_working_day_amount }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Total Night Differential:</v-list-tile-content>
+                        <v-list-tile-content
+                          class="align-end"
+                        >{{ formData.payroll.total_night_differential_amount }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Total Overtime:</v-list-tile-content>
+                        <v-list-tile-content
+                          class="align-end"
+                        >{{ formData.payroll.total_overtime_amount }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Total Other Salary and Wages:</v-list-tile-content>
+                        <v-list-tile-content
+                          class="align-end"
+                        >{{ formData.payroll.total_other_salary_and_wages_amount }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Total Tardiness:</v-list-tile-content>
+                        <v-list-tile-content
+                          class="align-end"
+                        >{{ `(${formData.payroll.total_tardiness_amount})` }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-divider></v-divider>
+                      <v-list-tile>
+                        <v-list-tile-content>Gross Amount:</v-list-tile-content>
+                        <v-list-tile-content class="align-end">{{ formData.payroll.gross_amount }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Total Non-Taxable:</v-list-tile-content>
+                        <v-list-tile-content
+                          class="align-end"
+                        >{{ formData.payroll.total_non_taxable_amount }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-content>Total Deduction:</v-list-tile-content>
+                        <v-list-tile-content
+                          class="align-end"
+                        >{{ `(${formData.payroll.total_deduction_amount})` }}</v-list-tile-content>
+                      </v-list-tile>
+                      <v-divider></v-divider>
+                      <v-list-tile>
+                        <v-list-tile-content>Net Amount:</v-list-tile-content>
+                        <v-list-tile-content class="align-end">{{ formData.payroll.net_amount }}</v-list-tile-content>
+                      </v-list-tile>
+                    </v-flex>
+                  </v-layout>
+                </v-list>
+              </v-card>
+            </v-flex>
+          </v-layout>
         </v-flex>
       </v-container>
     </v-layout>
