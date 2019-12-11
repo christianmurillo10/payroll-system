@@ -1196,6 +1196,17 @@
                         <v-list-tile-content>Net Amount:</v-list-tile-content>
                         <v-list-tile-content class="align-end">{{ formData.payroll.net_amount }}</v-list-tile-content>
                       </v-list-tile>
+                      <v-divider></v-divider>
+                    </v-flex>
+                    <v-flex xs12 sm12 md12>
+                      <v-list-tile>
+                        <v-list-tile-content class="align-end">
+                          <div class="text-xs-center">
+                            <v-btn type="submit" round color="default" dark>Clear</v-btn>
+                            <v-btn type="submit" round color="success" dark>Save</v-btn>
+                          </div>
+                        </v-list-tile-content>
+                      </v-list-tile>
                     </v-flex>
                   </v-layout>
                 </v-list>
