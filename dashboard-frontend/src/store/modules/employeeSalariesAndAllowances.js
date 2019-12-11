@@ -127,7 +127,6 @@ const mutations = {
     }
   },
   SET_IS_CURRENT_DATA_BY_EMPLOYEE(state, payload) {
-    console.log(payload)
     if (payload) {
       state.employeeSalariesAndAllowancesIsCurrentData = payload;
     } else {

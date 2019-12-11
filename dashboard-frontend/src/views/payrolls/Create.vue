@@ -20,55 +20,90 @@
                       </v-list-tile-content>
                     </v-flex>
                     <v-flex xs12 sm12 md6 lg6>
-                      <v-list-tile>
-                        <v-list-tile-title><h3>Taxable</h3></v-list-tile-title>
-                      </v-list-tile>
-                      <v-list-tile>
-                        <v-list-tile-content>Basic Salary:</v-list-tile-content>
-                        <v-list-tile-content
-                          class="align-end"
-                        >{{ formData.payroll.basic_salary_amount }}</v-list-tile-content>
-                      </v-list-tile>
-                      <v-list-tile>
-                        <v-list-tile-content>Daily Rate:</v-list-tile-content>
-                        <v-list-tile-content
-                          class="align-end"
-                        >{{ formData.payroll.daily_rate_amount }}</v-list-tile-content>
-                      </v-list-tile>
-                      <v-divider></v-divider>
-                      <v-list-tile>
-                        <v-list-tile-title><h3>Non-Taxable</h3></v-list-tile-title>
-                      </v-list-tile>
-                      <v-list-tile>
-                        <v-list-tile-content>Fixed Allowance:</v-list-tile-content>
-                        <v-list-tile-content
-                          class="align-end"
-                        >{{ formData.payroll.fixed_allowance_amount }}</v-list-tile-content>
-                      </v-list-tile>
-                      <v-list-tile>
-                        <v-list-tile-content>Daily Allowance:</v-list-tile-content>
-                        <v-list-tile-content
-                          class="align-end"
-                        >{{ formData.payroll.daily_allowance_amount }}</v-list-tile-content>
-                      </v-list-tile>
-                      <v-list-tile>
-                        <v-list-tile-content>Sick Leave:</v-list-tile-content>
-                        <v-list-tile-content
-                          class="align-end"
-                        >{{ formData.tardiness.sick_leave_amount }}</v-list-tile-content>
-                      </v-list-tile>
-                      <v-list-tile>
-                        <v-list-tile-content>Vacation Leave:</v-list-tile-content>
-                        <v-list-tile-content
-                          class="align-end"
-                        >{{ formData.tardiness.vacation_leave_amount }}</v-list-tile-content>
-                      </v-list-tile>
-                      <v-list-tile>
-                        <v-list-tile-content>Holiday:</v-list-tile-content>
-                        <v-list-tile-content
-                          class="align-end"
-                        >{{ formData.tardiness.holiday_amount }}</v-list-tile-content>
-                      </v-list-tile>
+                      <v-layout wrap>
+                        <v-flex xs12 sm12 md6 lg6>
+                          <v-list-tile>
+                            <v-list-tile-title><h3>Employee Details</h3></v-list-tile-title>
+                          </v-list-tile>
+                          <v-list-tile>
+                            <v-list-tile-content>Name:</v-list-tile-content>
+                            <v-list-tile-content
+                              class="align-end"
+                            >{{ `${formData.employeeDetails.lastname}, ${formData.employeeDetails.firstname} ${formData.employeeDetails.middlename}` }}</v-list-tile-content>
+                          </v-list-tile>
+                          <v-list-tile>
+                            <v-list-tile-content>Date:</v-list-tile-content>
+                            <v-list-tile-content
+                              class="align-end"
+                            >{{ formData.payroll.date }}</v-list-tile-content>
+                          </v-list-tile>
+                          <v-list-tile>
+                            <v-list-tile-content>Date From:</v-list-tile-content>
+                            <v-list-tile-content
+                              class="align-end"
+                            >{{ formData.payroll.date_from }}</v-list-tile-content>
+                          </v-list-tile>
+                          <v-list-tile>
+                            <v-list-tile-content>Date To:</v-list-tile-content>
+                            <v-list-tile-content
+                              class="align-end"
+                            >{{ formData.payroll.date_to }}</v-list-tile-content>
+                          </v-list-tile>
+                        </v-flex>
+                        <v-flex xs12 sm12 md6 lg6>
+                          <v-list-tile>
+                            <v-list-tile-title><h3>Non-Taxable</h3></v-list-tile-title>
+                          </v-list-tile>
+                          <v-list-tile>
+                            <v-list-tile-content>Fixed Allowance:</v-list-tile-content>
+                            <v-list-tile-content
+                              class="align-end"
+                            >{{ formData.payroll.fixed_allowance_amount }}</v-list-tile-content>
+                          </v-list-tile>
+                          <v-list-tile>
+                            <v-list-tile-content>Daily Allowance:</v-list-tile-content>
+                            <v-list-tile-content
+                              class="align-end"
+                            >{{ formData.payroll.daily_allowance_amount }}</v-list-tile-content>
+                          </v-list-tile>
+                          <v-list-tile>
+                            <v-list-tile-content>Sick Leave:</v-list-tile-content>
+                            <v-list-tile-content
+                              class="align-end"
+                            >{{ formData.tardiness.sick_leave_amount }}</v-list-tile-content>
+                          </v-list-tile>
+                          <v-list-tile>
+                            <v-list-tile-content>Vacation Leave:</v-list-tile-content>
+                            <v-list-tile-content
+                              class="align-end"
+                            >{{ formData.tardiness.vacation_leave_amount }}</v-list-tile-content>
+                          </v-list-tile>
+                          <v-list-tile>
+                            <v-list-tile-content>Holiday:</v-list-tile-content>
+                            <v-list-tile-content
+                              class="align-end"
+                            >{{ formData.tardiness.holiday_amount }}</v-list-tile-content>
+                          </v-list-tile>
+                        </v-flex>
+                        <v-divider></v-divider>
+                        <v-flex xs12 sm12 md6 lg6 offset-md6 offset-lg6>
+                          <v-list-tile>
+                            <v-list-tile-title><h3>Taxable</h3></v-list-tile-title>
+                          </v-list-tile>
+                          <v-list-tile>
+                            <v-list-tile-content>Basic Salary:</v-list-tile-content>
+                            <v-list-tile-content
+                              class="align-end"
+                            >{{ formData.payroll.basic_salary_amount }}</v-list-tile-content>
+                          </v-list-tile>
+                          <v-list-tile>
+                            <v-list-tile-content>Daily Rate:</v-list-tile-content>
+                            <v-list-tile-content
+                              class="align-end"
+                            >{{ formData.payroll.daily_rate_amount }}</v-list-tile-content>
+                          </v-list-tile>
+                        </v-flex>
+                      </v-layout>
                     </v-flex>
                     <v-flex xs12 sm12 md6 lg6>
                       <v-list-tile>
@@ -155,7 +190,7 @@
                                   :items="getEmployeeList"
                                   item-text="firstname"
                                   item-value="id"
-                                  v-model="formData.employee_id"
+                                  v-model="formData.employeeDetails.id"
                                   :rules="validateItem.employeeRules"
                                   label="Employee"
                                   required
@@ -170,7 +205,7 @@
                                   v-model="date"
                                   :close-on-content-click="false"
                                   :nudge-right="40"
-                                  :return-value.sync="formData.date"
+                                  :return-value.sync="formData.payroll.date"
                                   lazy
                                   transition="scale-transition"
                                   offset-y
@@ -179,20 +214,20 @@
                                 >
                                   <template v-slot:activator="{ on }">
                                     <v-text-field
-                                      v-model="formData.date"
+                                      v-model="formData.payroll.date"
                                       label="Date"
                                       prepend-icon="event"
                                       readonly
                                       v-on="on"
                                     ></v-text-field>
                                   </template>
-                                  <v-date-picker v-model="formData.date" no-title scrollable>
+                                  <v-date-picker v-model="formData.payroll.date" no-title scrollable>
                                     <v-spacer></v-spacer>
                                     <v-btn flat color="primary" @click="date = false">Cancel</v-btn>
                                     <v-btn
                                       flat
                                       color="primary"
-                                      @click="$refs.date.save(formData.date)"
+                                      @click="$refs.date.save(formData.payroll.date)"
                                     >OK</v-btn>
                                   </v-date-picker>
                                 </v-menu>
@@ -205,7 +240,7 @@
                                   v-model="date_from"
                                   :close-on-content-click="false"
                                   :nudge-right="40"
-                                  :return-value.sync="formData.date_from"
+                                  :return-value.sync="formData.payroll.date_from"
                                   lazy
                                   transition="scale-transition"
                                   offset-y
@@ -214,20 +249,20 @@
                                 >
                                   <template v-slot:activator="{ on }">
                                     <v-text-field
-                                      v-model="formData.date_from"
+                                      v-model="formData.payroll.date_from"
                                       label="Date From"
                                       prepend-icon="event"
                                       readonly
                                       v-on="on"
                                     ></v-text-field>
                                   </template>
-                                  <v-date-picker v-model="formData.date_from" no-title scrollable>
+                                  <v-date-picker v-model="formData.payroll.date_from" no-title scrollable>
                                     <v-spacer></v-spacer>
                                     <v-btn flat color="primary" @click="date_from = false">Cancel</v-btn>
                                     <v-btn
                                       flat
                                       color="primary"
-                                      @click="$refs.date_from.save(formData.date_from)"
+                                      @click="$refs.date_from.save(formData.payroll.date_from)"
                                     >OK</v-btn>
                                   </v-date-picker>
                                 </v-menu>
@@ -238,7 +273,7 @@
                                   v-model="date_to"
                                   :close-on-content-click="false"
                                   :nudge-right="40"
-                                  :return-value.sync="formData.date_to"
+                                  :return-value.sync="formData.payroll.date_to"
                                   lazy
                                   transition="scale-transition"
                                   offset-y
@@ -247,20 +282,20 @@
                                 >
                                   <template v-slot:activator="{ on }">
                                     <v-text-field
-                                      v-model="formData.date_to"
+                                      v-model="formData.payroll.date_to"
                                       label="Date To"
                                       prepend-icon="event"
                                       readonly
                                       v-on="on"
                                     ></v-text-field>
                                   </template>
-                                  <v-date-picker v-model="formData.date_to" no-title scrollable>
+                                  <v-date-picker v-model="formData.payroll.date_to" no-title scrollable>
                                     <v-spacer></v-spacer>
                                     <v-btn flat color="primary" @click="date_to = false">Cancel</v-btn>
                                     <v-btn
                                       flat
                                       color="primary"
-                                      @click="$refs.date_to.save(formData.date_to)"
+                                      @click="$refs.date_to.save(formData.payroll.date_to)"
                                     >OK</v-btn>
                                   </v-date-picker>
                                 </v-menu>
@@ -1220,7 +1255,13 @@ export default {
     date_from: false,
     date_to: false,
     defaultFormData: {
-      employee_id: null,
+      employeeDetails: {
+        id: null,
+        employee_no: "",
+        firstname: "",
+        middlename: "",
+        lastname: ""
+      },
       payroll: {
         basic_salary_amount: "0.00",
         fixed_allowance_amount: "0.00",
@@ -1235,9 +1276,9 @@ export default {
         total_non_taxable_amount: "0.00",
         total_deduction_amount: "0.00",
         net_amount: "0.00",
-        date: new Date().toISOString().substr(0, 10),
-        date_from: new Date().toISOString().substr(0, 10),
-        date_to: new Date().toISOString().substr(0, 10)
+        date: "",
+        date_from: "",
+        date_to: ""
       },
       workingDay: {
         regular_day: "0.00",
@@ -1363,7 +1404,13 @@ export default {
       }
     },
     formData: {
-      employee_id: null,
+      employeeDetails: {
+        id: null,
+        employee_no: "",
+        firstname: "",
+        middlename: "",
+        lastname: ""
+      },
       payroll: {
         basic_salary_amount: "0.00",
         fixed_allowance_amount: "0.00",
@@ -1378,9 +1425,9 @@ export default {
         total_non_taxable_amount: "0.00",
         total_deduction_amount: "0.00",
         net_amount: "0.00",
-        date: new Date().toISOString().substr(0, 10),
-        date_from: new Date().toISOString().substr(0, 10),
-        date_to: new Date().toISOString().substr(0, 10)
+        date: "",
+        date_from: "",
+        date_to: ""
       },
       workingDay: {
         regular_day: "0.00",
@@ -1520,7 +1567,7 @@ export default {
   },
 
   created() {
-    this.formData.employee_id = this.employeeId;
+    this.formData.employeeDetails.id = this.employeeId;
     this.getEmployeesData();
   },
 
@@ -1535,7 +1582,7 @@ export default {
 
     getEmployeeDetails() {
       this.getEmployeeSalariesAndAllowancesIsCurrentDataByEmployeeId(
-        this.formData.employee_id
+        this.formData.employeeDetails.id
       )
         .then(response => {
           let obj = {
@@ -1546,9 +1593,17 @@ export default {
           if (!response.data.result) obj.type = "error";
           this.setAlert(obj);
           if (response.data.result) {
+            this.formData.employeeDetails.employee_no = response.data.result[0].employees.employee_no
+            this.formData.employeeDetails.firstname = response.data.result[0].employees.firstname
+            this.formData.employeeDetails.middlename = response.data.result[0].employees.middlename
+            this.formData.employeeDetails.lastname = response.data.result[0].employees.lastname
             this.formData.payroll.basic_salary_amount = response.data.result[0].salary_amount;
             this.formData.payroll.fixed_allowance_amount = response.data.result[0].allowance_amount;
           } else {
+            this.formData.employeeDetails.employee_no = this.defaultFormData.employeeDetails.employee_no
+            this.formData.employeeDetails.firstname = this.defaultFormData.employeeDetails.firstname
+            this.formData.employeeDetails.middlename = this.defaultFormData.employeeDetails.middlename
+            this.formData.employeeDetails.lastname = this.defaultFormData.employeeDetails.lastname
             this.formData.payroll.basic_salary_amount = this.defaultFormData.payroll.basic_salary_amount;
             this.formData.payroll.fixed_allowance_amount = this.defaultFormData.payroll.fixed_allowance_amount;
           }
