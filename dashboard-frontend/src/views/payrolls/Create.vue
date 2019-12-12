@@ -1586,6 +1586,7 @@ export default {
     ...mapActions("payrollNightDifferentials", { computePayrollNightDifferentialsData: "computeData" }),
     ...mapActions("payrollOvertimes", { computePayrollOvertimesData: "computeData" }),
     ...mapActions("payrollTardiness", { computePayrollTardinessData: "computeData" }),
+    ...mapActions("sssContributionTables", { getSSSContributionTablesContributionRange: "getContributionRange" }),
 
     getEmployeeDetails() {
       this.getEmployeeSalariesAndAllowancesIsCurrentDataByEmployeeId(
@@ -1603,11 +1604,23 @@ export default {
             this.formData.employeeDetails.name = this.setFullnameLastnameFirst(response.data.result[0].employees.firstname, response.data.result[0].employees.middlename, response.data.result[0].employees.lastname);
             this.formData.payroll.basic_salary_amount = response.data.result[0].salary_amount;
             this.formData.payroll.fixed_allowance_amount = response.data.result[0].allowance_amount;
+            this.getSSSContributionRange(response.data.result[0].salary_amount);
           } else {
             this.formData.employeeDetails.name = this.defaultFormData.employeeDetails.name;
             this.formData.payroll.basic_salary_amount = this.defaultFormData.payroll.basic_salary_amount;
             this.formData.payroll.fixed_allowance_amount = this.defaultFormData.payroll.fixed_allowance_amount;
+            this.formData.deductions.sss.bi_monthly.fixed = this.defaultFormData.deductions.sss.bi_monthly.fixed;
           }
+        })
+        .catch(err => console.log(err));
+    },
+    
+    getSSSContributionRange(value) {
+      this.getSSSContributionTablesContributionRange(
+        value
+      )
+        .then(response => {
+          this.formData.deductions.sss.bi_monthly.fixed = response.data.result[0].total / 2;
         })
         .catch(err => console.log(err));
     },

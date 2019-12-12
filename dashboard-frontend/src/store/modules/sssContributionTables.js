@@ -43,6 +43,21 @@ const actions = {
       }
     });
   },
+  getContributionRange({ dispatch, commit, state, rootState, getters, rootGetters }, payload) {
+    let url = `${process.env.VUE_APP_API_BACKEND}/sssContributionTable/findContributionRange/${payload}`;
+    let header = { headers: { Token: localStorage.getItem("token") } };
+    return new Promise((resolve, reject) => {
+      try {
+        axios
+          .get(url, header)
+          .then(response => {
+            resolve(response);
+          });
+      } catch (err) {
+        reject(err);
+      }
+    });
+  },
   saveData({ dispatch, commit, state, rootState, getters, rootGetters }, payload) {
     let url = `${process.env.VUE_APP_API_BACKEND}/sssContributionTable/create`;
     let header = { headers: { Token: localStorage.getItem("token") } };
