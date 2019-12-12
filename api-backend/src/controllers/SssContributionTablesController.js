@@ -255,4 +255,15 @@ module.exports = {
       });
     }
   },
+
+  /**
+   * Find by id
+   * @route GET /sssContributionTable/:id
+   * @param req
+   * @param res
+   * @returns {never}
+   */
+  // findById: async (req, res) => {
+  //   let data;
+  // },
 };
