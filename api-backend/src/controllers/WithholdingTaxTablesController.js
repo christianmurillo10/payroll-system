@@ -256,4 +256,29 @@ module.exports = {
       });
     }
   },
+
+  /**
+   * Public Functions
+   */
+
+  findContributionRange: async (basic, payFrequency) => {
+    let query, data;
+
+    try {
+      // Pre-setting variables
+      query = `SELECT * FROM withholding_tax_tables WHERE ? BETWEEN compensation_range_from AND compensation_range_to AND pay_frequency_id = ? AND is_deleted = 0;`;
+      // Execute native query
+      data = await Model.sequelize.query(query, {
+        replacements: [basic, payFrequency],
+        type: Model.sequelize.QueryTypes.SELECT
+      });
+      if (!_.isEmpty(data)) {
+        return data;
+      } else {
+        return false;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 };

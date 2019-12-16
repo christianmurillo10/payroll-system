@@ -1,5 +1,6 @@
 const Model = require('../models');
 const SssContributionTablesController = require('../controllers/SssContributionTablesController');
+const WithholdingTaxTablesController = require('../controllers/WithholdingTaxTablesController');
 const jsonfile = require('jsonfile');
 
 module.exports = {
@@ -90,35 +91,30 @@ module.exports = {
    */
   compute: async (req, res) => {
     const params = req.body;
-    let query, data;
 
     try {
       let phicJson = 'src/json/phic.json';
-      let phicPercentage = await jsonfile.readFile(phicJson);
-      let sssContribution = await SssContributionTablesController.findContributionRange(params.basic);
-      let phicContribution = (params.basic * phicPercentage.percentage) / 100;
-      console.log(phicContribution);
+      let hdmfJson = 'src/json/hdmf.json';
+      let phicJsonData = await jsonfile.readFile(phicJson);
+      let hdmfJsonData = await jsonfile.readFile(hdmfJson);
+      let now = new Date();
 
-      // // Pre-setting variables
-      // query = `SELECT * FROM sss_contribution_tables WHERE ? BETWEEN compensation_range_from AND compensation_range_to AND is_deleted = 0;`;
-      // // Execute native query
-      // data = await Model.sequelize.query(query, {
-      //   replacements: [params.value],
-      //   type: Model.sequelize.QueryTypes.SELECT
-      // });
-      // if (!_.isEmpty(data)) {
-      //   res.json({
-      //     status: 200,
-      //     message: "Successfully find contribution range.",
-      //     result: data
-      //   });
-      // } else {
-      //   res.json({
-      //     status: 200,
-      //     message: "No Data Found.",
-      //     result: false
-      //   });
-      // }
+      let sssContribution = await SssContributionTablesController.findContributionRange(params.basic);
+      let taxContribution = await WithholdingTaxTablesController.findContributionRange(params.basic, params.pay_frequency_id);
+      let phicContribution = ((params.basic * phicJsonData.percentage) / 100).toFixed(2);
+      let hdmfContribution = hdmfJsonData.filter(hdmf => hdmf.date == now.getFullYear());
+      let finalResult = {
+        sssContribution,
+        taxContribution,
+        phicContribution,
+        hdmfContribution
+      }
+
+      res.json({
+        status: 200,
+        message: "Successfully computed data.",
+        result: finalResult
+      });
     } catch (err) {
       res.json({
         status: 401,

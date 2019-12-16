@@ -280,42 +280,4 @@ module.exports = {
       console.log(err);
     }
   }
-  // findContributionRange: async (req, res) => {
-  //   const params = req.params;
-  //   let query, data;
-
-  //   if (_.isUndefined(params))
-  //     return res.badRequest({ err: "Invalid Parameter: [params]" });
-  //   if (_.isEmpty(params))
-  //     return res.badRequest({ err: "Empty Parameter: [params]" });
-
-  //   try {
-  //     // Pre-setting variables
-  //     query = `SELECT * FROM sss_contribution_tables WHERE ? BETWEEN compensation_range_from AND compensation_range_to AND is_deleted = 0;`;
-  //     // Execute native query
-  //     data = await Model.sequelize.query(query, {
-  //       replacements: [params.value],
-  //       type: Model.sequelize.QueryTypes.SELECT
-  //     });
-  //     if (!_.isEmpty(data)) {
-  //       res.json({
-  //         status: 200,
-  //         message: "Successfully find contribution range.",
-  //         result: data
-  //       });
-  //     } else {
-  //       res.json({
-  //         status: 200,
-  //         message: "No Data Found.",
-  //         result: false
-  //       });
-  //     }
-  //   } catch (err) {
-  //     res.json({
-  //       status: 401,
-  //       err: err,
-  //       message: "Failed to find contribution range."
-  //     });
-  //   }
-  // },
 };
