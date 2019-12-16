@@ -113,7 +113,6 @@ module.exports = {
       let doubleHoliday = computationTools(basic, data.fixedWorkingDays, data.fixedWorkingHours, params.double_holiday, data.overtime.doubleHoliday);
       let doubleHolidayFord = computationTools(basic, data.fixedWorkingDays, data.fixedWorkingHours, params.double_holiday_ford, data.overtime.doubleHolidayFord);
       let totalAmount = sum([regularDay, specialDay, specialDayFord, holiday, holidayFord, doubleHoliday, doubleHolidayFord]);
-      console.log(regularDay)
       let finalResult = {
         regularDay: regularDay.toFixed(2),
         specialDay: specialDay.toFixed(2),

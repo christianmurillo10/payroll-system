@@ -10,6 +10,7 @@ router.use('/payrollNightDifferential', require('./payrollNightDifferentials'));
 router.use('/payrollOvertime', require('./payrollOvertimes'));
 router.use('/payrollTardiness', require('./payrollTardiness'));
 router.use('/payrollOtherSalariesAndWages', require('./payrollOtherSalariesAndWages'));
+router.use('/payrollDeduction', require('./payrollDeductions'));
 router.use('/role', require('./roles'));
 router.use('/sssContributionTable', require('./sssContributionTables'));
 router.use('/user', require('./users'));
