@@ -1586,7 +1586,7 @@ export default {
     ...mapActions("payrollNightDifferentials", { computePayrollNightDifferentialsData: "computeData" }),
     ...mapActions("payrollOvertimes", { computePayrollOvertimesData: "computeData" }),
     ...mapActions("payrollTardiness", { computePayrollTardinessData: "computeData" }),
-    ...mapActions("sssContributionTables", { getSSSContributionTablesContributionRange: "getContributionRange" }),
+    ...mapActions("payrollDeductions", { computePayrollDeductionsData: "computeData" }),
 
     getEmployeeDetails() {
       this.getEmployeeSalariesAndAllowancesIsCurrentDataByEmployeeId(
@@ -1604,7 +1604,7 @@ export default {
             this.formData.employeeDetails.name = this.setFullnameLastnameFirst(response.data.result[0].employees.firstname, response.data.result[0].employees.middlename, response.data.result[0].employees.lastname);
             this.formData.payroll.basic_salary_amount = response.data.result[0].salary_amount;
             this.formData.payroll.fixed_allowance_amount = response.data.result[0].allowance_amount;
-            this.getSSSContributionRange(response.data.result[0].salary_amount);
+            this.computeDeductions({ basic: response.data.result[0].salary_amount, pay_frequency_id: response.data.result[0].employees.pay_frequency_id });
           } else {
             this.formData.employeeDetails.name = this.defaultFormData.employeeDetails.name;
             this.formData.payroll.basic_salary_amount = this.defaultFormData.payroll.basic_salary_amount;
@@ -1615,12 +1615,10 @@ export default {
         .catch(err => console.log(err));
     },
     
-    getSSSContributionRange(value) {
-      this.getSSSContributionTablesContributionRange(
-        value
-      )
+    computeDeductions(data) {
+      this.computePayrollDeductionsData(data)
         .then(response => {
-          this.formData.deductions.sss.bi_monthly.fixed = response.data.result[0].total / 2;
+          console.log('data', response)
         })
         .catch(err => console.log(err));
     },
