@@ -1610,6 +1610,9 @@ export default {
             this.formData.payroll.basic_salary_amount = this.defaultFormData.payroll.basic_salary_amount;
             this.formData.payroll.fixed_allowance_amount = this.defaultFormData.payroll.fixed_allowance_amount;
             this.formData.deductions.sss.bi_monthly.fixed = this.defaultFormData.deductions.sss.bi_monthly.fixed;
+            this.formData.deductions.phic.bi_monthly.fixed = this.defaultFormData.deductions.phic.bi_monthly.fixed;
+            this.formData.deductions.hdmf.bi_monthly.fixed = this.defaultFormData.deductions.hdmf.bi_monthly.fixed;
+            this.formData.deductions.bir.with_tax_compensation.fixed = this.defaultFormData.deductions.bir.with_tax_compensation.fixed;
           }
         })
         .catch(err => console.log(err));
@@ -1618,7 +1621,10 @@ export default {
     computeDeductions(data) {
       this.computePayrollDeductionsData(data)
         .then(response => {
-          console.log('data', response)
+          this.formData.deductions.sss.bi_monthly.fixed = response.data.result.sssContribution[0].employee_contribution != false ? response.data.result.sssContribution[0].employee_contribution : this.defaultFormData.deductions.sss.bi_monthly.fixed;
+          this.formData.deductions.phic.bi_monthly.fixed = response.data.result.phicContribution != false ? response.data.result.phicContribution : this.defaultFormData.deductions.phic.bi_monthly.fixed;
+          this.formData.deductions.hdmf.bi_monthly.fixed = response.data.result.hdmfContribution[0].employee_amount != false ? response.data.result.hdmfContribution[0].employee_amount : this.defaultFormData.deductions.hdmf.bi_monthly.fixed;
+          this.formData.deductions.bir.with_tax_compensation.fixed = response.data.result.taxContribution != false ? response.data.result.taxContribution : this.defaultFormData.deductions.bir.with_tax_compensation.fixed;
         })
         .catch(err => console.log(err));
     },
