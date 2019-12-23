@@ -21,7 +21,7 @@ const actions = {
       try {
         let obj = {
           basic: payload.basic,
-          pay_frequency_id: payload.pay_frequency_id
+          payFrequency: payload.payFrequency
         };
 
         axios

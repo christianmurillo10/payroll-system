@@ -1,6 +1,7 @@
 const Model = require('../models');
 const SssContributionTablesController = require('../controllers/SssContributionTablesController');
 const WithholdingTaxTablesController = require('../controllers/WithholdingTaxTablesController');
+const payrollHelper = require('../helpers/payroll-helper');
 const jsonfile = require('jsonfile');
 
 module.exports = {
@@ -99,10 +100,18 @@ module.exports = {
       let hdmfJsonData = await jsonfile.readFile(hdmfJson);
       let now = new Date();
 
+      // contributions amount
       let sssContribution = await SssContributionTablesController.findContributionRange(params.basic);
-      let taxContribution = await WithholdingTaxTablesController.findContributionRange(params.basic, params.pay_frequency_id);
+      let taxContribution = await WithholdingTaxTablesController.findContributionRange(params.basic, params.payFrequency.id);
       let phicContribution = ((params.basic * phicJsonData.percentage) / 100).toFixed(2);
       let hdmfContribution = hdmfJsonData.filter(hdmf => hdmf.date == now.getFullYear());
+
+      // compute by pay frequency
+      // let computedSssContribution = await payrollHelper.computeByPayFrequency(sssContribution.employee_contribution, params.payFrequency.code);
+      // let computedTaxContribution = await payrollHelper.computeByPayFrequency(taxContribution, params.payFrequency.code);
+      // let computedPhicContribution = await payrollHelper.computeByPayFrequency(phicContribution, params.payFrequency.code);
+      // let computedHdmfContribution = await payrollHelper.computeByPayFrequency(hdmfContribution, params.payFrequency.code);
+      
       let finalResult = {
         sssContribution,
         taxContribution,

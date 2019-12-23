@@ -1,6 +1,6 @@
 {
   "fixedWorkingHours": 8,
-  "fixedWorkingDays": 26,
+  "fixedWorkingDays": 24,
   "workingDay": {
     "regularDay": 1,
     "specialDay": 1.3,

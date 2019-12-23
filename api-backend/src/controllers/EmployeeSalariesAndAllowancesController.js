@@ -317,7 +317,7 @@ module.exports = {
 
     try {
       // Pre-setting variables
-      criteria = { where: { employee_id: params.employeeId, is_current: 1, is_deleted: 0 }, include: [{ model: Model.Employees, as: 'employees' }, { model: Model.Users, as: 'users' }] };
+      criteria = { where: { employee_id: params.employeeId, is_current: 1, is_deleted: 0 }, include: [{ model: Model.Employees, as: 'employees',  include: [{ model: Model.PayFrequencies, as: 'payFrequencies',  }] }, { model: Model.Users, as: 'users' }] };
       // Execute findAll query
       data = await Model.EmployeeSalariesAndAllowances.findAll(criteria);
       if (!_.isEmpty(data[0])) {
