@@ -19,6 +19,7 @@
     <v-data-table :headers="headers" :items="payFrequencyList" class="elevation-1">
       <template v-slot:items="props">
         <td class="text-xs-left">{{ props.item.name }}</td>
+        <td class="text-xs-left">{{ props.item.code }}</td>
         <td class="justify-center layout px-0">
           <v-icon small class="mr-2" @click="editItem(props.item.id)">edit</v-icon>
           <v-icon small @click="deleteItem(props.item.id)">delete</v-icon>
@@ -46,6 +47,7 @@ export default {
     dialog: false,
     headers: [
       { text: "Name", value: "name" },
+      { text: "Code", value: "code" },
       { text: "Actions", align: "center", value: "name", sortable: false }
     ]
   }),

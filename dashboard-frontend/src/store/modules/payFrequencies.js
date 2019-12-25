@@ -52,7 +52,8 @@ const actions = {
     return new Promise((resolve, reject) => {
       try {
         let obj = {
-          name: payload.name
+          name: payload.name,
+          code: payload.code
         };
 
         axios
@@ -72,7 +73,8 @@ const actions = {
     return new Promise((resolve, reject) => {
       try {
         let obj = {
-          name: payload.name
+          name: payload.name,
+          code: payload.code
         };
 
         axios
@@ -118,7 +120,8 @@ const mutations = {
   UPDATE_DATA(state, payload) {
     let index = state.payFrequencyList.map(payFrequency => payFrequency.id).indexOf(payload.id);
     Object.assign(state.payFrequencyList[index], {
-      name: payload.name
+      name: payload.name,
+      code: payload.code
     });
   },
   DELETE_DATA(state, payload) {

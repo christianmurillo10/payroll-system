@@ -19,6 +19,14 @@
                 required
               ></v-text-field>
             </v-flex>
+            <v-flex xs12 sm12 md12>
+              <v-text-field
+                v-model="formData.code"
+                :rules="validateItem.codeRules"
+                label="Code"
+                required
+              ></v-text-field>
+            </v-flex>
           </v-layout>
         </v-container>
       </v-card-text>
@@ -46,18 +54,21 @@ export default {
   data: () => ({
     defaultFormData: {
       name: null,
-      description: ""
+      code: null
     },
     formType: "new",
     formData: {
       name: null,
-      description: ""
+      code: null
     },
     valid: true,
     validateItem: {
       nameRules: [
         v => !!v || "Name is required",
         v => (v && v.length <= 50) || "Name must be less than 50 characters"
+      ],
+      codeRules: [
+        v => !!v || "Code is required"
       ]
     }
   }),
@@ -89,6 +100,7 @@ export default {
       let data = this.getPayFrequencyById(id);
       this.formData.id = data.id;
       this.formData.name = data.name;
+      this.formData.code = data.code;
       this.formType = "update";
     },
 

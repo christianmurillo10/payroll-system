@@ -24,10 +24,11 @@ module.exports = {
     try {
       // Validators
       if (_.isEmpty(params.name)) return res.json({ status: 200, message: "Name is required.", result: false });
+      if (_.isEmpty(params.code)) return res.json({ status: 200, message: "Code is required.", result: false });
 
       // Pre-setting variables
       criteria = { where: { name: params.name } };
-      initialValues = _.pick(params, ['name', 'created_at']);
+      initialValues = _.pick(params, ['name', 'code','created_at']);
       // Execute findAll query
       data = await Model.PayFrequencies.findAll(criteria);
       if (_.isEmpty(data[0])) {
@@ -71,7 +72,7 @@ module.exports = {
 
     try {
       // Pre-setting variables
-      initialValues = _.pick(params, ['name']);
+      initialValues = _.pick(params, ['name', 'code']);
       // Execute findByPk query
       data = await Model.PayFrequencies.findByPk(req.params.id);
       if (!_.isEmpty(data)) {
@@ -151,7 +152,7 @@ module.exports = {
 
     try {
       // Pre-setting variables
-      query = `SELECT id, name, created_at, updated_at FROM pay_frequencies WHERE name LIKE ? AND is_deleted = 0;`;
+      query = `SELECT id, name, code, created_at, updated_at FROM pay_frequencies WHERE name LIKE ? AND is_deleted = 0;`;
       // Execute native query
       data = await Model.sequelize.query(query, {
         replacements: [`%${params.value}%`],
