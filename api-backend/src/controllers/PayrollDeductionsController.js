@@ -107,10 +107,11 @@ module.exports = {
       let hdmfContribution = hdmfJsonData.filter(hdmf => hdmf.date == now.getFullYear());
 
       // compute by pay frequency
-      // let computedSssContribution = await payrollHelper.computeByPayFrequency(sssContribution.employee_contribution, params.payFrequency.code);
-      // let computedTaxContribution = await payrollHelper.computeByPayFrequency(taxContribution, params.payFrequency.code);
-      // let computedPhicContribution = await payrollHelper.computeByPayFrequency(phicContribution, params.payFrequency.code);
-      // let computedHdmfContribution = await payrollHelper.computeByPayFrequency(hdmfContribution, params.payFrequency.code);
+      let computedSssContribution = await payrollHelper.computeByPayFrequency(sssContribution.employee_contribution, params.payFrequency.code);
+      let computedTaxContribution = await payrollHelper.computeByPayFrequency(taxContribution[0].tax_amount, params.payFrequency.code);
+      let computedPhicContribution = await payrollHelper.computeByPayFrequency(phicContribution, params.payFrequency.code);
+      let computedHdmfContribution = await payrollHelper.computeByPayFrequency(hdmfContribution[0].employee_amount, params.payFrequency.code);
+      console.log('ASDASD', computedHdmfContribution)
       
       let finalResult = {
         sssContribution,
