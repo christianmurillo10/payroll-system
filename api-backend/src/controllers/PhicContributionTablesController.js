@@ -229,10 +229,8 @@ module.exports = {
     let data, criteria;
 
     try {
-      // Pre-setting variables
-      criteria = { include: [{ model: Model.PayFrequencies, as: 'payFrequencies' }] };
       // Execute findAll query
-      data = await Model.WithholdingTaxTables.findByPk(req.params.id, criteria);
+      data = await Model.PhicContributionTables.findByPk(req.params.id);
       if (!_.isEmpty(data)) {
         res.json({
           status: 200,
@@ -264,7 +262,7 @@ module.exports = {
 
     try {
       // Pre-setting variables
-      query = `SELECT * FROM withholding_tax_tables WHERE ? BETWEEN compensation_range_from AND compensation_range_to AND pay_frequency_id = ? AND is_deleted = 0;`;
+      query = `SELECT * FROM phic_contribution_tables WHERE ? BETWEEN compensation_range_from AND compensation_range_to AND is_deleted = 0;`;
       // Execute native query
       data = await Model.sequelize.query(query, {
         replacements: [basic, payFrequency],
