@@ -1,3 +1,30 @@
-{
+[
+  {
+    "date": 2019,
     "percentage": 2.75
-}
+  },
+  {
+    "date": 2020,
+    "percentage": 3.00
+  },
+  {
+    "date": 2021,
+    "percentage": 3.50
+  },
+  {
+    "date": 2022,
+    "percentage": 4.00
+  },
+  {
+    "date": 2023,
+    "percentage": 4.50
+  },
+  {
+    "date": 2024,
+    "percentage": 5.00
+  },
+  {
+    "date": 2025,
+    "percentage": 5.00
+  }
+]

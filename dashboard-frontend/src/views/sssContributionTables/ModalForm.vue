@@ -140,14 +140,9 @@ export default {
     }
   },
 
-  mounted() {
-    this.getSssContributionTableData();
-  },
-
   methods: {
     ...mapActions("alerts", ["setAlert"]),
     ...mapActions("sssContributionTables", {
-      getSssContributionTableData: "getData",
       saveSssContributionTableData: "saveData",
       updateSssContributionTableData: "updateData",
       deleteSssContributionTableData: "deleteData"

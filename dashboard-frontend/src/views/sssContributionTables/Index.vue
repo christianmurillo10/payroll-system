@@ -60,6 +60,10 @@ export default {
     ]
   }),
 
+  mounted() {
+    this.getSssContributionTableData();
+  },
+
   computed: {
     ...mapState("sssContributionTables", ["sssContributionTableList"])
   },
@@ -71,6 +75,10 @@ export default {
   },
 
   methods: {
+    ...mapActions("sssContributionTables", {
+      getSssContributionTableData: "getData"
+    }),
+
     editItem(id) {
       this.setDialog(true);
       this.$refs.modalForm.editItem(id);
