@@ -1604,7 +1604,7 @@ export default {
             this.formData.employeeDetails.name = this.setFullnameLastnameFirst(response.data.result[0].employees.firstname, response.data.result[0].employees.middlename, response.data.result[0].employees.lastname);
             this.formData.payroll.basic_salary_amount = response.data.result[0].salary_amount;
             this.formData.payroll.fixed_allowance_amount = response.data.result[0].allowance_amount;
-            this.computeDeductions({ basic: response.data.result[0].salary_amount, payFrequency: response.data.result[0].employees.payFrequencies });
+            this.computeDeductions({ basic: response.data.result[0].salary_amount, fixed_allowance: response.data.result[0].allowance_amount, payFrequency: response.data.result[0].employees.payFrequencies, personal_cash: this.formData.deductions.personal_cash.advances });
           } else {
             this.formData.employeeDetails.name = this.defaultFormData.employeeDetails.name;
             this.formData.payroll.basic_salary_amount = this.defaultFormData.payroll.basic_salary_amount;

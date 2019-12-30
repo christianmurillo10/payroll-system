@@ -103,21 +103,27 @@ module.exports = {
       // contributions amount
       let sssContribution = await SssContributionTablesController.findContributionRange(params.basic);
       let taxContribution = await WithholdingTaxTablesController.findContributionRange(params.basic, params.payFrequency.id);
-      let phicContribution = ((params.basic * phicJsonData.percentage) / 100).toFixed(2);
+      let phicFilteredJsonData = phicJsonData.filter(phic => phic.date == now.getFullYear());
+      let phicContribution = ((params.basic * phicFilteredJsonData[0].percentage) / 100).toFixed(2);
       let hdmfContribution = hdmfJsonData.filter(hdmf => hdmf.date == now.getFullYear());
 
       // compute by pay frequency
-      let computedSssContribution = await payrollHelper.computeByPayFrequency(sssContribution.employee_contribution, params.payFrequency.code);
-      let computedTaxContribution = await payrollHelper.computeByPayFrequency(taxContribution[0].tax_amount, params.payFrequency.code);
+      let computedSssContribution = await payrollHelper.computeByPayFrequency(sssContribution[0].employee_contribution, params.payFrequency.code);
       let computedPhicContribution = await payrollHelper.computeByPayFrequency(phicContribution, params.payFrequency.code);
       let computedHdmfContribution = await payrollHelper.computeByPayFrequency(hdmfContribution[0].employee_amount, params.payFrequency.code);
+      let totalDeduction = sum([params.basic, params.fixed_allowance, params.personal_cash]);
+      console.log('ASDASD', computedSssContribution)
+      console.log('ASDASD', computedPhicContribution)
       console.log('ASDASD', computedHdmfContribution)
+      console.log('ASDASD', params.personal_cash)
+      console.log('ASDASD', totalDeduction)
+      // let computedTaxContribution = await payrollHelper.computeByPayFrequency(taxContribution[0].tax_amount, params.payFrequency.code);
       
       let finalResult = {
         sssContribution,
-        taxContribution,
         phicContribution,
-        hdmfContribution
+        hdmfContribution,
+        taxContribution
       }
 
       res.json({
@@ -134,3 +140,21 @@ module.exports = {
     }
   },
 };
+
+/**
+ * Other Functions
+ */
+
+const sum = (input) => {
+  if (toString.call(input) !== "[object Array]")
+    return false;
+
+  var total = 0;
+  for (var i = 0; i < input.length; i++) {
+    if (isNaN(input[i])) {
+      continue;
+    }
+    total += Number(input[i]);
+  }
+  return total;
+}
